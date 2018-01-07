@@ -1,0 +1,45 @@
+{
+  "name": "kihon",
+  "version": "0.0.1",
+  "description": "Javascript Library to help developers make Interactive UI.",
+  "keywords": [
+    "kihon",
+    "ui",
+    "util",
+    "javascript",
+    "js",
+    "dragmove"
+  ],
+  "homepage": "https://www.npmjs.com/package/kihon",
+  "bugs": {
+    "url": "https://github.com/dragmove/kihon/issues",
+    "email": "dragmove@gmail.com"
+  },
+  "main": "./dist/kihon.js",
+  "scripts": {
+    "build": "babel js/src --out-dir dist"
+  },
+  "author": {
+    "name": "Hyun-Seok.Kim",
+    "email": "dragmove@gmail.com",
+    "url": "http://dragmove.com"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/dragmove/kihon"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-core": "^6.26.0",
+    "babel-eslint": "^8.1.2",
+    "babel-loader": "^7.1.2",
+    "babel-plugin-add-module-exports": "^0.2.1",
+    "babel-preset-env": "^1.6.1",
+    "eslint-loader": "^1.9.0",
+    "gulp": "^3.9.1",
+    "gulp-eslint": "^4.0.1",
+    "webpack": "^3.10.0",
+    "webpack-dev-server": "^2.10.0"
+  }
+}
