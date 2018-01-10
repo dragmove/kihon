@@ -1,4 +1,4 @@
-import { isBoolean, isNotDef, notSingleEle } from '../util/util';
+import {isBoolean, isNotDef, notSingleEle} from '../util/util';
 
 class FullSizeBg {
   constructor(options) {
@@ -7,11 +7,11 @@ class FullSizeBg {
     if (isNotDef(options)) throw new Error('require options object when create FullSizeBg instance.');
 
     _._option = $.extend({
-      imgWrap: null,
-      imgWidth: 320,
-      imgHeight: 240,
-      alignX: 'center',
-      alignY: 'center',
+      imgWrap: null, // image wrap
+      imgWidth: 320, // natural image width
+      imgHeight: 240, // natural image height
+      alignX: 'center', // 'left' or 'center' or 'right'
+      alignY: 'center', // 'top' or 'center' or 'bottom'
       global: window
     }, options);
 
@@ -52,11 +52,11 @@ class FullSizeBg {
     if (!isBoolean(flag)) throw new Error('setResizeEventHandler require boolean parameter.');
 
     $(_._global).off(evtName, _._proxy.resizeEventHandler);
-
-    if (flag === true) $(_._global).on(evtName, _._proxy.resizeEventHandler);
+    if (flag) $(_._global).on(evtName, _._proxy.resizeEventHandler);
   }
 
-  resize(evt) {
+  // TODO
+  resize(evt = null) {
     const _ = this,
       size = _.getImageSizeAspectFill();
 
@@ -81,7 +81,7 @@ class FullSizeBg {
       modifiedHeight = winHeight;
     }
 
-    return { width: modifiedWidth, height: modifiedHeight };
+    return {width: modifiedWidth, height: modifiedHeight};
   }
 
   destroy(obj = null) {
@@ -133,7 +133,7 @@ class FullSizeBg {
         break;
     }
 
-    _._$imgWrap.css({ left: left, top: top });
+    _._$imgWrap.css({left: left, top: top});
 
     return _;
   }

@@ -145,8 +145,6 @@ export const lazyChain = function lazyChain(obj) {
   };
 };
 
-export const singleEle = function singleEle($ele) {
-  return $ele.length === 1;
-};
+export const singleEle = ($ele) => ($ele.length === 1);
 
 export const notSingleEle = not(singleEle);
