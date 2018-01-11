@@ -1,12 +1,72 @@
-import {isBoolean, isNotDef, notSingleEle} from '../util/util';
+import {isDefined, isBoolean, isNotDef, notSingleEle, anyOf} from '../util/util';
+
+
+var $ = null;
+
+// Establish the root object, `window` (`self`) in the browser, or `global` on the server.
+// We use `self` instead of `window` for `WebWorker` support.
+var root = (typeof self == 'object' && self.self === self && self) ||
+  (typeof global == 'object' && global.global === global && global);
+
+console.log('root :', root);
+
+// Start with AMD.
+if (typeof define === 'function' && define.amd) {
+  console.log('amd');
+
+  define(['jquery', 'exports'], function ($, exports) {
+    console.log('$ :', $);
+
+    if (isNotDef(root.jQuery)) throw new Error('FullSizeBg: require options object when create FullSizeBg instance.');
+  });
+
+
+  // Next for Node.js or CommonJS.
+} else if (typeof exports !== 'undefined') {
+  // node.js or common js or browser
+  console.log('node.js or common js or browser');
+
+  try {
+    if (isDefined(root.jQuery)) {
+      // browser
+      $ = root.jQuery;
+
+    } else {
+      // node.js or common js
+
+      $ = require('jquery');
+
+      console.log('$ :', $);
+
+    }
+
+  } catch (e) {
+    console.log('e :', e);
+
+    console.log('nonono');
+
+    // throw new Error('FullSizeBg: require options object when create FullSizeBg instance.');
+  }
+
+  // Finally, as a browser global.
+} else {
+  // browser
+  console.log('browser');
+
+  if (isNotDef(root.jQuery)) throw new Error('FullSizeBg: require options object when create FullSizeBg instance.');
+
+  $ = root.jQuery;
+}
+
 
 class FullSizeBg {
   constructor(options) {
     const _ = this;
 
-    if (isNotDef(options)) throw new Error('require options object when create FullSizeBg instance.');
+    if (isNotDef(options)) throw new Error('FullSizeBg: require options object when create FullSizeBg instance.');
 
     _._option = $.extend({
+      wrap: null, // wrap
       imgWrap: null, // image wrap
       imgWidth: 320, // natural image width
       imgHeight: 240, // natural image height
@@ -17,19 +77,23 @@ class FullSizeBg {
 
     _._global = _._option.global;
 
+    _._initialized = false;
+
     _._uniqueId = Date.now();
+
+    _._$wrap = $(_._option.wrap);
 
     _._$imgWrap = $(_._option.imgWrap);
 
     _._$img = $('img', _._option.imgWrap);
 
-    if (notSingleEle(_._$imgWrap) || notSingleEle(_._$img)) {
-      throw new Error('FullSizeBg Class require options object has a single imgWrap has a single img.');
-    }
-
     _._proxy = {
       resizeEventHandler: null
     };
+
+    if (anyOf(notSingleEle(_._$img), notSingleEle(_._$imgWrap), notSingleEle(_._$img))) {
+      throw new Error('FullSizeBg: require options object has a single wrap, imgWrap, img.');
+    }
   }
 
   /*
@@ -38,31 +102,39 @@ class FullSizeBg {
   init(obj = null) {
     const _ = this;
 
+    if (_._initialized) return _;
+
+    _._initialized = true;
+
     _._proxy.resizeEventHandler = $.proxy(_.resize, _);
 
     _.setResizeEventHandler(true);
 
+    _.resize();
+
     return _;
   }
 
-  setResizeEventHandler(flag) {
+  setResizeEventHandler(flag = false) {
+    if (!isBoolean(flag)) throw new Error('FullSizeBg: setResizeEventHandler require boolean parameter.');
+
     const _ = this,
       evtName = `resize.kihon.fullsizebg.${_._uniqueId}`;
 
-    if (!isBoolean(flag)) throw new Error('setResizeEventHandler require boolean parameter.');
-
     $(_._global).off(evtName, _._proxy.resizeEventHandler);
+
     if (flag) $(_._global).on(evtName, _._proxy.resizeEventHandler);
   }
 
-  // TODO
   resize(evt = null) {
     const _ = this,
       size = _.getImageSizeAspectFill();
 
-    _._$img.width(size.width).height(size.height);
+    _._$img.css({width: size.width, height: size.height});
 
     _._setWrapAlign(_._option.alignX, _._option.alignY, size);
+
+    _._$wrap.css({width: _._global.innerWidth, height: _._global.innerHeight});
 
     return _;
   }
@@ -86,6 +158,8 @@ class FullSizeBg {
 
   destroy(obj = null) {
     const _ = this;
+
+    _._initialized = false;
 
     _.setResizeEventHandler(false);
 

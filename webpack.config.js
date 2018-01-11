@@ -8,7 +8,7 @@ function createConfig(isDebug, options = { banner: '' }) {
     plugins = [];
 
   const appEntry = {
-    "kihon": ['./app/src/kihon.js'],
+    "kihon": ['./app/src/kihon.js']
   };
 
   if (isDebug) {
@@ -49,17 +49,24 @@ function createConfig(isDebug, options = { banner: '' }) {
     }));
   }
 
+  /*
+  plugins.push(new webpack.ProvidePlugin({
+    $: 'jquery',
+    jQuery: 'jquery'
+  }));
+  */
+
   return {
     target: 'web',
 
     entry: appEntry,
 
     output: {
-      filename: "[name].js",
-      path: path.resolve(dirName, 'build'),
+      path: path.resolve(dirName),
+      filename: "kihon.js",
       library: 'Kihon',
       libraryTarget: 'umd',
-      umdNamedDefine: true
+      libraryExport: 'default'
     },
 
     module: {

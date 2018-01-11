@@ -15,9 +15,8 @@
     "url": "https://github.com/dragmove/kihon/issues",
     "email": "dragmove@gmail.com"
   },
-  "main": "./dist/kihon.js",
+  "main": "kihon.js",
   "scripts": {
-    "build": "babel js/src --out-dir dist"
   },
   "author": {
     "name": "Hyun-Seok.Kim",

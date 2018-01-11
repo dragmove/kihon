@@ -1,14 +1,12 @@
-export const not = function not(func) {
-  return function (object) {
+export const not = (func) => {
+  return (object) => {
     return !func(object);
   };
 };
 
-export const existy = function existy(obj) {
-  return obj != null;
-};
+export const existy = (obj) => (obj != null);
 
-export const isDefined = function isDefined(obj) {
+export const isDefined = (obj) => {
   let flag = true;
   if (obj === null || typeof obj === 'undefined') return false;
   return flag;
@@ -28,7 +26,7 @@ export const isInteger = function (obj) {
   return (isFinite(obj) && Math.floor(obj) === obj);
 };
 
-export const isBoolean = function(obj) {
+export const isBoolean = (obj) => {
   if (!isDefined(obj)) return false;
   
   return (obj.constructor === Boolean);
@@ -63,7 +61,7 @@ export const each = function each(dataCanLoop, func, context) {
   }
 };
 
-export const allOf = function allOf(/*args*/) {
+export const allOf = (/*args*/) => {
   let args = Array.prototype.slice.call(arguments);
 
   return args.every(function (val) {
@@ -71,7 +69,7 @@ export const allOf = function allOf(/*args*/) {
   });
 };
 
-export const anyOf = function anyOf(/*args*/) {
+export const anyOf = (/*args*/) => {
   let args = Array.prototype.slice.call(arguments);
 
   return args.some(function (val) {

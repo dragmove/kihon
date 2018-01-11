@@ -6,7 +6,7 @@ var pkg = require('./package.json'),
 
 const webpackConfig = require('./webpack.config.js'),
   devConfig = webpackConfig(true),
-  prodConfig = webpackConfig(false);
+  prodConfig = webpackConfig(false, { banner: banner() });
 
 function banner() {
   return `/*
