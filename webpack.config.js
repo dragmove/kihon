@@ -1,5 +1,3 @@
-
-
 const path = require('path'),
   webpack = require('webpack'),
   dirName = path.resolve('./');
@@ -93,8 +91,7 @@ function createConfig(isDebug, options = { banner: '' }) {
 
     devServer: {
       contentBase: './build/',
-      noInfo: true, //  --no-info option
-      // host: '',
+      noInfo: true,
       port: 9000,
       hot: true,
       inline: true
