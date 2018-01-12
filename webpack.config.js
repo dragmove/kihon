@@ -1,10 +1,11 @@
+
+
 const path = require('path'),
   webpack = require('webpack'),
   dirName = path.resolve('./');
 
 function createConfig(isDebug, options = { banner: '' }) {
   let devTool = '',
-    externals = [],
     plugins = [];
 
   const appEntry = {
@@ -43,23 +44,15 @@ function createConfig(isDebug, options = { banner: '' }) {
         drop_console: true,
         warnings: true
       }
+
     }), new webpack.BannerPlugin({
       banner: (options.banner || ''),
       raw: true
     }));
   }
 
-  /*
-  plugins.push(new webpack.ProvidePlugin({
-    $: 'jquery',
-    jQuery: 'jquery'
-  }));
-  */
-
   return {
-    target: 'web',
-
-    entry: appEntry,
+    entry: './app/src/kihon.js',
 
     output: {
       path: path.resolve(dirName),
@@ -87,7 +80,14 @@ function createConfig(isDebug, options = { banner: '' }) {
 
     devtool: devTool,
 
-    externals: externals,
+    externals: {
+      jquery: {
+        commonjs: 'jquery',
+        commonjs2: 'jquery',
+        amd: 'jquery',
+        root: 'jQuery'
+      }
+    },
 
     plugins: plugins,
 
@@ -98,7 +98,7 @@ function createConfig(isDebug, options = { banner: '' }) {
       port: 9000,
       hot: true,
       inline: true
-    },
+    }
   };
 }
 

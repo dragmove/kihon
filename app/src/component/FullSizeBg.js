@@ -1,6 +1,7 @@
+import $ from 'jquery';
 import {isDefined, isBoolean, isNotDef, notSingleEle, anyOf} from '../util/util';
 
-
+/*
 var $ = null;
 
 // Establish the root object, `window` (`self`) in the browser, or `global` on the server.
@@ -14,10 +15,14 @@ console.log('root :', root);
 if (typeof define === 'function' && define.amd) {
   console.log('amd');
 
-  define(['jquery', 'exports'], function ($, exports) {
-    console.log('$ :', $);
 
-    if (isNotDef(root.jQuery)) throw new Error('FullSizeBg: require options object when create FullSizeBg instance.');
+
+  define(['jquery', 'exports'], function (jQuery, exports) {
+    console.log('jQuery :', jQuery);
+
+    if (isNotDef(jQuery)) throw new Error('FullSizeBg: require jQuery.');
+
+    $ = jQuery;
   });
 
 
@@ -28,36 +33,30 @@ if (typeof define === 'function' && define.amd) {
 
   try {
     if (isDefined(root.jQuery)) {
-      // browser
+      console.log('use es2015+. browser $ :', $);
+
       $ = root.jQuery;
 
     } else {
-      // node.js or common js
+      console.log('node.js or common js - $ :', $);
 
       $ = require('jquery');
-
-      console.log('$ :', $);
-
     }
 
   } catch (e) {
-    console.log('e :', e);
+    console.log('error :', e);
 
-    console.log('nonono');
-
-    // throw new Error('FullSizeBg: require options object when create FullSizeBg instance.');
+    throw new Error('FullSizeBg: require jQuery.');
   }
 
-  // Finally, as a browser global.
 } else {
-  // browser
-  console.log('browser');
+  // browser global
+  console.log('browser global. test complete.');
 
-  if (isNotDef(root.jQuery)) throw new Error('FullSizeBg: require options object when create FullSizeBg instance.');
-
+  if (isNotDef(root.jQuery)) throw new Error('FullSizeBg: require jQuery.');
   $ = root.jQuery;
 }
-
+*/
 
 class FullSizeBg {
   constructor(options) {
