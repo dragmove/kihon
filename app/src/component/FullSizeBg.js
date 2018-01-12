@@ -1,62 +1,5 @@
 import $ from 'jquery';
-import {isDefined, isBoolean, isNotDef, notSingleEle, anyOf} from '../util/util';
-
-/*
-var $ = null;
-
-// Establish the root object, `window` (`self`) in the browser, or `global` on the server.
-// We use `self` instead of `window` for `WebWorker` support.
-var root = (typeof self == 'object' && self.self === self && self) ||
-  (typeof global == 'object' && global.global === global && global);
-
-console.log('root :', root);
-
-// Start with AMD.
-if (typeof define === 'function' && define.amd) {
-  console.log('amd');
-
-
-
-  define(['jquery', 'exports'], function (jQuery, exports) {
-    console.log('jQuery :', jQuery);
-
-    if (isNotDef(jQuery)) throw new Error('FullSizeBg: require jQuery.');
-
-    $ = jQuery;
-  });
-
-
-  // Next for Node.js or CommonJS.
-} else if (typeof exports !== 'undefined') {
-  // node.js or common js or browser
-  console.log('node.js or common js or browser');
-
-  try {
-    if (isDefined(root.jQuery)) {
-      console.log('use es2015+. browser $ :', $);
-
-      $ = root.jQuery;
-
-    } else {
-      console.log('node.js or common js - $ :', $);
-
-      $ = require('jquery');
-    }
-
-  } catch (e) {
-    console.log('error :', e);
-
-    throw new Error('FullSizeBg: require jQuery.');
-  }
-
-} else {
-  // browser global
-  console.log('browser global. test complete.');
-
-  if (isNotDef(root.jQuery)) throw new Error('FullSizeBg: require jQuery.');
-  $ = root.jQuery;
-}
-*/
+import {isBoolean, isNotDef, notSingleEle, anyOf} from '../util/util';
 
 class FullSizeBg {
   constructor(options) {
@@ -98,7 +41,7 @@ class FullSizeBg {
   /*
    * public methods
    */
-  init(obj = null) {
+  init() {
     const _ = this;
 
     if (_._initialized) return _;
@@ -127,7 +70,7 @@ class FullSizeBg {
 
   resize(evt = null) {
     const _ = this,
-      size = _.getImageSizeAspectFill();
+      size = _.getImageSizeAspectFill(_._option.imgWidth, _._option.imgHeight);
 
     _._$img.css({width: size.width, height: size.height});
 
@@ -138,24 +81,23 @@ class FullSizeBg {
     return _;
   }
 
-  getImageSizeAspectFill() {
+  getImageSizeAspectFill(srcWidth = 0, srcHeight = 0) {
     const _ = this,
-      opt = _._option,
       winWidth = _._global.innerWidth,
       winHeight = _._global.innerHeight;
 
     let modifiedWidth = winWidth,
-      modifiedHeight = Math.ceil((winWidth / opt.imgWidth) * opt.imgHeight);
+      modifiedHeight = Math.ceil((winWidth / srcWidth) * srcHeight);
 
     if (modifiedHeight < winHeight) {
-      modifiedWidth = Math.ceil((winHeight / opt.imgHeight) * opt.imgWidth);
+      modifiedWidth = Math.ceil((winHeight / srcHeight) * srcWidth);
       modifiedHeight = winHeight;
     }
 
     return {width: modifiedWidth, height: modifiedHeight};
   }
 
-  destroy(obj = null) {
+  destroy() {
     const _ = this;
 
     _._initialized = false;
@@ -170,7 +112,7 @@ class FullSizeBg {
   /*
    * private methods
    */
-  _setWrapAlign(alignX, alignY, modifiedSize) {
+  _setWrapAlign(alignX = 'center', alignY = 'center', modifiedSize = {width: 0, height: 0}) {
     const _ = this,
       winWidth = _._global.innerWidth,
       winHeight = _._global.innerHeight;
