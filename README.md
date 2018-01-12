@@ -1,5 +1,5 @@
 # kihon
-Don't use this library yet. This project is incompletion now. 
+Don't use this library yet. This project is incomplete now. 
 
 ## About
 * UI Components
