@@ -1,5 +1,5 @@
 import $ from 'jquery';
-import {isBoolean, isNotDef, notSingleEle, anyOf} from '../util/util';
+import {not, isBoolean, isNotDef, notSingleEle, anyOf} from '../util/util';
 
 class FullSizeBg {
   constructor(options) {
@@ -58,7 +58,7 @@ class FullSizeBg {
   }
 
   setResizeEventHandler(flag = false) {
-    if (!isBoolean(flag)) throw new Error('FullSizeBg: setResizeEventHandler require boolean parameter.');
+    if (not(isBoolean)(flag)) throw new Error('FullSizeBg: setResizeEventHandler require boolean parameter.');
 
     const _ = this,
       evtName = `resize.kihon.fullsizebg.${_._uniqueId}`;

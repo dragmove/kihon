@@ -1,5 +1,5 @@
 import $ from 'jquery';
-import {isBoolean, isFunction, not} from '../util/util';
+import {not, isBoolean, isFunction} from '../util/util';
 
 class Overlay {
   constructor(options) {
@@ -60,7 +60,7 @@ class Overlay {
   }
 
   setNodeEventHandler(flag) {
-    if (!isBoolean(flag)) throw new Error('Overlay: setNodeEventHandler require boolean parameter.');
+    if (not(isBoolean)(flag)) throw new Error('Overlay: setNodeEventHandler require boolean parameter.');
 
     const _ = this,
       evtName = `click.kihon.overlay.${_._uniqueId}`;
@@ -81,7 +81,7 @@ class Overlay {
   setCss(obj) {
     const _ = this;
 
-    _._$node.css(obj);
+    if (_._$node.length > 0) _._$node.css(obj);
 
     return _;
   }
@@ -118,7 +118,7 @@ class Overlay {
       isRemoveNode: true
     }, obj);
 
-    if (!isBoolean(obj.isRemoveNode)) throw new Error('Overlay: destroy isRemoveNode variable type of option should be boolean.');
+    if (not(isBoolean)(obj.isRemoveNode)) throw new Error('Overlay: destroy isRemoveNode variable type of option should be boolean.');
     
     _._initialized = false;
 
