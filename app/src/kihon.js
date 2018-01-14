@@ -1,7 +1,9 @@
 import FullSizeBg from './component/FullSizeBg';
+import Overlay from './component/Overlay';
 
 let Kihon = {
-  FullSizeBg
+  FullSizeBg,
+  Overlay
 };
 
 export default Kihon;
