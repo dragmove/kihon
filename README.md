@@ -15,8 +15,8 @@ npm install kihon --save-dev
 
 
 ## Components
-FullSizeBg
-Overlay
+FullSizeBg  
+Overlay  
 
 
 ## Contact
