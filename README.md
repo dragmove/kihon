@@ -16,6 +16,18 @@ npm install kihon --save-dev
 ```
 
 
+## Getting Started
+In Node.js environment :
+```javascript
+will update soon.
+```
+
+In Browser environment :
+```javascript
+will update soon.
+```
+
+
 ## Components
 FullSizeBg  
 Overlay  

@@ -1,5 +1,5 @@
 /*
-  * kihon 0.0.4
+  * kihon 0.0.5
   * https://www.npmjs.com/package/kihon
   *
   * The MIT License (MIT)
