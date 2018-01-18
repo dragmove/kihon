@@ -50,16 +50,16 @@ function createConfig(isDebug, options = { banner: '' }) {
   }
 
   return {
+    target: 'web',
+
     entry: './app/src/kihon.js',
 
     output: {
       path: path.resolve(dirName),
       filename: "kihon.js",
-
       library: 'Kihon',
       libraryTarget: 'umd',
-
-      libraryExport: 'default'
+      // libraryExport: 'default',
     },
 
     module: {

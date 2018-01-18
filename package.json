@@ -1,6 +1,6 @@
 {
   "name": "kihon",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Javascript Library to help developers make Interactive UI. Dependency to jQuery 3.x.x.",
   "keywords": [
     "kihon",
@@ -37,11 +37,10 @@
     "eslint-loader": "^1.9.0",
     "gulp": "^3.9.1",
     "gulp-eslint": "^4.0.1",
-    "jquery": "^3.2.1",
     "webpack": "^3.10.0",
     "webpack-dev-server": "^2.10.0"
   },
   "peerDependencies": {
-
+    "jquery": ">= 3.0.0"
   }
 }
