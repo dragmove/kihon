@@ -1,7 +1,9 @@
 # kihon
-Don't use this library yet. This project is incomplete now. 
+[![npm version](https://badge.fury.io/js/kihon.svg)](https://www.npmjs.com/package/kihon)
+
 
 ## About
+* Don't use this library yet. This project is incomplete now. 
 * UI Components
 * Dependency to jQuery 3.x.x
 
