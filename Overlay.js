@@ -1,5 +1,5 @@
 import $ from 'jquery';
-import {not, isBoolean, isFunction} from '../util/util';
+import {not, isBoolean, isFunction} from './_util';
 
 class Overlay {
   constructor(options) {

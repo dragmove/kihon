@@ -7,7 +7,7 @@ function createConfig(isDebug, options = { banner: '' }) {
     plugins = [];
 
   const appEntry = {
-    "kihon": ['./app/src/kihon.js']
+    "kihon": ['./kihon.js']
   };
 
   if (isDebug) {
@@ -52,13 +52,14 @@ function createConfig(isDebug, options = { banner: '' }) {
   return {
     target: 'web',
 
-    entry: './app/src/kihon.js',
+    entry: appEntry,
 
     output: {
       path: path.resolve(dirName),
-      filename: "kihon.js",
+      filename: "kihon.min.js",
       library: 'Kihon',
-      libraryTarget: 'umd'
+      libraryTarget: 'umd',
+      libraryExport: 'default'
     },
 
     module: {
@@ -91,7 +92,7 @@ function createConfig(isDebug, options = { banner: '' }) {
     plugins: plugins,
 
     devServer: {
-      contentBase: './build/',
+      contentBase: './examples/',
       noInfo: true,
       port: 9000,
       hot: true,

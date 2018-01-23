@@ -1,5 +1,5 @@
 import $ from 'jquery';
-import {not, isBoolean, isNotDef, notSingleEle, anyOf} from '../util/util';
+import {not, isBoolean, isNotDef, notSingleEle, anyOf} from './_util';
 
 class FullSizeBg {
   constructor(options) {
