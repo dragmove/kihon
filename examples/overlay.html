@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
@@ -29,44 +28,43 @@
         $(document).ready(init);
 
         function init() {
-          var overlay = new Kihon.Overlay({
-            // class: 'overlay',
-            // color: '#000',
-            // opacity: 0.5,
-            // appendTo: $('body'),
-            clickCallback: function (evt) {
-              console.log('Kihon.Overlay clickCallback :', evt);
-            }
-          }).init();
+            var overlay = new Kihon.Overlay({
+                // class: 'overlay',
+                // color: '#000',
+                // opacity: 0.5,
+                // appendTo: $('body'),
+                clickCallback: function (evt) {
+                    console.log('Kihon.Overlay clickCallback :', evt);
+                }
+            }).init();
 
-          overlay.show();
+            overlay.show();
 
-          /*
-          * overlay public methods
-          */
-          // set node event handler
-          // overlay.setNodeEventHandler(true / false);
+            /*
+             * Overlay public methods
+             */
+            // set node event handler
+            // overlay.setNodeEventHandler(true / false);
 
-          // get node
-          // console.log(overlay.getNode());
+            // get node
+            // console.log(overlay.getNode());
 
-          // set css
-          // overlay.setCss({'background-color': '#f00', ...});
+            // set css
+            // overlay.setCss({'background-color': '#f00', ...});
 
-          // append to other element
-          // overlay.appendTo(parent element);
+            // append to other element
+            // overlay.appendTo(parent element);
 
-          // show overlay
-          // overlay.show();
+            // show overlay
+            // overlay.show();
 
-          // hide overlay
-          // overlay.hide();
+            // hide overlay
+            // overlay.hide();
 
-          // destroy overlay
-          // overlay.destroy();
+            // destroy overlay
+            // overlay.destroy();
         }
     }(jQuery));
 </script>
 </body>
-
 </html>

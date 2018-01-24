@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
@@ -53,9 +52,23 @@
                 alignX: 'center', // 'left' or 'center' or 'right'
                 alignY: 'center' // 'top' or 'center' or 'bottom'
             }).init();
+
+            /*
+             * FullSizeBg public methods
+             */
+            // set resize event handler
+            // fullSizeBg.setResizeEventHandler(true / false);
+
+            // resize
+            // fullSizeBg.resize();
+
+            // get image size based on aspect fill calculation
+            // fullSizeBg.getImageSizeAspectFill(srcWidth, srcHeight);
+
+            // destroy
+            // fullSizeBg.destroy();
         }
     }(jQuery));
 </script>
 </body>
-
 </html>

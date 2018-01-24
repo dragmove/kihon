@@ -53,25 +53,65 @@ html, body {margin: 0; padding: 0;}
 import FullSizeBg from 'kihon/FullSizeBg';
 
 var fullSizeBg = new FullSizeBg({
-  wrap: $('.wrap-full-size-bg'),
-  imgWrap: $('.full-size-bg'),
-  imgWidth: 4592, // natural image width
-  imgHeight: 3064, // natural image height
-  alignX: 'center', // 'left' or 'center' or 'right'
-  alignY: 'center' // 'top' or 'center' or 'bottom'
+    wrap: $('.wrap-full-size-bg'), // wrap
+    imgWrap: $('.full-size-bg'), // image wrap
+    imgWidth: 4592, // natural image width
+    imgHeight: 3064, // natural image height
+    alignX: 'center', // 'left' or 'center' or 'right'
+    alignY: 'center' // 'top' or 'center' or 'bottom'
 }).init();
 
-// fullSizeBg.getImageSizeAspectFill(srcWidth, srcHeight);
+// set resize event handler
 // fullSizeBg.setResizeEventHandler(true / false);
+
+// resize
 // fullSizeBg.resize();
+
+// get image size based on aspect fill calculation
+// fullSizeBg.getImageSizeAspectFill(srcWidth, srcHeight);
+
+// destroy
 // fullSizeBg.destroy();
 ```  
 
 
 ### Overlay
 ```javascript
-will update soon.
-```
+import Overlay from 'kihon/Overlay';
+
+var overlay = new Overlay({
+    // class: 'overlay',
+    // color: '#000',
+    // opacity: 0.5,
+    // appendTo: $('body'),
+    clickCallback: function (evt) {
+        console.log('Kihon.Overlay clickCallback :', evt);
+    }
+}).init();
+
+overlay.show();
+
+// set node event handler
+// overlay.setNodeEventHandler(true / false);
+
+// get node
+// console.log(overlay.getNode());
+
+// set css
+// overlay.setCss({'background-color': '#f00', ...});
+
+// append to other element
+// overlay.appendTo(parent element);
+
+// show overlay
+// overlay.show();
+
+// hide overlay
+// overlay.hide();
+
+// destroy overlay
+// overlay.destroy();
+```  
 
 
 ## Contact
