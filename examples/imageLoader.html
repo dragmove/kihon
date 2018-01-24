@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport"
+          content="user-scalable=no, maximum-scale=1.0, minimum-scale=1.0, width=device-width, initial-scale=1.0">
+    <meta name="description" content="Kihon.ImageLoader"/>
+    <meta name="keywords" content="kihon"/>
+    <meta name="author" content="dragmove"/>
+    <title>Kihon.ImageLoader</title>
+</head>
+
+<body>
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"
+        integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+        crossorigin="anonymous"></script>
+<script src="kihon.min.js"></script>
+<script>
+    (function ($) {
+        $(document).ready(init);
+
+        function init() {
+            var imgLoader = new Kihon.ImageLoader({
+                loadCompleteCallback: function (obj) {
+                    console.log('loadComplete :', obj);
+                    console.log('imgLoader.isFinished() :', imgLoader.isFinished());
+                    console.log('imgLoader.getLoadedImgs() :', imgLoader.getLoadedImgs());
+                },
+                loadPerCompleteCallback: function (obj) {
+                    console.log('loadPerComplete :', obj);
+                    console.log('imgLoader.isFinished() :', imgLoader.isFinished());
+                    console.log('imgLoader.getLoadedImgs() :', imgLoader.getLoadedImgs());
+                },
+                loadErrorCallback: function (obj) {
+                    console.log('loadError :', obj)
+                    console.log('imgLoader.isFinished() :', imgLoader.isFinished());
+                    console.log('imgLoader.getLoadedImgs() :', imgLoader.getLoadedImgs());
+                }
+            });
+
+            imgLoader.start([
+                'https://images.unsplash.com/photo-1431794062232-2a99a5431c6c?dpr=2&auto=compress,format&crop=entropy&fit=crop&w=767&h=511&q=80&cs=tinysrgb',
+                'https://images.unsplash.com/error-dummy-url.png',
+                'https://images.unsplash.com/photo-1459666644539-a9755287d6b0?dpr=2&auto=compress,format&crop=entropy&fit=crop&w=767&h=463&q=80&cs=tinysrgb'
+            ]);
+
+            /*
+             * ImageLoader public methods
+             */
+            // get flag finish load all images
+            // console.log( imgLoader.isFinished() );
+
+            // get array has loaded images
+            // console.log( imgLoader.getLoadedImgs() );
+
+            // get percentage number(0 ~ 1)
+            // console.log( imgLoader.getPercentageLoaded() );
+
+            // destroy
+            // imgLoader.destroy();
+        }
+    }(jQuery));
+</script>
+</body>
+</html>

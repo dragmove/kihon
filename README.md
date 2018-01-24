@@ -68,7 +68,7 @@ var fullSizeBg = new FullSizeBg({
 // fullSizeBg.resize();
 
 // get image size based on aspect fill calculation
-// fullSizeBg.getImageSizeAspectFill(srcWidth, srcHeight);
+// console.log( fullSizeBg.getImageSizeAspectFill(srcWidth, srcHeight) );
 
 // destroy
 // fullSizeBg.destroy();
@@ -95,7 +95,7 @@ overlay.show();
 // overlay.setNodeEventHandler(true / false);
 
 // get node
-// console.log(overlay.getNode());
+// console.log( overlay.getNode() );
 
 // set css
 // overlay.setCss({'background-color': '#f00', ...});
@@ -111,6 +111,48 @@ overlay.show();
 
 // destroy overlay
 // overlay.destroy();
+```  
+
+
+### ImageLoader
+```javascript
+import ImageLoader from 'kihon/ImageLoader';
+
+var imgLoader = new ImageLoader({
+    loadCompleteCallback: function (obj) {
+        console.log('loadComplete :', obj);
+        console.log('imgLoader.isFinished() :', imgLoader.isFinished());
+        console.log('imgLoader.getLoadedImgs() :', imgLoader.getLoadedImgs());
+    },
+    loadPerCompleteCallback: function (obj) {
+        console.log('loadPerComplete :', obj);
+        console.log('imgLoader.isFinished() :', imgLoader.isFinished());
+        console.log('imgLoader.getLoadedImgs() :', imgLoader.getLoadedImgs());
+    },
+    loadErrorCallback: function (obj) {
+        console.log('loadError :', obj)
+        console.log('imgLoader.isFinished() :', imgLoader.isFinished());
+        console.log('imgLoader.getLoadedImgs() :', imgLoader.getLoadedImgs());
+    }
+});
+
+imgLoader.start([
+    'https://images.unsplash.com/photo-1431794062232-2a99a5431c6c?dpr=2&auto=compress,format&crop=entropy&fit=crop&w=767&h=511&q=80&cs=tinysrgb',
+    'https://images.unsplash.com/error-dummy-url.png',
+    'https://images.unsplash.com/photo-1459666644539-a9755287d6b0?dpr=2&auto=compress,format&crop=entropy&fit=crop&w=767&h=463&q=80&cs=tinysrgb'
+]);
+
+// get flag finish load all images
+// console.log( imgLoader.isFinished() );
+
+// get array has loaded images
+// console.log( imgLoader.getLoadedImgs() );
+
+// get percentage number(0 ~ 1)
+// console.log( imgLoader.getPercentageLoaded() );
+
+// destroy
+// imgLoader.destroy();
 ```  
 
 

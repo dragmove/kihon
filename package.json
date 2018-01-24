@@ -1,6 +1,6 @@
 {
   "name": "kihon",
-  "version": "0.0.9",
+  "version": "0.0.10",
   "description": "Javascript Library to help developers make Interactive UI. Dependency to jQuery 3.x.x.",
   "keywords": [
     "kihon",
