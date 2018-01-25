@@ -3,9 +3,9 @@ import {not, isBoolean, isNotDef, notSingleEle, anyOf} from './_util';
 
 class FullSizeBg {
   constructor(options) {
-    const _ = this;
+    if (isNotDef(options)) throw new Error('FullSizeBg: require options object when create instance.');
 
-    if (isNotDef(options)) throw new Error('FullSizeBg: require options object when create FullSizeBg instance.');
+    const _ = this;
 
     _._option = $.extend({
       wrap: null, // wrap
@@ -57,7 +57,7 @@ class FullSizeBg {
     return _;
   }
 
-  setResizeEventHandler(flag = false) {
+  setResizeEventHandler(flag) {
     if (not(isBoolean)(flag)) throw new Error('FullSizeBg: setResizeEventHandler require boolean parameter.');
 
     const _ = this,

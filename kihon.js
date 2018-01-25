@@ -1,9 +1,11 @@
 import FullSizeBg from './FullSizeBg';
-import Overlay from './Overlay';
 import ImageLoader from './ImageLoader';
+import Navi from './Navi';
+import Overlay from './Overlay';
 
 export default {
   FullSizeBg: FullSizeBg,
-  Overlay: Overlay,
-  ImageLoader: ImageLoader
+  ImageLoader: ImageLoader,
+  Navi: Navi,
+  Overlay: Overlay
 };

@@ -2,11 +2,9 @@ import {not, isNotDef, isFunction} from './_util';
 
 class ImageLoader {
   constructor(options) {
-    if (isNotDef(options)) {
-      throw new Error('ImageLoader: require options object when create instance.');
-    }
-
     const _ = this;
+
+    if (isNotDef(options)) throw new Error('ImageLoader: require options object when create instance.');
 
     _._loadCompleteCallback = isFunction(options.loadCompleteCallback) ? options.loadCompleteCallback : null;
     _._loadPerCompleteCallback = isFunction(options.loadPerCompleteCallback) ? options.loadPerCompleteCallback : null;

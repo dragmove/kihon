@@ -6,7 +6,7 @@
 * Javascript Library to help developers make Interactive UI
 * Dependency to jQuery 3.x.x
 
-Thansk to whoever use kihon.
+Thanks to whoever use kihon.
 
 
 ## Install  
@@ -17,6 +17,8 @@ npm install kihon --save-dev
 
 ## UI Components
 FullSizeBg  
+ImageLoader  
+Navi  
 Overlay  
   
 
@@ -75,45 +77,6 @@ var fullSizeBg = new FullSizeBg({
 ```  
 
 
-### Overlay
-```javascript
-import Overlay from 'kihon/Overlay';
-
-var overlay = new Overlay({
-    // class: 'overlay',
-    // color: '#000',
-    // opacity: 0.5,
-    // appendTo: $('body'),
-    clickCallback: function (evt) {
-        console.log('Kihon.Overlay clickCallback :', evt);
-    }
-}).init();
-
-overlay.show();
-
-// set node event handler
-// overlay.setNodeEventHandler(true / false);
-
-// get node
-// console.log( overlay.getNode() );
-
-// set css
-// overlay.setCss({'background-color': '#f00', ...});
-
-// append to other element
-// overlay.appendTo(parent element);
-
-// show overlay
-// overlay.show();
-
-// hide overlay
-// overlay.hide();
-
-// destroy overlay
-// overlay.destroy();
-```  
-
-
 ### ImageLoader
 ```javascript
 import ImageLoader from 'kihon/ImageLoader';
@@ -153,6 +116,111 @@ imgLoader.start([
 
 // destroy
 // imgLoader.destroy();
+```  
+
+
+### ImageLoader
+```html
+<ul class="navi">
+    <li><a href="#">Thanks</a></li>
+    <li><a href="#">to</a></li>
+    <li><a href="#">whoever</a></li>
+    <li><a href="#">use</a></li>
+    <li><a href="#">kihon.</a></li>
+</ul>
+```  
+
+```css
+.navi li a.on {color: #D50000;}
+```
+```javascript
+import Navi from 'kihon/Navi';
+
+var navi = new Navi({
+    wrap: $('.navi'),
+    btns: $('.navi li a'),
+    mouseoverCallback: function (obj) { // { event, btn, index }
+        console.log('mouseoverCallback :', obj);
+    },
+    mouseoutCallback: function (obj) { // { event, btn, index }
+        console.log('mouseoutCallback :', obj);
+    },
+    mousedownCallback: function (obj) { // { event, btn, index }
+        console.log('mousedownCallback :', obj);
+    },
+    mouseupCallback: function (obj) { // { event, btn, index }
+        console.log('mouseupCallback:', obj);
+    },
+    clickCallback: function (obj) { // { event, btn, prevActivatedIndex, index }
+        console.log('clickCallback :', obj);
+    },
+    activateCallback: function (obj) { // { prevActivatedIndex, index }
+        console.log('activateCallback :', obj);
+
+        var btns = $(navi.getBtns()),
+            btn = $(navi.getBtn(obj.index));
+
+        btns.removeClass('on');
+        btn.addClass('on');
+    }
+}).init();
+
+// get all buttons
+// console.log( navi.getBtns() );
+
+// get one button. (1st button's index is 1.)
+// console.log( navi.getBtn(button index) );
+
+// get activated button index
+// console.log( navi.getActivatedIndex() );
+
+// activate one button, and deactivate other buttons. (1st button's index is 1.)
+// navi.activate(button index);
+
+// set buttons event handler
+// navi.setBtnsEventHandler(true / false);
+
+// destroy
+// navi.destroy();
+```  
+
+
+### Overlay
+```javascript
+import Overlay from 'kihon/Overlay';
+
+var overlay = new Overlay({
+    // class: 'overlay',
+    // color: '#000',
+    // opacity: 0.5,
+    // appendTo: $('body'),
+    clickCallback: function (evt) {
+        console.log('Kihon.Overlay clickCallback :', evt);
+    }
+}).init();
+
+overlay.show();
+
+// set node event handler
+// overlay.setNodeEventHandler(true / false);
+
+// get node
+// console.log( overlay.getNode() );
+
+// set css
+// overlay.setCss({'background-color': '#f00', ...});
+
+// append to other element
+// overlay.appendTo(parent element);
+
+// show overlay
+// overlay.show();
+
+// hide overlay
+// overlay.hide();
+
+// destroy overlay
+// overlay.destroy();
 ```  
 
 
