@@ -119,7 +119,7 @@ imgLoader.start([
 ```  
 
 
-### ImageLoader
+### Navi
 ```html
 <ul class="navi">
     <li><a href="#">Thanks</a></li>
