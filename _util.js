@@ -18,6 +18,12 @@ export const isBoolean = (obj) => {
   return (obj.constructor === Boolean);
 };
 
+export const isNumber = (obj) => {
+  if (!isDefined(obj)) return false;
+
+  return (obj.constructor === Number);
+};
+
 export const isFunction = (obj) => {
   if (!isDefined(obj)) return false;
 

@@ -15,10 +15,11 @@ npm install kihon --save-dev
 ```
 
 
-## UI Components
+## Components
 FullSizeBg  
 ImageLoader  
 Navi  
+NaviHasTimer  
 Overlay  
   
 
@@ -36,7 +37,7 @@ import FullSizeBg from 'kihon/FullSizeBg' // Import single component. You can us
   
 
 ## Examples
-### FullSizeBg
+### FullSizeBg 
 ```html
 <div class="wrap-full-size-bg"> <!-- can rename class you want -->
     <div class="full-size-bg"> <!-- can rename class you want -->
@@ -133,6 +134,7 @@ imgLoader.start([
 ```css
 .navi li a.on {color: #D50000;}
 ```
+
 ```javascript
 import Navi from 'kihon/Navi';
 
@@ -164,6 +166,80 @@ var navi = new Navi({
         btn.addClass('on');
     }
 }).init();
+
+// get all buttons
+// console.log( navi.getBtns() );
+
+// get one button. (1st button's index is 1.)
+// console.log( navi.getBtn(button index) );
+
+// get activated button index
+// console.log( navi.getActivatedIndex() );
+
+// activate one button, and deactivate other buttons. (1st button's index is 1.)
+// navi.activate(button index);
+
+// set buttons event handler
+// navi.setBtnsEventHandler(true / false);
+
+// destroy
+// navi.destroy();
+```  
+
+
+### NaviHasTimer
+```html
+<ul class="navi">
+    <li><a href="#">Thanks</a></li>
+    <li><a href="#">to</a></li>
+    <li><a href="#">whoever</a></li>
+    <li><a href="#">use</a></li>
+    <li><a href="#">kihon.</a></li>
+</ul>
+```  
+
+```css
+.navi {width: 75px; background-color: #CFD8DC;}
+.navi li a.on {color: #D50000;}
+```
+
+```javascript
+import NaviHasTimer from 'kihon/NaviHasTimer';
+
+var navi = new NaviHasTimer({
+    wrap: $('.navi'),
+    btns: $('.navi li a'),
+    mouseoverCallback: function (obj) { // { event, btn, index }
+        console.log('mouseoverCallback :', obj);
+        
+        activateBtn(obj.index);
+    },
+    mouseoutCallback: function (obj) { // { event, btn, index }
+        console.log('mouseoutCallback :', obj);
+    },
+    mousedownCallback: function (obj) { // { event, btn, index }
+        console.log('mousedownCallback :', obj);
+    },
+    mouseupCallback: function (obj) { // { event, btn, index }
+        console.log('mouseupCallback:', obj);
+    },
+    clickCallback: function (obj) { // { event, btn, prevActivatedIndex, index }
+        console.log('clickCallback :', obj);
+    },
+    activateCallback: function (obj) { // { prevActivatedIndex, index }
+        console.log('activateCallback :', obj);
+
+        activateBtn(obj.index);
+    }
+}).init();
+
+function activateBtn(index) {
+    var btns = $(navi.getBtns()),
+        btn = $(navi.getBtn(index));
+
+    btns.removeClass('on');
+    btn.addClass('on');
+}
 
 // get all buttons
 // console.log( navi.getBtns() );
