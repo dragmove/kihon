@@ -94,7 +94,7 @@ class Navi {
   }
 
   setBtnsEventHandler(flag) {
-    if (not(isBoolean)(flag)) throw new Error('Navi: setBtnsEventHandler require boolean parameter.');
+    if (not(isBoolean)(flag)) throw new TypeError('Navi: setBtnsEventHandler require boolean parameter.');
 
     const _ = this;
 

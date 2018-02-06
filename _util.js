@@ -1,3 +1,7 @@
+export const truthy = (obj) => !!obj;
+
+export const falsy = (obj) => !!!obj;
+
 export const not = (func) => {
   return (object) => {
     return !func(object);

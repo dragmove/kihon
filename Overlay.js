@@ -60,7 +60,7 @@ class Overlay {
   }
 
   setNodeEventHandler(flag) {
-    if (not(isBoolean)(flag)) throw new Error('Overlay: setNodeEventHandler require boolean parameter.');
+    if (not(isBoolean)(flag)) throw new TypeError('Overlay: setNodeEventHandler require boolean parameter.');
 
     const _ = this,
       evtName = `click.kihon.overlay.${_._uniqueId}`;
@@ -118,7 +118,7 @@ class Overlay {
       isRemoveNode: true
     }, obj);
 
-    if (not(isBoolean)(obj.isRemoveNode)) throw new Error('Overlay: destroy isRemoveNode variable type of option should be boolean.');
+    if (not(isBoolean)(obj.isRemoveNode)) throw new TypeError('Overlay: destroy isRemoveNode variable type of option should be boolean.');
     
     _._initialized = false;
 
@@ -127,11 +127,12 @@ class Overlay {
     _._proxy.clickOverlayEventHandler = null;
 
     if (obj.isRemoveNode) _._$node.remove();
+
     _._$node = null;
 
     _._$parentNode = null;
 
-    _.option = null;
+    _._option = null;
 
     return _;
   }

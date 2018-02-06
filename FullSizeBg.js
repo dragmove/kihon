@@ -58,7 +58,7 @@ class FullSizeBg {
   }
 
   setResizeEventHandler(flag) {
-    if (not(isBoolean)(flag)) throw new Error('FullSizeBg: setResizeEventHandler require boolean parameter.');
+    if (not(isBoolean)(flag)) throw new TypeError('FullSizeBg: setResizeEventHandler require boolean parameter.');
 
     const _ = this,
       evtName = `resize.kihon.fullsizebg.${_._uniqueId}`;

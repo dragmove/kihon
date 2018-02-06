@@ -21,6 +21,7 @@ ImageLoader
 Navi  
 NaviHasTimer  
 Overlay  
+Modal  
   
 
 ## Getting Started
@@ -64,6 +65,9 @@ var fullSizeBg = new FullSizeBg({
     alignY: 'center' // 'top' or 'center' or 'bottom'
 }).init();
 
+/*
+ * FullSizeBg public methods
+ */
 // set resize event handler
 // fullSizeBg.setResizeEventHandler(true / false);
 
@@ -106,6 +110,9 @@ imgLoader.start([
     'https://images.unsplash.com/photo-1459666644539-a9755287d6b0?dpr=2&auto=compress,format&crop=entropy&fit=crop&w=767&h=463&q=80&cs=tinysrgb'
 ]);
 
+/*
+ * ImageLoader public methods
+ */
 // get flag finish load all images
 // console.log( imgLoader.isFinished() );
 
@@ -167,6 +174,9 @@ var navi = new Navi({
     }
 }).init();
 
+/*
+ * Navi public methods
+ */
 // get all buttons
 // console.log( navi.getBtns() );
 
@@ -241,6 +251,9 @@ function activateBtn(index) {
     btn.addClass('on');
 }
 
+/*
+ * NaviHasTimer public methods
+ */
 // get all buttons
 // console.log( navi.getBtns() );
 
@@ -277,6 +290,9 @@ var overlay = new Overlay({
 
 overlay.show();
 
+/*
+ * Overlay public methods
+ */
 // set node event handler
 // overlay.setNodeEventHandler(true / false);
 
@@ -295,8 +311,81 @@ overlay.show();
 // hide overlay
 // overlay.hide();
 
-// destroy overlay
+// destroy
 // overlay.destroy();
+```  
+
+
+### Modal
+```css
+.modal-wrap {position: fixed; top: 0; right: 0; bottom: 0; left: 0;}
+.modal {
+    position: relative;
+    display: block;
+    margin: 0 auto;
+    top: 50%;
+    width: 250px;
+    height: 250px;
+    background-color: #CFD8DC;
+    color: #FFFFFF;
+    -webkit-transform: translateY(-50%);
+    -moz-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    -o-transform: translateY(-50%);
+    transform: translateY(-50%);
+}
+.btn-close {position: absolute; top: 0; right: 0; background-color: #FF5252;}
+```
+
+```javascript
+import Modal from 'kihon/Modal';
+
+var modal = new Modal({
+    wrapClass: 'modal-wrap',
+    contents: '<div class="modal"><p>Kihon.Modal<br>Thanks to whoever use <a href="https://github.com/dragmove/kihon">kihon</a>.</p><a href="#" class="btn-close">close</a></div>',
+    // appendTo: $('body'),
+    // closeBtnSelector: '.btn-close',
+    // isCloseByClickOutside: true,
+    // isCloseByEscKey: true,
+    showCallback: function () {
+        console.log('Kihon.Modal showCallback :', this);
+    },
+    hideCallback: function () {
+        console.log('Kihon.Modal hideCallback :', this);
+    }
+}).init();
+
+modal.show();
+
+/*
+ * Modal public methods
+ */
+// set close button event handler
+// modal.setCloseBtnEventHandler(true / false);
+
+// set modal wrap event handler
+// modal.setWrapEventHandler(true / false);
+
+// set escape key event handler
+// modal.setEscKeyEventHandler(true / false);
+
+// get modal node
+// console.log( modal.getNode() );
+
+// append to other element
+// modal.appendTo(parent element);
+
+// show modal
+// modal.show();
+
+// hide overlay
+// modal.hide();
+
+// get flag modal is hide
+// console.log( modal.isShow() );
+
+// destroy
+// modal.destroy();
 ```  
 
 
