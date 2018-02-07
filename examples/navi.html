@@ -10,7 +10,7 @@
     <meta name="author" content="dragmove"/>
     <title>Kihon.Navi</title>
     <style>
-        .navi li a.on {color: #D50000;}
+        .navi li a.on {color: #FF5252;}
     </style>
 </head>
 
@@ -34,8 +34,8 @@
 
         function init() {
             var navi = new Kihon.Navi({
-                wrap: $('.navi'),
-                btns: $('.navi li a'),
+                wrap: $('.navi'), // navi wrap
+                btns: $('.navi li a'), // navi buttons
                 mouseoverCallback: function (obj) { // { event, btn, index }
                     console.log('mouseoverCallback :', obj);
                 },

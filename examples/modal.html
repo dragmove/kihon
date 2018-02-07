@@ -11,21 +11,7 @@
     <title>Kihon.Modal</title>
     <style>
         .modal-wrap {position: fixed; top: 0; right: 0; bottom: 0; left: 0;}
-        .modal {
-            position: relative;
-            display: block;
-            margin: 0 auto;
-            top: 50%;
-            width: 250px;
-            height: 250px;
-            background-color: #CFD8DC;
-            color: #FFFFFF;
-            -webkit-transform: translateY(-50%);
-            -moz-transform: translateY(-50%);
-            -ms-transform: translateY(-50%);
-            -o-transform: translateY(-50%);
-            transform: translateY(-50%);
-        }
+        .modal {position: relative; display: block; margin: 0 auto; top: 50%; width: 250px; height: 250px; background-color: #CFD8DC; color: #FFFFFF; -webkit-transform: translateY(-50%); -moz-transform: translateY(-50%); -ms-transform: translateY(-50%); -o-transform: translateY(-50%); transform: translateY(-50%);}
         .btn-close {position: absolute; top: 0; right: 0; background-color: #FF5252;}
     </style>
 </head>
@@ -41,16 +27,16 @@
 
         function init() {
             var modal = new Kihon.Modal({
-                wrapClass: 'modal-wrap',
-                contents: '<div class="modal"><p>Kihon.Modal<br>Thanks to whoever use <a href="https://github.com/dragmove/kihon">kihon</a>.</p><a href="#" class="btn-close">close</a></div>',
-                // appendTo: $('body'),
-                // closeBtnSelector: '.btn-close',
-                // isCloseByClickOutside: true,
-                // isCloseByEscKey: true,
-                showCallback: function () {
+                wrapClass: 'modal-wrap', // modal wrap class
+                contents: '<div class="modal"><p>Kihon.Modal<br>Thanks to whoever use <a href="https://github.com/dragmove/kihon">kihon</a>.</p><a href="#" class="btn-close">close</a></div>', // modal contents html
+                // appendTo: $('body'), // element to append modal wrap
+                // closeBtnSelector: '.btn-close', // jQuery selector of close button
+                // isCloseByClickOutside: true, // hide modal when click outside of modal contents
+                // isCloseByEscKey: true, // hide modal when keydown escape key
+                showCallback: function () { // call just before show modal
                     console.log('Kihon.Modal showCallback :', this);
                 },
-                hideCallback: function () {
+                hideCallback: function () { // call just before hide modal
                     console.log('Kihon.Modal hideCallback :', this);
                 }
             }).init();

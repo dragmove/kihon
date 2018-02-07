@@ -22,11 +22,11 @@
 
         function init() {
             var overlay = new Kihon.Overlay({
-                // class: 'overlay',
-                // color: '#000',
-                // opacity: 0.5,
-                // appendTo: $('body'),
-                clickCallback: function (evt) {
+                // class: 'overlay', // overlay class
+                // color: '#000', // background color
+                // opacity: 0.5, // opacity (0 ~ 1)
+                // appendTo: $('body'), // element to append overlay
+                clickCallback: function (evt) { // call when click overlay
                     console.log('Kihon.Overlay clickCallback :', evt);
                 }
             }).init();

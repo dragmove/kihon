@@ -75,7 +75,7 @@ var fullSizeBg = new FullSizeBg({
 // fullSizeBg.resize();
 
 // get image size based on aspect fill calculation
-// console.log( fullSizeBg.getImageSizeAspectFill(srcWidth, srcHeight) );
+// fullSizeBg.getImageSizeAspectFill(srcWidth, srcHeight);
 
 // destroy
 // fullSizeBg.destroy();
@@ -87,20 +87,20 @@ var fullSizeBg = new FullSizeBg({
 import ImageLoader from 'kihon/ImageLoader';
 
 var imgLoader = new ImageLoader({
-    loadCompleteCallback: function (obj) {
+    loadCompleteCallback: function (obj) { // data about all images
         console.log('loadComplete :', obj);
-        console.log('imgLoader.isFinished() :', imgLoader.isFinished());
-        console.log('imgLoader.getLoadedImgs() :', imgLoader.getLoadedImgs());
+        console.log('loadComplete - imgLoader.isFinished() :', imgLoader.isFinished());
+        console.log('loadComplete - imgLoader.getLoadedImgs() :', imgLoader.getLoadedImgs());
     },
-    loadPerCompleteCallback: function (obj) {
+    loadPerCompleteCallback: function (obj) { // data about per image
         console.log('loadPerComplete :', obj);
-        console.log('imgLoader.isFinished() :', imgLoader.isFinished());
-        console.log('imgLoader.getLoadedImgs() :', imgLoader.getLoadedImgs());
+        console.log('loadPerComplete - imgLoader.isFinished() :', imgLoader.isFinished());
+        console.log('loadPerComplete - imgLoader.getLoadedImgs() :', imgLoader.getLoadedImgs());
     },
-    loadErrorCallback: function (obj) {
+    loadErrorCallback: function (obj) { // data about per error
         console.log('loadError :', obj)
-        console.log('imgLoader.isFinished() :', imgLoader.isFinished());
-        console.log('imgLoader.getLoadedImgs() :', imgLoader.getLoadedImgs());
+        console.log('loadError - imgLoader.isFinished() :', imgLoader.isFinished());
+        console.log('loadError - imgLoader.getLoadedImgs() :', imgLoader.getLoadedImgs());
     }
 });
 
@@ -127,6 +127,65 @@ imgLoader.start([
 ```  
 
 
+### Modal
+```css
+.modal-wrap {position: fixed; top: 0; right: 0; bottom: 0; left: 0;}
+.modal {position: relative; display: block; margin: 0 auto; top: 50%; width: 250px; height: 250px; background-color: #CFD8DC; color: #FFFFFF; -webkit-transform: translateY(-50%); -moz-transform: translateY(-50%); -ms-transform: translateY(-50%); -o-transform: translateY(-50%); transform: translateY(-50%);}
+.btn-close {position: absolute; top: 0; right: 0; background-color: #FF5252;}
+```
+
+```javascript
+import Modal from 'kihon/Modal';
+
+var modal = new Modal({
+    wrapClass: 'modal-wrap', // modal wrap class
+    contents: '<div class="modal"><p>Kihon.Modal<br>Thanks to whoever use <a href="https://github.com/dragmove/kihon">kihon</a>.</p><a href="#" class="btn-close">close</a></div>', // modal contents html
+    // appendTo: $('body'), // element to append modal wrap
+    // closeBtnSelector: '.btn-close', // jQuery selector of close button
+    // isCloseByClickOutside: true, // hide modal when click outside of modal contents
+    // isCloseByEscKey: true, // hide modal when keydown escape key
+    showCallback: function () { // call just before show modal
+        console.log('Kihon.Modal showCallback :', this);
+    },
+    hideCallback: function () { // call just before hide modal
+        console.log('Kihon.Modal hideCallback :', this);
+    }
+}).init();
+
+modal.show();
+
+/*
+ * Modal public methods
+ */
+// set close button event handler
+// modal.setCloseBtnEventHandler(true / false);
+
+// set modal wrap event handler
+// modal.setWrapEventHandler(true / false);
+
+// set escape key event handler
+// modal.setEscKeyEventHandler(true / false);
+
+// get modal node
+// console.log( modal.getNode() );
+
+// append to other element
+// modal.appendTo(parent element);
+
+// show modal
+// modal.show();
+
+// hide overlay
+// modal.hide();
+
+// get flag modal is hide
+// console.log( modal.isShow() );
+
+// destroy
+// modal.destroy();
+```  
+
+
 ### Navi
 ```html
 <ul class="navi">
@@ -146,8 +205,8 @@ imgLoader.start([
 import Navi from 'kihon/Navi';
 
 var navi = new Navi({
-    wrap: $('.navi'),
-    btns: $('.navi li a'),
+    wrap: $('.navi'), // navi wrap
+    btns: $('.navi li a'), // navi buttons
     mouseoverCallback: function (obj) { // { event, btn, index }
         console.log('mouseoverCallback :', obj);
     },
@@ -217,11 +276,11 @@ var navi = new Navi({
 import NaviHasTimer from 'kihon/NaviHasTimer';
 
 var navi = new NaviHasTimer({
-    wrap: $('.navi'),
-    btns: $('.navi li a'),
+    wrap: $('.navi'), // navi wrap
+    btns: $('.navi li a'), // navi buttons
     mouseoverCallback: function (obj) { // { event, btn, index }
         console.log('mouseoverCallback :', obj);
-        
+
         activateBtn(obj.index);
     },
     mouseoutCallback: function (obj) { // { event, btn, index }
@@ -240,7 +299,8 @@ var navi = new NaviHasTimer({
         console.log('activateCallback :', obj);
 
         activateBtn(obj.index);
-    }
+    },
+    timerInterval: 1000 // after mouseout navi, interval to set activated button index
 }).init();
 
 function activateBtn(index) {
@@ -279,11 +339,11 @@ function activateBtn(index) {
 import Overlay from 'kihon/Overlay';
 
 var overlay = new Overlay({
-    // class: 'overlay',
-    // color: '#000',
-    // opacity: 0.5,
-    // appendTo: $('body'),
-    clickCallback: function (evt) {
+    // class: 'overlay', // overlay class
+    // color: '#000', // background color
+    // opacity: 0.5, // opacity (0 ~ 1)
+    // appendTo: $('body'), // element to append overlay
+    clickCallback: function (evt) { // call when click overlay
         console.log('Kihon.Overlay clickCallback :', evt);
     }
 }).init();
@@ -297,7 +357,7 @@ overlay.show();
 // overlay.setNodeEventHandler(true / false);
 
 // get node
-// console.log( overlay.getNode() );
+// console.log(overlay.getNode());
 
 // set css
 // overlay.setCss({'background-color': '#f00', ...});
@@ -313,79 +373,6 @@ overlay.show();
 
 // destroy
 // overlay.destroy();
-```  
-
-
-### Modal
-```css
-.modal-wrap {position: fixed; top: 0; right: 0; bottom: 0; left: 0;}
-.modal {
-    position: relative;
-    display: block;
-    margin: 0 auto;
-    top: 50%;
-    width: 250px;
-    height: 250px;
-    background-color: #CFD8DC;
-    color: #FFFFFF;
-    -webkit-transform: translateY(-50%);
-    -moz-transform: translateY(-50%);
-    -ms-transform: translateY(-50%);
-    -o-transform: translateY(-50%);
-    transform: translateY(-50%);
-}
-.btn-close {position: absolute; top: 0; right: 0; background-color: #FF5252;}
-```
-
-```javascript
-import Modal from 'kihon/Modal';
-
-var modal = new Modal({
-    wrapClass: 'modal-wrap',
-    contents: '<div class="modal"><p>Kihon.Modal<br>Thanks to whoever use <a href="https://github.com/dragmove/kihon">kihon</a>.</p><a href="#" class="btn-close">close</a></div>',
-    // appendTo: $('body'),
-    // closeBtnSelector: '.btn-close',
-    // isCloseByClickOutside: true,
-    // isCloseByEscKey: true,
-    showCallback: function () {
-        console.log('Kihon.Modal showCallback :', this);
-    },
-    hideCallback: function () {
-        console.log('Kihon.Modal hideCallback :', this);
-    }
-}).init();
-
-modal.show();
-
-/*
- * Modal public methods
- */
-// set close button event handler
-// modal.setCloseBtnEventHandler(true / false);
-
-// set modal wrap event handler
-// modal.setWrapEventHandler(true / false);
-
-// set escape key event handler
-// modal.setEscKeyEventHandler(true / false);
-
-// get modal node
-// console.log( modal.getNode() );
-
-// append to other element
-// modal.appendTo(parent element);
-
-// show modal
-// modal.show();
-
-// hide overlay
-// modal.hide();
-
-// get flag modal is hide
-// console.log( modal.isShow() );
-
-// destroy
-// modal.destroy();
 ```  
 
 
