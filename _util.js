@@ -8,6 +8,8 @@ export const not = (func) => {
   };
 };
 
+export const existy = (obj) => (obj != null);
+
 export const isDefined = (obj) => {
   if (obj === null || typeof obj === 'undefined') return false;
 
@@ -28,10 +30,22 @@ export const isNumber = (obj) => {
   return (obj.constructor === Number);
 };
 
+export const isString = (obj) => {
+  if (!isDefined(obj)) return false;
+
+  return (obj.constructor === String);
+};
+
 export const isFunction = (obj) => {
   if (!isDefined(obj)) return false;
 
   return (obj.constructor === Function);
+};
+
+export const allOf = function (/*args*/) {
+  const args = Array.prototype.slice.call(arguments);
+
+  return args.every((val) => (val === true));
 };
 
 export const anyOf = (/*args*/) => {
@@ -45,3 +59,43 @@ export const anyOf = (/*args*/) => {
 export const singleEle = ($ele) => ($ele.length === 1);
 
 export const notSingleEle = not(singleEle);
+
+export const each = (dataCanLoop, func, context) => {
+  if (falsy(Array.isArray(dataCanLoop) || isString(dataCanLoop))) {
+    throw new TypeError('dataCanLoop parameter type of each() must be Array or String.');
+  }
+
+  const _context = (existy(context)) ? context : null;
+
+  for (let i = 0, max = dataCanLoop.length; i < max; i++) {
+    func.call(_context, dataCanLoop[i]);
+  }
+};
+
+export const curry2 = (func) => {
+  if (!isFunction(func)) throw new TypeError('func parameter type of curry2() must be Function.');
+
+  return (secondArg) => (firstArg) => func(firstArg, secondArg);
+};
+
+export const lte = curry2(function (lhs, rhs) {
+  if (!allOf(isNumber(lhs), isNumber(rhs))) throw new TypeError('lte requires Number parameters.');
+
+  return lhs <= rhs;
+});
+
+export const getSizeAspectFill = (srcWidth, srcHeight, fillWidth, fillHeight) => {
+  if(!allOf(isNumber(srcWidth), isNumber(srcHeight),isNumber(fillWidth), isNumber(fillHeight))) {
+    throw new TypeError('getSizeAspectFill() requires Number parameters.');
+  }
+
+  let modifiedSizeW = fillWidth,
+    modifiedSizeH = Math.ceil((fillWidth / srcWidth) * srcHeight);
+
+  if (modifiedSizeH < fillHeight) {
+    modifiedSizeW = Math.ceil((fillHeight / srcHeight) * srcWidth);
+    modifiedSizeH = fillHeight;
+  }
+
+  return {width: modifiedSizeW, height: modifiedSizeH};
+};

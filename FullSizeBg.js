@@ -1,5 +1,5 @@
 import $ from 'jquery';
-import {not, isNotDef, isBoolean, anyOf, notSingleEle} from './_util';
+import {not, isNotDef, isBoolean, anyOf, notSingleEle, getSizeAspectFill} from './_util';
 
 class FullSizeBg {
   constructor(options) {
@@ -70,7 +70,7 @@ class FullSizeBg {
 
   resize(evt = null) {
     const _ = this,
-      size = _.getImageSizeAspectFill(_._option.imgWidth, _._option.imgHeight);
+      size = _.getImageSizeAspectFill(_._option.imgWidth, _._option.imgHeight, _._global);
 
     _._$img.css({width: size.width, height: size.height});
 
@@ -81,20 +81,8 @@ class FullSizeBg {
     return _;
   }
 
-  getImageSizeAspectFill(srcWidth = 0, srcHeight = 0) {
-    const _ = this,
-      winWidth = _._global.innerWidth,
-      winHeight = _._global.innerHeight;
-
-    let modifiedWidth = winWidth,
-      modifiedHeight = Math.ceil((winWidth / srcWidth) * srcHeight);
-
-    if (modifiedHeight < winHeight) {
-      modifiedWidth = Math.ceil((winHeight / srcHeight) * srcWidth);
-      modifiedHeight = winHeight;
-    }
-
-    return {width: modifiedWidth, height: modifiedHeight};
+  getImageSizeAspectFill(srcWidth = 0, srcHeight = 0, global = window) {
+    return getSizeAspectFill(srcWidth, srcHeight, global.innerWidth, global.innerHeight);
   }
 
   destroy() {
