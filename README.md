@@ -281,7 +281,7 @@ modal.show();
 
 ### Navi
 ```html
-<ul class="navi">
+<ul class="navi"> <!-- can rename class you want -->
     <li><a href="#">kihon:</a></li>
     <li><a href="#">Thanks</a></li>
     <li><a href="#">to</a></li>
@@ -352,7 +352,7 @@ var navi = new Navi({
 
 ### NaviHasTimer
 ```html
-<ul class="navi">
+<ul class="navi"> <!-- can rename class you want -->
     <li><a href="#">kihon:</a></li>
     <li><a href="#">Thanks</a></li>
     <li><a href="#">to</a></li>
