@@ -1,13 +1,15 @@
 {
   "name": "kihon",
   "version": "0.0.14",
-  "description": "Javascript Library to help developers make Interactive UI. Dependency to jQuery 3.x.x.",
+  "description": "A Bundle of Lite components which provides straightforward Interactive UI",
   "keywords": [
     "kihon",
+    "component",
     "ui",
     "util",
     "javascript",
     "js",
+    "es2015",
     "dragmove"
   ],
   "homepage": "https://www.npmjs.com/package/kihon",
