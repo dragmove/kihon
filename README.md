@@ -1,7 +1,7 @@
 # kihon
 [![npm version](https://badge.fury.io/js/kihon.svg)](https://www.npmjs.com/package/kihon)
 
-kihon is a Bundle of Lite components which provides straightforward Interactive UI.
+kihon is a Bundle of Lite components which provide straightforward Interactive UI.
 
 
 ## About
