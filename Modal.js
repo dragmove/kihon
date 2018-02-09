@@ -1,5 +1,5 @@
 import $ from 'jquery';
-import {truthy, falsy, not, isDefined, isNotDef, isBoolean, isFunction} from './_util';
+import {truthy, not, isDefined, isNotDef, isBoolean, isFunction} from './_util';
 
 class Modal {
   constructor(options) {
@@ -178,44 +178,6 @@ class Modal {
     _._proxy.escKeyEventHandler = null;
 
     return _;
-  }
-
-  /*
-   * private methods
-   */
-  _closeBtnEventHandler(evt) {
-    evt.preventDefault();
-
-    switch (evt.type) {
-      case 'click' :
-        this.hide();
-
-        break;
-    }
-  }
-
-  _wrapEventHandler(evt) {
-    const _ = this;
-
-    switch (evt.type) {
-      case 'click' :
-        if (falsy(_._option.isCloseByClickOutside)) return;
-
-        if (evt.target === _._$contents.get(0) || $.contains(_._$contents.get(0), evt.target)) return;
-
-        _.hide();
-
-        break;
-    }
-  }
-
-  _escKeyEventHandler(evt) {
-    switch (evt.type) {
-      case 'keydown' :
-        if (evt.keyCode === 27) this.hide();
-
-        break;
-    }
   }
 }
 

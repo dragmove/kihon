@@ -33,7 +33,7 @@ class Overlay {
     const _ = this;
 
     if (_._initialized) return _;
-    
+
     _._initialized = true;
 
     _._$node = $(document.createElement('div')).addClass(_._option.class);
@@ -69,7 +69,7 @@ class Overlay {
 
     _._$node.off(evtName, _._proxy.clickOverlayEventHandler);
 
-    if(flag) _._$node.on(evtName, _._proxy.clickOverlayEventHandler);
+    if (flag) _._$node.on(evtName, _._proxy.clickOverlayEventHandler);
 
     return _;
   }
@@ -119,7 +119,7 @@ class Overlay {
     }, obj);
 
     if (not(isBoolean)(obj.isRemoveNode)) throw new TypeError('Overlay: destroy isRemoveNode variable type of option should be boolean.');
-    
+
     _._initialized = false;
 
     _.setNodeEventHandler(false);

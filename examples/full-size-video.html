@@ -10,30 +10,15 @@
     <meta name="author" content="dragmove"/>
     <title>Kihon.FullSizeVideo</title>
     <style>
-        .wrapper {
-            position: relative;
-            overflow: hidden;
-            background: #333;
-        }
-
-        .full-size-video {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-        }
-
-        .full-size-video video {
-            position: absolute;
-            top: 0;
-            left: 0;
-        }
+        html, body {margin: 0; padding: 0;}
+        .wrap-full-size-video {position: relative; overflow: hidden; background: #333;}
+        .full-size-video {position: absolute;}
+        .full-size-video video {position: absolute; top: 0; left: 0;}
     </style>
 </head>
 
 <body>
-<div class="wrapper">
+<div class="wrap-full-size-video">
     <div class="full-size-video"></div>
 </div>
 
@@ -47,54 +32,74 @@
 
         function init() {
             var fullSizeVideo = new Kihon.FullSizeVideo({
-                videoWrap: $('.full-size-video'),
-                videoUrls: ['https://www.w3schools.com/tags/mov_bbb.mp4', 'https://www.w3schools.com/tags/mov_bbb.ogg'],
-                videoWidth: 320,
-                videoHeight: 176,
+                wrap: $('.wrap-full-size-video'), // wrap
+                videoWrap: $('.full-size-video'), // video wrap
+                videoUrls: ['https://www.quirksmode.org/html5/videos/big_buck_bunny.mp4', 'https://www.quirksmode.org/html5/videos/big_buck_bunny.ogv'], // video sources
+                videoWidth: 640, // video width
+                videoHeight: 360, // video height
                 alignX: 'center', // left, center, right
                 alignY: 'center', // top, center, bottom
-
-                isAutoPlay: true,
-                isLoop: false,
-                isMuted: false,
-
-                canplayCallback: function (obj) {
+                isAutoPlay: false, // auto play flag
+                isLoop: false, // loop flag
+                isMuted: false, // mute flag
+                canplayCallback: function (obj) { // {event}
                     console.log('canplayCallback obj :', obj);
                 },
-                timeupdateCallback: function (obj) {
+                timeupdateCallback: function (obj) { // {event, currentTime, duration}
                     console.log('timeupdateCallback obj :', obj);
                 },
-                endedCallback: function (obj) {
+                endedCallback: function (obj) { // {event, currentTime, duration}
                     console.log('endedCallback obj :', obj);
                 }
             }).init();
 
-            /*
-             * FullSizeVideo public methods
-             */
-            /*
             setTimeout(function () {
-                fullSizeVideo.play();
-                fullSizeVideo.setVolume(0.5);
+                fullSizeVideo.play().setVolume(0.5);
             }, 2000);
 
             setTimeout(function () {
-                fullSizeVideo.stop();
-            }, 4000);
+                fullSizeVideo.pause();
+            }, 5000);
 
             setTimeout(function () {
-                fullSizeVideo.seek(5);
-                fullSizeVideo.play();
-                fullSizeVideo.setVolume(1.0);
-            }, 6000);
+                fullSizeVideo.seek(30).play().setVolume(1.0);
+            }, 8000);
 
-            $(window).on('resize', function (evt) {
-                $('#wrapper').css({
-                    width: window.innerWidth,
-                    height: window.innerHeight
-                });
-            }).trigger('resize');
-            */
+            /*
+             * FullSizeVideo public methods
+             */
+            // get video node
+            // console.log( fullSizeVideo.getVideoNode() );
+
+            // get video size based on aspect fill calculation
+            // console.log( fullSizeVideo.getVideoSizeAspectFill(srcWidth, srcHeight) );
+
+            // get volume (0 ~ 1)
+            // console.log( fullSizeVideo.getVolume() );
+
+            // set volume
+            // console.log( fullSizeVideo.setVolume(0 ~ 1) );
+
+            // play video
+            // fullSizeVideo.play();
+
+            // pause video
+            // fullSizeVideo.pause();
+
+            // stop video
+            // fullSizeVideo.stop();
+
+            // seek video
+            // fullSizeVideo.seek(second);
+
+            // set resize event handler
+            // fullSizeVideo.setResizeEventHandler(true / false);
+
+            // resize
+            // fullSizeVideo.resize();
+
+            // destroy
+            // fullSizeVideo.destroy();
         }
     }(jQuery));
 </script>

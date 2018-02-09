@@ -39,6 +39,9 @@ class Navi {
     if (notSingleEle($(_._option.wrap))) throw new Error('Navi: require options object has a single wrap.');
   }
 
+  /*
+   * public methods
+   */
   init() {
     const _ = this;
 
@@ -57,9 +60,6 @@ class Navi {
     return _;
   }
 
-  /*
-   * public methods
-   */
   getBtns() {
     return this._$btns.toArray();
   }
@@ -120,9 +120,9 @@ class Navi {
   destroy() {
     const _ = this;
 
-    _.setBtnsEventHandler(false);
-
     _._initialized = false;
+
+    _.setBtnsEventHandler(false);
 
     _._currentIndex = 0;
 

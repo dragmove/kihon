@@ -66,6 +66,8 @@ class FullSizeBg {
     $(_._global).off(evtName, _._proxy.resizeEventHandler);
 
     if (flag) $(_._global).on(evtName, _._proxy.resizeEventHandler);
+
+    return _;
   }
 
   resize(evt = null) {
@@ -74,7 +76,7 @@ class FullSizeBg {
 
     _._$img.css({width: size.width, height: size.height});
 
-    _._setWrapAlign(_._option.alignX, _._option.alignY, size);
+    _._setWrapAlign(_._option.alignX, _._option.alignY, size, _._global);
 
     _._$wrap.css({width: _._global.innerWidth, height: _._global.innerHeight});
 
@@ -90,6 +92,12 @@ class FullSizeBg {
 
     _._initialized = false;
 
+    _._$wrap = null;
+
+    _._$imgWrap = null;
+
+    _._$img = null;
+
     _.setResizeEventHandler(false);
 
     _._proxy.resizeEventHandler = null;
@@ -100,10 +108,10 @@ class FullSizeBg {
   /*
    * private methods
    */
-  _setWrapAlign(alignX = 'center', alignY = 'center', modifiedSize = {width: 0, height: 0}) {
+  _setWrapAlign(alignX = 'center', alignY = 'center', modifiedSize = {width: 0, height: 0}, global = window) {
     const _ = this,
-      winWidth = _._global.innerWidth,
-      winHeight = _._global.innerHeight;
+      winWidth = global.innerWidth,
+      winHeight = global.innerHeight;
 
     let left = 0,
       top = 0;

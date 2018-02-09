@@ -36,22 +36,22 @@
             var navi = new Kihon.Navi({
                 wrap: $('.navi'), // navi wrap
                 btns: $('.navi li a'), // navi buttons
-                mouseoverCallback: function (obj) { // { event, btn, index }
+                mouseoverCallback: function (obj) { // {event, btn, index}
                     console.log('mouseoverCallback :', obj);
                 },
-                mouseoutCallback: function (obj) { // { event, btn, index }
+                mouseoutCallback: function (obj) { // {event, btn, index}
                     console.log('mouseoutCallback :', obj);
                 },
-                mousedownCallback: function (obj) { // { event, btn, index }
+                mousedownCallback: function (obj) { // {event, btn, index}
                     console.log('mousedownCallback :', obj);
                 },
-                mouseupCallback: function (obj) { // { event, btn, index }
+                mouseupCallback: function (obj) { // {event, btn, index}
                     console.log('mouseupCallback:', obj);
                 },
-                clickCallback: function (obj) { // { event, btn, prevActivatedIndex, index }
+                clickCallback: function (obj) { // {event, btn, prevActivatedIndex, index}
                     console.log('clickCallback :', obj);
                 },
-                activateCallback: function (obj) { // { prevActivatedIndex, index }
+                activateCallback: function (obj) { // {prevActivatedIndex, index}
                     console.log('activateCallback :', obj);
 
                     var btns = $(navi.getBtns()),

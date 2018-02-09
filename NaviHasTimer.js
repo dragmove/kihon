@@ -16,6 +16,25 @@ class NaviHasTimer extends Navi {
   }
 
   /*
+   * public methods
+   */
+  // init()
+  // getBtns()
+  // getBtn(index)
+  // getActivatedIndex()
+  // activate(index)
+  // setBtnsEventHandler(true / false)
+
+  // override
+  destroy() {
+    this._removeTimer();
+
+    super.destroy();
+
+    return this;
+  }
+
+  /*
    * private methods
    */
   // override
@@ -49,24 +68,6 @@ class NaviHasTimer extends Navi {
     _._timer = null;
 
     return _;
-  }
-
-  /*
-   * public methods
-   */
-  // getBtns()
-  // getBtn(index)
-  // getActivatedIndex()
-  // activate(index)
-  // setBtnsEventHandler(true / false)
-
-  // override
-  destroy() {
-    this._removeTimer();
-
-    super.destroy();
-
-    return this;
   }
 }
 
