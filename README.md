@@ -26,6 +26,7 @@ Navi
 NaviHasTimer  
 Overlay  
 Modal  
+YoutubeModal  
   
 
 ## Getting Started
@@ -472,6 +473,90 @@ overlay.show();
 // destroy
 // overlay.destroy();
 // overlay.destroy({isRemoveNode: true});
+```  
+
+
+### YoutubeModal
+```css
+.modal-wrap {position: fixed; top: 0; right: 0; bottom: 0; left: 0;}
+.modal {position: relative; display: block; margin: 0 auto; top: 50%; width: 100%; max-width: 640px; background-color: #CFD8DC; color: #FFFFFF; -webkit-transform: translateY(-50%); -moz-transform: translateY(-50%); -ms-transform: translateY(-50%); -o-transform: translateY(-50%); transform: translateY(-50%);}
+.btn-close {position: absolute; top: 0; right: 0; background-color: #FF5252;}
+.embed-responsive-video {position: relative; padding-top: 56.25%; /* 16:9 ratio */ background-color: #CFD8DC;}
+.embed-responsive-video .iframe-wrap {position: absolute; overflow: hidden; top: 0; left: 0; width: 100%; height: 100%;}
+```
+
+```javascript
+import YoutubeModal from 'kihon/YoutubeModal';
+// import Overlay from 'kihon/Overlay';
+
+var youtubeModal = new YoutubeModal({
+    wrapClass: 'modal-wrap', // modal wrap class
+    contents: '<div class="modal"><div class="embed-responsive-video"><div class="iframe-wrap"></div></div><a href="#" class="btn-close">close</a></div>', // modal contents html
+    // appendTo: $('body'), // element to append modal wrap
+    // closeBtnSelector: '.btn-close', // jQuery selector of close button
+    // isCloseByClickOutside: true, // hide modal when click outside of modal contents
+    // isCloseByEscKey: true, // hide modal when keydown escape key
+    showCallback: function () { // call just before show modal
+        console.log('Kihon.YoutubeModal showCallback :', this);
+    },
+    hideCallback: function () { // call just before hide modal
+        console.log('Kihon.YoutubeModal hideCallback :', this);
+    },
+    // overlay: new Overlay().init(),
+    iFrameWrapSelector: '.iframe-wrap', // youtube iframe wrap selector
+    youtube: { // youtube player info
+        id: 'YzKLbB5B0tg',
+        width: '',
+        height: '',
+        playerVars: {
+            // https://developers.google.com/youtube/player_parameters?playerVersion=HTML5#Parameters
+            autoplay: 1,
+            rel: 0
+        }
+    }
+}).init();
+
+youtubeModal.show();
+
+/*
+ * YoutubeModal public methods
+ */
+// set close button event handler
+// youtubeModal.setCloseBtnEventHandler(true / false);
+
+// set modal wrap event handler
+// youtubeModal.setWrapEventHandler(true / false);
+
+// set escape key event handler
+// youtubeModal.setEscKeyEventHandler(true / false);
+
+// get modal node
+// console.log( youtubeModal.getNode() );
+
+// append to other element
+// youtubeModal.appendTo(parent element);
+
+// show modal
+// youtubeModal.show();
+
+// hide overlay
+// youtubeModal.hide();
+
+// change youtube iframe
+// youtubeModal.changeYoutubeIFrame('mJEZFTbxm4o');
+// youtubeModal.changeYoutubeIFrame({id: 'mJEZFTbxm4o', width: '', height: '', playerVars: {autoplay: 1, rel: 0, controls: 0}});
+
+// get youtube iframe
+// console.log( youtubeModal.getYoutubeIFrame() );
+
+// get youtube id
+// console.log( youtubeModal.getYoutubeId() );
+
+// get flag modal is hide
+
+// destroy
+// youtubeModal.destroy();
+// youtubeModal.destroy({isRemoveNode: true, isRemoveOverlay: true});
 ```  
 
 

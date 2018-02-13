@@ -12,9 +12,9 @@ class Modal {
       closeBtnSelector: '.btn-close',
       isCloseByClickOutside: true,
       isCloseByEscKey: true,
-      overlay: null,
       showCallback: null,
-      hideCallback: null
+      hideCallback: null,
+      overlay: null
     }, options);
 
     _._initialized = false;
@@ -164,6 +164,8 @@ class Modal {
   }
 
   destroy(obj = null) {
+    // {isRemoveNode: true/false, isRemoveOverlay: true/false}
+
     const _ = this;
 
     obj = $.extend({

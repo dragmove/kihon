@@ -36,6 +36,12 @@ export const isString = (obj) => {
   return (obj.constructor === String);
 };
 
+export const isObject = (obj) => {
+  if (isNotDef(obj)) return false;
+
+  return (obj.constructor === Object);
+};
+
 export const isFunction = (obj) => {
   if (isNotDef(obj)) return false;
 
@@ -68,7 +74,7 @@ export const notSingleEle = not(singleEle);
 
 export const each = (dataCanLoop, func, context) => {
   if (falsy(Array.isArray(dataCanLoop) || isString(dataCanLoop))) {
-    throw new TypeError('dataCanLoop parameter type of each() must be Array or String.');
+    throw new TypeError('dataCanLoop parameter type of each() should be Array or String.');
   }
 
   const _context = (existy(context)) ? context : null;
@@ -79,7 +85,7 @@ export const each = (dataCanLoop, func, context) => {
 };
 
 export const curry2 = (func) => {
-  if (!isFunction(func)) throw new TypeError('func parameter type of curry2() must be Function.');
+  if (!isFunction(func)) throw new TypeError('func parameter type of curry2() should be Function.');
 
   return (secondArg) => (firstArg) => func(firstArg, secondArg);
 };
@@ -102,6 +108,10 @@ export const lte = curry2(function (lhs, rhs) {
   return lhs <= rhs;
 });
 
+export const eq = curry2(function (lhs, rhs) {
+  return lhs === rhs;
+});
+
 export const getSizeAspectFill = (srcWidth, srcHeight, fillWidth, fillHeight) => {
   if (!allOf(isNumber(srcWidth), isNumber(srcHeight), isNumber(fillWidth), isNumber(fillHeight))) {
     throw new TypeError('getSizeAspectFill() requires Number parameters.');
@@ -116,4 +126,24 @@ export const getSizeAspectFill = (srcWidth, srcHeight, fillWidth, fillHeight) =>
   }
 
   return {width: modifiedSizeW, height: modifiedSizeH};
+};
+
+export const getUriCombinedParams = (uri = '', params = {}) => {
+  if (!isString(uri)) throw new TypeError('uri parameter type of getUriCombinedParams() should be string.');
+
+  if (!uri) return '';
+  if (!params) return uri;
+
+  let str = '';
+  for (let key in params) str += `&${key}=${String(params[key])}`;
+
+  if (str === '') return uri;
+
+  const uris = uri.split('#');
+  uri = uris[0];
+
+  const hashStr = (isDefined(uris[1])) ? '#' + uris[1] : '';
+  uri = ((uri.indexOf('?') >= 0) ? (uri + str) : (uri + '?' + str.substr(1))) + hashStr;
+
+  return uri;
 };

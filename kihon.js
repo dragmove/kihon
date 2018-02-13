@@ -5,6 +5,7 @@ import Navi from './Navi';
 import NaviHasTimer from './NaviHasTimer';
 import Overlay from './Overlay';
 import Modal from './Modal';
+import YoutubeModal from './YoutubeModal';
 
 export default {
   FullSizeBg: FullSizeBg,
@@ -13,5 +14,6 @@ export default {
   Navi: Navi,
   NaviHasTimer: NaviHasTimer,
   Overlay: Overlay,
-  Modal: Modal
+  Modal: Modal,
+  YoutubeModal: YoutubeModal
 };
