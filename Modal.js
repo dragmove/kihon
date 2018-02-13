@@ -1,5 +1,5 @@
 import $ from 'jquery';
-import {truthy, not, isDefined, isNotDef, isBoolean, isFunction} from './_util';
+import {truthy, falsy, not, isDefined, isNotDef, isBoolean, isFunction} from './_util';
 
 class Modal {
   constructor(options) {
@@ -12,6 +12,7 @@ class Modal {
       closeBtnSelector: '.btn-close',
       isCloseByClickOutside: true,
       isCloseByEscKey: true,
+      overlay: null,
       showCallback: null,
       hideCallback: null
     }, options);
@@ -24,9 +25,11 @@ class Modal {
 
     _._$contents = null;
 
-    _._$parentNode = _._option.appendTo;
+    _._$parentNode = $(_._option.appendTo);
 
     _._$closeBtn = null;
+
+    _._overlay = _._option.overlay;
 
     _._isShow = false;
 
@@ -136,6 +139,8 @@ class Modal {
 
     if (isDefined(_._$wrap)) _._$wrap.show();
 
+    if (isDefined(_._overlay)) _._overlay.show();
+
     return _;
   }
 
@@ -149,6 +154,8 @@ class Modal {
 
     if (isDefined(_._$wrap)) _._$wrap.hide();
 
+    if (isDefined(_._overlay)) _._overlay.hide();
+
     return _;
   }
 
@@ -156,8 +163,16 @@ class Modal {
     return this._isShow;
   }
 
-  destroy() {
+  destroy(obj = null) {
     const _ = this;
+
+    obj = $.extend({
+      isRemoveNode: true,
+      isRemoveOverlay: true
+    }, obj);
+
+    if (not(isBoolean)(obj.isRemoveNode)) throw new TypeError('Modal: destroy isRemoveNode variable type of option should be boolean.');
+    if (not(isBoolean)(obj.isRemoveOverlay)) throw new TypeError('Modal: destroy isRemoveOverlay variable type of option should be boolean.');
 
     _._initialized = false;
 
@@ -165,7 +180,11 @@ class Modal {
     _.setWrapEventHandler(false);
     _.setEscKeyEventHandler(false);
 
-    _._$wrap = null;
+    if (isDefined(_._$wrap)) {
+      if (truthy(obj.isRemoveNode)) _._$wrap.remove();
+
+      _._$wrap = null;
+    }
 
     _._$contents = null;
 
@@ -173,11 +192,54 @@ class Modal {
 
     _._$closeBtn = null;
 
+    if (isDefined(_._overlay)) {
+      _._overlay.destroy({isRemoveNode: obj.isRemoveOverlay});
+      _._overlay = null;
+    }
+
     _._proxy.closeBtnEventHandler = null;
     _._proxy.wrapEventHandler = null;
     _._proxy.escKeyEventHandler = null;
 
     return _;
+  }
+
+  /*
+   * private methods
+   */
+  _closeBtnEventHandler(evt) {
+    evt.preventDefault();
+
+    switch (evt.type) {
+      case 'click' :
+        this.hide();
+
+        break;
+    }
+  }
+
+  _wrapEventHandler(evt) {
+    const _ = this;
+
+    switch (evt.type) {
+      case 'click' :
+        if (falsy(_._option.isCloseByClickOutside)) return;
+
+        if (evt.target === _._$contents.get(0) || $.contains(_._$contents.get(0), evt.target)) return;
+
+        _.hide();
+
+        break;
+    }
+  }
+
+  _escKeyEventHandler(evt) {
+    switch (evt.type) {
+      case 'keydown' :
+        if (evt.keyCode === 27) this.hide();
+
+        break;
+    }
   }
 }
 

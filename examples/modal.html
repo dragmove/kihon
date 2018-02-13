@@ -39,9 +39,12 @@
                 hideCallback: function () { // call just before hide modal
                     console.log('Kihon.Modal hideCallback :', this);
                 }
+                // overlay: new Kihon.Overlay().init()
             }).init();
 
             modal.show();
+
+            window.modal = modal;
 
             /*
              * Modal public methods
@@ -72,6 +75,7 @@
 
             // destroy
             // modal.destroy();
+            // modal.destroy({isRemoveNode: true, isRemoveOverlay: true});
         }
     }(jQuery));
 </script>

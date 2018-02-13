@@ -1,11 +1,17 @@
 {
   "name": "kihon",
-  "version": "0.0.14",
+  "version": "0.0.15",
   "description": "A Bundle of Lite components which provides straightforward Interactive UI",
   "keywords": [
     "kihon",
     "component",
     "ui",
+    "fullsize",
+    "video",
+    "imageLoader",
+    "modal",
+    "navi",
+    "overlay",
     "util",
     "javascript",
     "js",
