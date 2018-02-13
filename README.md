@@ -229,6 +229,7 @@ imgLoader.start([
 
 ```javascript
 import Modal from 'kihon/Modal';
+// import Overlay from 'kihon/Overlay';
 
 var modal = new Modal({
     wrapClass: 'modal-wrap', // modal wrap class
@@ -242,7 +243,8 @@ var modal = new Modal({
     },
     hideCallback: function () { // call just before hide modal
         console.log('Kihon.Modal hideCallback :', this);
-    }
+    },
+    // overlay: new Overlay().init()
 }).init();
 
 modal.show();
@@ -268,7 +270,7 @@ modal.show();
 // show modal
 // modal.show();
 
-// hide overlay
+// hide modal
 // modal.hide();
 
 // get flag modal is hide
@@ -276,6 +278,7 @@ modal.show();
 
 // destroy
 // modal.destroy();
+// modal.destroy({isRemoveNode: true, isRemoveOverlay: true});
 ```  
 
 
@@ -468,6 +471,7 @@ overlay.show();
 
 // destroy
 // overlay.destroy();
+// overlay.destroy({isRemoveNode: true});
 ```  
 
 
