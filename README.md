@@ -116,13 +116,13 @@ var fullSizeVideo = new FullSizeVideo({
     isLoop: false, // loop flag
     isMuted: false, // mute flag
     canplayCallback: function (obj) { // {event}
-        console.log('canplayCallback obj :', obj);
+        console.log('Kihon.FullSizeVideo canplayCallback obj :', obj);
     },
     timeupdateCallback: function (obj) { // {event, currentTime, duration}
-        console.log('timeupdateCallback obj :', obj);
+        console.log('Kihon.FullSizeVideo timeupdateCallback obj :', obj);
     },
     endedCallback: function (obj) { // {event, currentTime, duration}
-        console.log('endedCallback obj :', obj);
+        console.log('Kihon.FullSizeVideo endedCallback obj :', obj);
     }
 }).init();
 
@@ -182,19 +182,19 @@ import ImageLoader from 'kihon/ImageLoader';
 
 var imgLoader = new ImageLoader({
     loadCompleteCallback: function (obj) { // data about all images. {imgs, percentage}
-        console.log('loadComplete :', obj);
-        console.log('loadComplete - imgLoader.isFinished() :', imgLoader.isFinished());
-        console.log('loadComplete - imgLoader.getLoadedImgs() :', imgLoader.getLoadedImgs());
+        console.log('Kihon.ImageLoader loadComplete :', obj);
+        console.log('Kihon.ImageLoader loadComplete - imgLoader.isFinished() :', imgLoader.isFinished());
+        console.log('Kihon.ImageLoader loadComplete - imgLoader.getLoadedImgs() :', imgLoader.getLoadedImgs());
     },
     loadPerCompleteCallback: function (obj) { // data about per image. {event, img, percentage}
-        console.log('loadPerComplete :', obj);
-        console.log('loadPerComplete - imgLoader.isFinished() :', imgLoader.isFinished());
-        console.log('loadPerComplete - imgLoader.getLoadedImgs() :', imgLoader.getLoadedImgs());
+        console.log('Kihon.ImageLoader loadPerComplete :', obj);
+        console.log('Kihon.ImageLoader loadPerComplete - imgLoader.isFinished() :', imgLoader.isFinished());
+        console.log('Kihon.ImageLoader loadPerComplete - imgLoader.getLoadedImgs() :', imgLoader.getLoadedImgs());
     },
     loadErrorCallback: function (obj) { // data about per error. {event, img, percentage}
-        console.log('loadError :', obj)
-        console.log('loadError - imgLoader.isFinished() :', imgLoader.isFinished());
-        console.log('loadError - imgLoader.getLoadedImgs() :', imgLoader.getLoadedImgs());
+        console.log('Kihon.ImageLoader loadError :', obj);
+        console.log('Kihon.ImageLoader loadError - imgLoader.isFinished() :', imgLoader.isFinished());
+        console.log('Kihon.ImageLoader loadError - imgLoader.getLoadedImgs() :', imgLoader.getLoadedImgs());
     }
 });
 
@@ -296,6 +296,7 @@ modal.show();
 ```  
 
 ```css
+.navi {width: 75px; background-color: #CFD8DC;}
 .navi li a.on {color: #FF5252;}
 ```
 
@@ -306,22 +307,22 @@ var navi = new Navi({
     wrap: $('.navi'), // navi wrap
     btns: $('.navi li a'), // navi buttons
     mouseoverCallback: function (obj) { // {event, btn, index}
-        console.log('mouseoverCallback :', obj);
+        console.log('Kihon.Navi mouseoverCallback :', obj);
     },
     mouseoutCallback: function (obj) { // {event, btn, index}
-        console.log('mouseoutCallback :', obj);
+        console.log('Kihon.Navi mouseoutCallback :', obj);
     },
     mousedownCallback: function (obj) { // {event, btn, index}
-        console.log('mousedownCallback :', obj);
+        console.log('Kihon.Navi mousedownCallback :', obj);
     },
     mouseupCallback: function (obj) { // {event, btn, index}
-        console.log('mouseupCallback:', obj);
+        console.log('Kihon.Navi mouseupCallback:', obj);
     },
     clickCallback: function (obj) { // {event, btn, prevActivatedIndex, index}
-        console.log('clickCallback :', obj);
+        console.log('Kihon.Navi clickCallback :', obj);
     },
     activateCallback: function (obj) { // {prevActivatedIndex, index}
-        console.log('activateCallback :', obj);
+        console.log('Kihon.Navi activateCallback :', obj);
 
         var btns = $(navi.getBtns()),
             btn = $(navi.getBtn(obj.index));
@@ -378,24 +379,24 @@ var navi = new NaviHasTimer({
     wrap: $('.navi'), // navi wrap
     btns: $('.navi li a'), // navi buttons
     mouseoverCallback: function (obj) { // {event, btn, index}
-        console.log('mouseoverCallback :', obj);
+        console.log('Kihon.NaviHasTimer mouseoverCallback :', obj);
 
         activateBtn(obj.index);
     },
     mouseoutCallback: function (obj) { // {event, btn, index}
-        console.log('mouseoutCallback :', obj);
+        console.log('Kihon.NaviHasTimer mouseoutCallback :', obj);
     },
     mousedownCallback: function (obj) { // {event, btn, index}
-        console.log('mousedownCallback :', obj);
+        console.log('Kihon.NaviHasTimer mousedownCallback :', obj);
     },
     mouseupCallback: function (obj) { // {event, btn, index}
-        console.log('mouseupCallback:', obj);
+        console.log('Kihon.NaviHasTimer mouseupCallback:', obj);
     },
     clickCallback: function (obj) { // {event, btn, prevActivatedIndex, index}
-        console.log('clickCallback :', obj);
+        console.log('Kihon.NaviHasTimer clickCallback :', obj);
     },
     activateCallback: function (obj) { // {prevActivatedIndex, index}
-        console.log('activateCallback :', obj);
+        console.log('Kihon.NaviHasTimer activateCallback :', obj);
 
         activateBtn(obj.index);
     },

@@ -24,19 +24,19 @@
         function init() {
             var imgLoader = new Kihon.ImageLoader({
                 loadCompleteCallback: function (obj) { // data about all images. {imgs, percentage}
-                    console.log('loadComplete :', obj);
-                    console.log('loadComplete - imgLoader.isFinished() :', imgLoader.isFinished());
-                    console.log('loadComplete - imgLoader.getLoadedImgs() :', imgLoader.getLoadedImgs());
+                    console.log('Kihon.ImageLoader loadComplete :', obj);
+                    console.log('Kihon.ImageLoader loadComplete - imgLoader.isFinished() :', imgLoader.isFinished());
+                    console.log('Kihon.ImageLoader loadComplete - imgLoader.getLoadedImgs() :', imgLoader.getLoadedImgs());
                 },
                 loadPerCompleteCallback: function (obj) { // data about per image. {event, img, percentage}
-                    console.log('loadPerComplete :', obj);
-                    console.log('loadPerComplete - imgLoader.isFinished() :', imgLoader.isFinished());
-                    console.log('loadPerComplete - imgLoader.getLoadedImgs() :', imgLoader.getLoadedImgs());
+                    console.log('Kihon.ImageLoader loadPerComplete :', obj);
+                    console.log('Kihon.ImageLoader loadPerComplete - imgLoader.isFinished() :', imgLoader.isFinished());
+                    console.log('Kihon.ImageLoader loadPerComplete - imgLoader.getLoadedImgs() :', imgLoader.getLoadedImgs());
                 },
                 loadErrorCallback: function (obj) { // data about per error. {event, img, percentage}
-                    console.log('loadError :', obj)
-                    console.log('loadError - imgLoader.isFinished() :', imgLoader.isFinished());
-                    console.log('loadError - imgLoader.getLoadedImgs() :', imgLoader.getLoadedImgs());
+                    console.log('Kihon.ImageLoader loadError :', obj);
+                    console.log('Kihon.ImageLoader loadError - imgLoader.isFinished() :', imgLoader.isFinished());
+                    console.log('Kihon.ImageLoader loadError - imgLoader.getLoadedImgs() :', imgLoader.getLoadedImgs());
                 }
             });
 

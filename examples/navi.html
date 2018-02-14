@@ -10,6 +10,7 @@
     <meta name="author" content="dragmove"/>
     <title>Kihon.Navi</title>
     <style>
+        .navi {width: 75px; background-color: #CFD8DC;}
         .navi li a.on {color: #FF5252;}
     </style>
 </head>
@@ -37,22 +38,22 @@
                 wrap: $('.navi'), // navi wrap
                 btns: $('.navi li a'), // navi buttons
                 mouseoverCallback: function (obj) { // {event, btn, index}
-                    console.log('mouseoverCallback :', obj);
+                    console.log('Kihon.Navi mouseoverCallback :', obj);
                 },
                 mouseoutCallback: function (obj) { // {event, btn, index}
-                    console.log('mouseoutCallback :', obj);
+                    console.log('Kihon.Navi mouseoutCallback :', obj);
                 },
                 mousedownCallback: function (obj) { // {event, btn, index}
-                    console.log('mousedownCallback :', obj);
+                    console.log('Kihon.Navi mousedownCallback :', obj);
                 },
                 mouseupCallback: function (obj) { // {event, btn, index}
-                    console.log('mouseupCallback:', obj);
+                    console.log('Kihon.Navi mouseupCallback:', obj);
                 },
                 clickCallback: function (obj) { // {event, btn, prevActivatedIndex, index}
-                    console.log('clickCallback :', obj);
+                    console.log('Kihon.Navi clickCallback :', obj);
                 },
                 activateCallback: function (obj) { // {prevActivatedIndex, index}
-                    console.log('activateCallback :', obj);
+                    console.log('Kihon.Navi activateCallback :', obj);
 
                     var btns = $(navi.getBtns()),
                         btn = $(navi.getBtn(obj.index));

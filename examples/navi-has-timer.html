@@ -40,24 +40,24 @@
                 wrap: $('.navi'), // navi wrap
                 btns: $('.navi li a'), // navi buttons
                 mouseoverCallback: function (obj) { // {event, btn, index}
-                    console.log('mouseoverCallback :', obj);
+                    console.log('Kihon.NaviHasTimer mouseoverCallback :', obj);
 
                     activateBtn(obj.index);
                 },
                 mouseoutCallback: function (obj) { // {event, btn, index}
-                    console.log('mouseoutCallback :', obj);
+                    console.log('Kihon.NaviHasTimer mouseoutCallback :', obj);
                 },
                 mousedownCallback: function (obj) { // {event, btn, index}
-                    console.log('mousedownCallback :', obj);
+                    console.log('Kihon.NaviHasTimer mousedownCallback :', obj);
                 },
                 mouseupCallback: function (obj) { // {event, btn, index}
-                    console.log('mouseupCallback:', obj);
+                    console.log('Kihon.NaviHasTimer mouseupCallback:', obj);
                 },
                 clickCallback: function (obj) { // {event, btn, prevActivatedIndex, index}
-                    console.log('clickCallback :', obj);
+                    console.log('Kihon.NaviHasTimer clickCallback :', obj);
                 },
                 activateCallback: function (obj) { // {prevActivatedIndex, index}
-                    console.log('activateCallback :', obj);
+                    console.log('Kihon.NaviHasTimer activateCallback :', obj);
 
                     activateBtn(obj.index);
                 },

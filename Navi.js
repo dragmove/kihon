@@ -82,7 +82,7 @@ class Navi {
       idx = (index <= 0 || index > _._$btns.length) ? 0 : index;
 
     if (isFunction(_._option.activateCallback)) {
-      _._option.activateCallback.call(null, {
+      _._option.activateCallback.call(_, {
         prevActivatedIndex: _._activatedIndex,
         index: idx
       });
@@ -150,7 +150,7 @@ class Navi {
     _._currentIndex = index + 1;
 
     if (isFunction(_._option.mouseoverCallback)) {
-      _._option.mouseoverCallback.call(null, {
+      _._option.mouseoverCallback.call(_, {
         event: evt,
         btn: ele,
         index: _._currentIndex
@@ -166,7 +166,7 @@ class Navi {
     if (index < 0) return;
 
     if (isFunction(_._option.mouseoutCallback)) {
-      _._option.mouseoutCallback.call(null, {
+      _._option.mouseoutCallback.call(_, {
         event: evt,
         btn: ele,
         index: index + 1
@@ -184,7 +184,7 @@ class Navi {
     evt.preventDefault();
 
     if (isFunction(_._option.mousedownCallback)) {
-      _._option.mousedownCallback.call(null, {
+      _._option.mousedownCallback.call(_, {
         event: evt,
         btn: ele,
         index: index + 1
@@ -202,7 +202,7 @@ class Navi {
     evt.preventDefault();
 
     if (isFunction(_._option.mouseupCallback)) {
-      _._option.mouseupCallback.call(null, {
+      _._option.mouseupCallback.call(_, {
         event: evt,
         btn: ele,
         index: index + 1
@@ -222,7 +222,7 @@ class Navi {
     const prevIndex = _._activatedIndex;
 
     if (isFunction(_._option.clickCallback)) {
-      _._option.clickCallback.call(null, {
+      _._option.clickCallback.call(_, {
         event: evt,
         btn: ele,
         prevActivatedIndex: prevIndex,
@@ -231,7 +231,7 @@ class Navi {
     }
 
     if (isFunction(_._option.activateCallback)) {
-      _._option.activateCallback.call(null, {
+      _._option.activateCallback.call(_, {
         prevActivatedIndex: prevIndex,
         index: index + 1
       });

@@ -138,7 +138,7 @@ class ImageLoader {
       _._isLoading = false;
       _._isFinish = true;
 
-      if (_._loadCompleteCallback) _._loadCompleteCallback.call(null, {
+      if (_._loadCompleteCallback) _._loadCompleteCallback.call(_, {
         imgs: _._loadedImgs,
         percentage: _._percentageLoaded
       });
@@ -158,7 +158,7 @@ class ImageLoader {
       _._percentageLoaded = _._loadCompleteNum / _._imgUrls.length;
 
       if (_._loadPerCompleteCallback) {
-        _._loadPerCompleteCallback.call(null, {
+        _._loadPerCompleteCallback.call(_, {
           event: evt,
           img: img,
           percentage: _._percentageLoaded
@@ -178,7 +178,7 @@ class ImageLoader {
       _._percentageLoaded = _._loadCompleteNum / _._imgUrls.length;
 
       if (_._loadErrorCallback) {
-        _._loadErrorCallback.call(null, {
+        _._loadErrorCallback.call(_, {
           event: evt,
           img: img,
           percentage: _._percentageLoaded

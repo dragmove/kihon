@@ -246,7 +246,7 @@ class FullSizeVideo {
 
     if (isFunction(opt.canplayCallback)) {
       _._$video.on(`canplay.kihon.fullsizevideo.${_._uniqueId}`, (evt) => {
-        opt.canplayCallback.call(null, {
+        opt.canplayCallback.call(_, {
           event: evt
         });
       });
@@ -255,7 +255,7 @@ class FullSizeVideo {
     if (isFunction(opt.timeupdateCallback) || allOf(falsy(isVideoHasOnended), isFunction(opt.endedCallback))) {
       _._$video.on(`timeupdate.kihon.fullsizevideo.${_._uniqueId}`, (evt) => {
         if (isFunction(opt.timeupdateCallback)) {
-          opt.timeupdateCallback.call(null, {
+          opt.timeupdateCallback.call(_, {
             event: evt,
             currentTime: video.currentTime,
             duration: video.duration
@@ -264,7 +264,7 @@ class FullSizeVideo {
 
 
         if (allOf(isFunction(opt.endedCallback), lte(video.currentTime)(video.duration))) { // if (isFunction(opt.endedCallback) && (video.currentTime >= video.duration)) {
-          opt.endedCallback.call(null, {
+          opt.endedCallback.call(_, {
             event: evt,
             currentTime: video.currentTime,
             duration: video.duration
@@ -275,7 +275,7 @@ class FullSizeVideo {
 
     if (allOf(truthy(isVideoHasOnended), isFunction(opt.endedCallback))) {
       _._$video.on(`ended.kihon.fullsizevideo.${_._uniqueId}`, (evt) => {
-        opt.endedCallback.call(null, {
+        opt.endedCallback.call(_, {
           event: evt,
           currentTime: video.currentTime,
           duration: video.duration
