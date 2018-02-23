@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport"
+          content="user-scalable=no, maximum-scale=1.0, minimum-scale=1.0, width=device-width, initial-scale=1.0">
+    <meta name="description" content="Kihon.Navi"/>
+    <meta name="keywords" content="kihon"/>
+    <meta name="author" content="dragmove"/>
+    <title>Kihon.HorizontalScrollingNavi</title>
+    <style>
+        html, body {
+            margin: 0;
+            padding: 0;
+        }
+
+        /* TODO */
+        #wrapper {
+            position: relative;
+            width: 100%;
+            font-family: "Apple Gothic", "Roboto", "Malgun Gothic", "Helvetica", "Arial", sans-serif;
+        }
+
+        .slide-navi {
+            position: relative;
+            width: 100%;
+            height: 50px;
+            overflow: hidden;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.5);
+        }
+
+        .slide-navi .handle {
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
+        .slide-navi .btns {
+            display: block;
+            position: relative;
+            margin: 0;
+            padding: 0;
+            font-size: 0;
+            white-space: nowrap;
+        }
+
+        .slide-navi .btns:after {
+            content: "";
+            display: block;
+            clear: both;
+        }
+
+        .slide-navi .btns li {
+            display: inline-block;
+            height: 50px;
+            line-height: 50px;
+        }
+
+        .slide-navi .btns li a {
+            display: block;
+            margin-left: 0;
+            margin-right: 0;
+            padding-left: 8px;
+            padding-right: 8px;
+            color: #333;
+            font-size: 15px;
+            font-weight: bold;
+            text-align: center;
+            text-decoration: none;
+        }
+
+        .slide-navi .btns li a.on {
+            color: #f43142;
+        }
+    </style>
+</head>
+
+<body>
+<!-- TODO: arrange -->
+<div id="wrapper">
+    <div class="slide-navi">
+        <div class="handle">
+            <ul class="btns">
+                <li><a href="#">kihon:</a></li>
+                <li><a href="#">Thanks</a></li>
+                <li><a href="#">to</a></li>
+                <li><a href="#">whoever</a></li>
+                <li><a href="#">use</a></li>
+                <li><a href="#">kihon.</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <style>
+        #test-btns {
+            margin-top: 10px;
+        }
+
+        #test-btns a {
+            cursor: pointer;
+            color: #333;
+        }
+
+        #test-btns a:hover {
+            color: #f43142;
+        }
+    </style>
+
+    <div id="test-btns">
+        <a>1</a>
+        <a>2</a>
+        <a>3</a>
+        <a>4</a>
+        <a>5</a>
+        <a>6</a>
+        <a>7</a>
+        <a>8</a>
+        <a>9</a>
+        <a>10</a>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.0.0.min.js"
+        integrity="sha256-JmvOoLtYsmqlsWxa7mDSLMwa6dZ9rrIdtrrVYRnDRH0="
+        crossorigin="anonymous"></script>
+<script src="kihon.min.js"></script>
+<script>
+    (function ($) {
+        $(document).ready(init);
+
+        function init() {
+            // set HorizontalScrollingNavi extends Navi
+            var wrap = $('.slide-navi');
+
+            var navi = new Kihon.HorizontalScrollingNavi({
+                /*
+                 * Kihon.Navi options
+                 */
+                wrap: wrap, // wrap
+                btns: $('.btns li a', wrap), // navi buttons
+                mouseoverCallback: function (obj) { // {event, btn, index}
+//                    console.log('Kihon.HorizontalScrollingNavi mouseoverCallback :', obj);
+                },
+                mouseoutCallback: function (obj) { // {event, btn, index}
+//                    console.log('Kihon.HorizontalScrollingNavi mouseoutCallback :', obj);
+                },
+                mousedownCallback: function (obj) { // {event, btn, index}
+//                    console.log('Kihon.HorizontalScrollingNavi mousedownCallback :', obj);
+                },
+                mouseupCallback: function (obj) { // {event, btn, index}
+//                    console.log('Kihon.HorizontalScrollingNavi mouseupCallback:', obj);
+                },
+                clickCallback: function (obj) { // {event, btn, prevActivatedIndex, index}
+//                    console.log('Kihon.HorizontalScrollingNavi clickCallback :', obj);
+                },
+                activateCallback: function (obj) { // {prevActivatedIndex, index}
+//                    console.log('Kihon.HorizontalScrollingNavi activateCallback :', obj);
+
+                    var btns = $(navi.getBtns()),
+                        btn = $(navi.getBtn(obj.index));
+
+                    btns.removeClass('on');
+                    btn.addClass('on');
+                },
+
+                /*
+                 * Kihon.HorizontalScrollingNavi options
+                 */
+                // Dragdealer: window.Dragdealer,
+                handleClass: 'handle',
+
+                disabled: false,
+                slide: true,
+                loose: true,
+                speed: 0.25,
+                css3: true,
+
+                dragStartCallback: function (x, y) {
+                    console.log('Kihon.HorizontalScrollingNavi dragStartCallback :', x, y);
+                },
+                dragStopCallback: function (x, y) {
+                    console.log('Kihon.HorizontalScrollingNavi dragStopCallback :', x, y);
+                },
+                slideEndCallback: function (x, y) {
+                    console.log('Kihon.HorizontalScrollingNavi slideEndCallback :', x, y);
+                }
+            }).init();
+
+            /*
+             * HorizontalScrollingNavi public methods
+             */
+            // get ratio x
+            console.log( navi.getRatioX() ); // TODO: what is this ?
+
+            // get offset ratio by position x
+            console.log( navi.getOffsetRatioByPosition(99) ); // TODO: what is this ?
+
+            // get handle node
+            // console.log( navi.getHandle() );
+
+            // set navi handle position by x
+            // navi.setX(99);
+
+            // set navi handle position by ratio(0 ~ 1)
+            // navi.setRatioX(0.75);
+
+            // get flag navi is draggbale
+            // console.log( navi.isDraggable() ); // TODO: test
+
+            // disable dragging
+            // navi.disable();
+
+            // enable dragging
+            // navi.enable();
+
+            // set resize event handler
+            // navi.setResizeEventHandler(true / false);
+
+            // resize
+            navi.resize();
+
+            // destroy
+            // navi.destroy();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            // TODO: arrange
+            // control HorizontalSlideNavi by external
+            $('#test-btns a').on('click', function (evt) {
+                evt.preventDefault();
+
+                const index = $('#test-btns a').index(this) + 1;
+                activateSlideNavi(index);
+            });
+
+            function activateSlideNavi(index) {
+                if (navi) navi.activate(index);
+
+                if (index < 1 || index > navi.getBtns().length) return;
+
+                var prev = (index <= 1) ? 0 : index - 1,
+                    next = (index > navi.getBtns().length) ? 0 : index + 1;
+
+                if (!prev) {
+                    // go to left end.
+                    navi.setRatioX(0);
+                    return;
+                }
+
+                if (!next) {
+                    // go to right end.
+                    navi.setRatioX(1);
+                    return;
+                }
+
+                const btn = $(navi.getBtn(prev));
+                if (btn.length) navi.setX(-btn.position().left);
+            }
+        }
+    }(jQuery));
+</script>
+</body>
+</html>

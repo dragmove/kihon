@@ -1,5 +1,6 @@
 import FullSizeBg from './FullSizeBg';
 import FullSizeVideo from './FullSizeVideo';
+import HorizontalScrollingNavi from './HorizontalScrollingNavi';
 import ImageLoader from './ImageLoader';
 import Navi from './Navi';
 import NaviHasTimer from './NaviHasTimer';
@@ -10,6 +11,7 @@ import YoutubeModal from './YoutubeModal';
 export default {
   FullSizeBg: FullSizeBg,
   FullSizeVideo: FullSizeVideo,
+  HorizontalScrollingNavi: HorizontalScrollingNavi,
   ImageLoader: ImageLoader,
   Navi: Navi,
   NaviHasTimer: NaviHasTimer,

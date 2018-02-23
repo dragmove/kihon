@@ -21,6 +21,7 @@ npm install kihon --save-dev
 ## Components
 FullSizeBg  
 FullSizeVideo  
+HorizontalScrollingNavi  
 ImageLoader  
 Navi  
 NaviHasTimer  
