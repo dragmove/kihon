@@ -21,7 +21,7 @@ npm install kihon --save-dev
 ## Components
 FullSizeBg  
 FullSizeVideo  
-HorizontalScrollingNavi (use [Dragdealer.js](https://github.com/skidding/dragdealer))  
+HorizontalScrollingNavi (dependency to [Dragdealer.js](https://github.com/skidding/dragdealer))  
 ImageLoader  
 Navi  
 NaviHasTimer  
