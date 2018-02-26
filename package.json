@@ -1,6 +1,6 @@
 {
   "name": "kihon",
-  "version": "0.0.20",
+  "version": "0.0.21",
   "description": "A Bundle of Lite components which provides straightforward Interactive UI",
   "keywords": [
     "kihon",
@@ -43,7 +43,6 @@
     "babel-eslint": "^8.1.2",
     "babel-loader": "^7.1.2",
     "babel-preset-env": "^1.6.1",
-    "dragdealer": "^0.10.0",
     "eslint-loader": "^1.9.0",
     "gulp": "^3.9.1",
     "gulp-eslint": "^4.0.1",
@@ -51,9 +50,11 @@
     "webpack-dev-server": "^2.10.0"
   },
   "dependencies": {
+    "dragdealer": "^0.10.0",
     "jquery": "^3.0.0"
   },
   "peerDependencies": {
+    "dragdealer": ">= 0.10.0",
     "jquery": ">= 3.0.0"
   }
 }
