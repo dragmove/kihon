@@ -7,7 +7,7 @@ kihon is a Bundle of Lite components which provide straightforward Interactive U
 ## About
 * Dependency to jQuery 3.x.x
 * Support ES2015+ (can also be used directly in the browser)
-* Support Webpack Tree Shaking (https://webpack.js.org/guides/tree-shaking/)
+* Support Webpack [Tree Shaking](https://webpack.js.org/guides/tree-shaking/)
 
 Thanks to whoever use kihon.
 
@@ -21,7 +21,7 @@ npm install kihon --save-dev
 ## Components
 FullSizeBg  
 FullSizeVideo  
-HorizontalScrollingNavi  
+HorizontalScrollingNavi (use [Dragdealer.js](https://github.com/skidding/dragdealer))  
 ImageLoader  
 Navi  
 NaviHasTimer  
@@ -174,6 +174,149 @@ setTimeout(function () {
 
 // destroy
 // fullSizeVideo.destroy();
+```  
+
+
+### HorizontalScrollingNavi
+```html
+<div class="scrolling-navi">
+    <div class="handle">
+        <ul class="btns">
+            <li><a href="#">kihon:</a></li>
+            <li><a href="#">Thanks</a></li>
+            <li><a href="#">to</a></li>
+            <li><a href="#">whoever</a></li>
+            <li><a href="#">use</a></li>
+            <li><a href="#">kihon.</a></li>
+            <li><a href="#">This</a></li>
+            <li><a href="#">is</a></li>
+            <li><a href="#">HorizontalScrollingNavi</a></li>
+        </ul>
+    </div>
+</div>
+```  
+
+```css
+html, body {margin: 0; padding: 0; width: 100%;}
+.scrolling-navi {position: relative; width: 100%; height: 50px; overflow: hidden; background-color: #CFD8DC;}
+.scrolling-navi .handle {position: absolute; top: 0; left: 0;}
+.scrolling-navi .btns {display: block; position: relative; margin: 0; padding: 0; font-size: 0; white-space: nowrap;}
+.scrolling-navi .btns:after {content: ""; display: block; clear: both;}
+.scrolling-navi .btns li {display: inline-block; height: 50px; line-height: 50px;}
+.scrolling-navi .btns li a {display: block; margin-left: 0; margin-right: 0; padding-left: 8px; padding-right: 8px; font-size: 15px; font-weight: bold;text-align: center; text-decoration: none; }
+.scrolling-navi .btns li a.on {color: #FF5252;}
+```
+
+```js
+import HorizontalScrollingNavi from 'kihon/HorizontalScrollingNavi';
+
+// set HorizontalScrollingNavi extends Navi
+var wrap = $('.scrolling-navi');
+
+var navi = new HorizontalScrollingNavi({
+    /*
+     * Kihon.Navi options
+     */
+    wrap: wrap, // wrap
+    btns: $('.btns li a', wrap), // navi buttons
+    mouseoverCallback: function (obj) { // {event, btn, index}
+        // console.log('Kihon.HorizontalScrollingNavi mouseoverCallback :', obj);
+    },
+    mouseoutCallback: function (obj) { // {event, btn, index}
+        // console.log('Kihon.HorizontalScrollingNavi mouseoutCallback :', obj);
+    },
+    mousedownCallback: function (obj) { // {event, btn, index}
+        // console.log('Kihon.HorizontalScrollingNavi mousedownCallback :', obj);
+    },
+    mouseupCallback: function (obj) { // {event, btn, index}
+        // console.log('Kihon.HorizontalScrollingNavi mouseupCallback:', obj);
+    },
+    clickCallback: function (obj) { // {event, btn, prevActivatedIndex, index}
+        // console.log('Kihon.HorizontalScrollingNavi clickCallback :', obj);
+    },
+    activateCallback: function (obj) { // {prevActivatedIndex, index}
+        // console.log('Kihon.HorizontalScrollingNavi activateCallback :', obj);
+
+        var btns = $(navi.getBtns()),
+            btn = $(navi.getBtn(obj.index));
+
+        btns.removeClass('on');
+        btn.addClass('on');
+    },
+
+    /*
+     * Kihon.HorizontalScrollingNavi options
+     */
+    handleClass: 'handle', // handle class
+    speed: 0.25, // how fast the handle will slide to position after you mouse up (0 ~ 1)
+    positionedCallback: function(x, y) {
+        // called when releasing handle or calling setX / setRatioX method, with the projected x, y position of the handle. projected value means the value the slider will have after finishing a sliding animation
+        // console.log('Kihon.HorizontalScrollingNavi positionedCallback :', x, navi.getOffsetRatioByPosition(x));
+    },
+    dragStartCallback: function (x, y) {
+        // called at the beginning of a drag with handle initial x, y values.
+        // console.log('Kihon.HorizontalScrollingNavi dragStartCallback :', x, y);
+    },
+    dragStopCallback: function (x, y) {
+        // same as callback(x, y) but only called after a drag, not after call setX / setRatioX method.
+        // console.log('Kihon.HorizontalScrollingNavi dragStopCallback :', x, y);
+    },
+    animationCallback: function(x, y) {
+        // called every animation loop, as long as the handle is being dragged or in the process of a sliding animation.
+        // console.log('Kihon.HorizontalScrollingNavi animationCallback :', x, y);
+    }
+}).init();
+
+/*
+ * HorizontalScrollingNavi public methods
+ */
+// get all buttons
+// console.log( navi.getBtns() );
+
+// get one button. (1st button's index is 1.)
+// console.log( navi.getBtn(button index) );
+
+// get activated button index
+// console.log( navi.getActivatedIndex() );
+
+// activate one button, and deactivate other buttons. (1st button's index is 1.)
+// navi.activate(button index);
+
+// set buttons event handler
+// navi.setBtnsEventHandler(true / false);
+
+// get navi handle position ratio x (0 ~ 1)
+// console.log( navi.getRatioX() );
+
+// get offset ratio by position
+// console.log( navi.getOffsetRatioByPosition(-99) );
+
+// get handle node
+// console.log( navi.getHandle() );
+
+// set navi handle position by x
+// navi.setX(-99);
+
+// set navi handle position by ratio x (0 ~ 1)
+// navi.setRatioX(0.75);
+
+// get flag navi is draggbale
+// console.log( navi.isDraggable() );
+
+// enable dragging
+// navi.enable();
+
+// disable dragging
+// navi.disable();
+
+// set resize event handler
+// navi.setResizeEventHandler(true / false);
+
+// resize
+// navi.resize();
+
+// destroy
+// navi.destroy();
 ```  
 
 

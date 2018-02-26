@@ -22,19 +22,14 @@ class HorizontalScrollingNavi extends Navi {
       /*
        * HorizontalScrollingNavi.js options
        */
-      // TODO: arrange
       // require Dragdealer library - https://github.com/skidding/dragdealer
       Dragdealer: require('dragdealer'),
-      disabled: false,
-      slide: true,
-      loose: true,
-      speed: 0.25,
       handleClass: 'handle',
-      css3: true,
-
+      speed: 0.25,
+      positionedCallback: null, // function(x, y)
       dragStartCallback: null, // function(x, y)
       dragStopCallback: null, // function(x, y)
-      slideEndCallback: null, // function(x, y)
+      animationCallback: null, // function(x, y)
 
       global: window
     }, options);
@@ -42,28 +37,6 @@ class HorizontalScrollingNavi extends Navi {
     super(opt);
 
     const _ = this;
-
-    /*
-     _._initialized = false;
-
-     _._uniqueId = Date.now();
-
-     _._$btns = $(_._option.btns || []);
-
-     _._currentIndex = 0;
-
-     _._activatedIndex = 0;
-
-     _._proxy = {
-     mouseoverBtnEventHandler: null,
-     mouseoutBtnEventHandler: null,
-     mousedownBtnEventHandler: null,
-     mouseupBtnEventHandler: null,
-     clickBtnEventHandler: null
-     };
-     */
-
-    _._global = _._option.global;
 
     _._isDraggable = false;
 
@@ -124,12 +97,12 @@ class HorizontalScrollingNavi extends Navi {
 
   setRatioX(ratioX) {
     this._dragDealer.setValue(ratioX, 0);
+
     return this;
   }
 
-  // TODO: test
   isDraggable() {
-    return this._isDraggable; // TODO: when change this._isDraggable to true.
+    return this._isDraggable;
   }
 
   enable() {
@@ -177,20 +150,18 @@ class HorizontalScrollingNavi extends Navi {
 
     _._dragDealer = new opt.Dragdealer($(opt.wrap).get(0), {
       handleClass: opt.handleClass,
-      disabled: opt.disabled,
+      disabled: false,
       horizontal: true,
       vertical: false,
-      slide: opt.slide,
-      loose: opt.loose,
+      slide: true,
+      loose: true,
       speed: opt.speed,
-      css3: opt.css3,
+      css3: true,
+      callback: opt.positionedCallback,
       dragStartCallback: opt.dragStartCallback,
       dragStopCallback: opt.dragStopCallback,
-      callback: opt.slideEndCallback // TODO: change naming ?
+      animationCallback: opt.animationCallback
     });
-
-    // TODO: require call enable() or disable() by what option parameter.
-    // _._isDraggable = ?
 
     return _;
   }
@@ -201,9 +172,9 @@ class HorizontalScrollingNavi extends Navi {
     const _ = this,
       evtName = `resize.kihon.horizontalscrollingnavi.${_._uniqueId}`;
 
-    $(_._global).off(evtName, _._proxy.resizeEventHandler);
+    $(_._option.global).off(evtName, _._proxy.resizeEventHandler);
 
-    if (flag) $(_._global).on(evtName, _._proxy.resizeEventHandler);
+    if (flag) $(_._option.global).on(evtName, _._proxy.resizeEventHandler);
 
     return _;
   }
@@ -218,7 +189,8 @@ class HorizontalScrollingNavi extends Navi {
       } else {
         if (falsy(_._dragDealer.disabled)) _.disable();
 
-        _.setRatioX(0);
+        const ratioX = _.getRatioX();
+        if (isDefined(ratioX) && ratioX !== 0) _.setRatioX(0);
       }
     }
 

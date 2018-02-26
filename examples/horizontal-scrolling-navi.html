@@ -5,120 +5,45 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     <meta name="viewport"
           content="user-scalable=no, maximum-scale=1.0, minimum-scale=1.0, width=device-width, initial-scale=1.0">
-    <meta name="description" content="Kihon.Navi"/>
+    <meta name="description" content="Kihon.HorizontalScrollingNavi"/>
     <meta name="keywords" content="kihon"/>
     <meta name="author" content="dragmove"/>
     <title>Kihon.HorizontalScrollingNavi</title>
     <style>
-        html, body {
-            margin: 0;
-            padding: 0;
-        }
+        html, body {margin: 0; padding: 0; width: 100%;}
+        .scrolling-navi {position: relative; width: 100%; height: 50px; overflow: hidden; background-color: #CFD8DC;}
+        .scrolling-navi .handle {position: absolute; top: 0; left: 0;}
+        .scrolling-navi .btns {display: block; position: relative; margin: 0; padding: 0; font-size: 0; white-space: nowrap;}
+        .scrolling-navi .btns:after {content: ""; display: block; clear: both;}
+        .scrolling-navi .btns li {display: inline-block; height: 50px; line-height: 50px;}
+        .scrolling-navi .btns li a {display: block; margin-left: 0; margin-right: 0; padding-left: 8px; padding-right: 8px; font-size: 15px; font-weight: bold;text-align: center; text-decoration: none; }
+        .scrolling-navi .btns li a.on {color: #FF5252;}
 
-        /* TODO */
-        #wrapper {
-            position: relative;
-            width: 100%;
-            font-family: "Apple Gothic", "Roboto", "Malgun Gothic", "Helvetica", "Arial", sans-serif;
-        }
-
-        .slide-navi {
-            position: relative;
-            width: 100%;
-            height: 50px;
-            overflow: hidden;
-            border-bottom: 1px solid rgba(0, 0, 0, 0.5);
-        }
-
-        .slide-navi .handle {
-            position: absolute;
-            top: 0;
-            left: 0;
-        }
-
-        .slide-navi .btns {
-            display: block;
-            position: relative;
-            margin: 0;
-            padding: 0;
-            font-size: 0;
-            white-space: nowrap;
-        }
-
-        .slide-navi .btns:after {
-            content: "";
-            display: block;
-            clear: both;
-        }
-
-        .slide-navi .btns li {
-            display: inline-block;
-            height: 50px;
-            line-height: 50px;
-        }
-
-        .slide-navi .btns li a {
-            display: block;
-            margin-left: 0;
-            margin-right: 0;
-            padding-left: 8px;
-            padding-right: 8px;
-            color: #333;
-            font-size: 15px;
-            font-weight: bold;
-            text-align: center;
-            text-decoration: none;
-        }
-
-        .slide-navi .btns li a.on {
-            color: #f43142;
-        }
+        #test-btns {margin-top: 15px; font-size: 12px;}
+        #test-btns a {display: inline-block; margin-left: 0; margin-right: 0; padding-left: 8px; padding-right: 8px; height: 22px; line-height: 22px;; cursor: pointer; color: #FFFFFF; background-color: #CFD8DC;}
+        #test-btns a:hover {color: #FF5252;}
     </style>
 </head>
 
 <body>
-<!-- TODO: arrange -->
-<div id="wrapper">
-    <div class="slide-navi">
-        <div class="handle">
-            <ul class="btns">
-                <li><a href="#">kihon:</a></li>
-                <li><a href="#">Thanks</a></li>
-                <li><a href="#">to</a></li>
-                <li><a href="#">whoever</a></li>
-                <li><a href="#">use</a></li>
-                <li><a href="#">kihon.</a></li>
-            </ul>
-        </div>
+<div class="scrolling-navi">
+    <div class="handle">
+        <ul class="btns">
+            <li><a href="#">kihon:</a></li>
+            <li><a href="#">Thanks</a></li>
+            <li><a href="#">to</a></li>
+            <li><a href="#">whoever</a></li>
+            <li><a href="#">use</a></li>
+            <li><a href="#">kihon.</a></li>
+            <li><a href="#">This</a></li>
+            <li><a href="#">is</a></li>
+            <li><a href="#">HorizontalScrollingNavi</a></li>
+        </ul>
     </div>
+</div>
 
-    <style>
-        #test-btns {
-            margin-top: 10px;
-        }
-
-        #test-btns a {
-            cursor: pointer;
-            color: #333;
-        }
-
-        #test-btns a:hover {
-            color: #f43142;
-        }
-    </style>
-
-    <div id="test-btns">
-        <a>1</a>
-        <a>2</a>
-        <a>3</a>
-        <a>4</a>
-        <a>5</a>
-        <a>6</a>
-        <a>7</a>
-        <a>8</a>
-        <a>9</a>
-        <a>10</a>
-    </div>
+<div id="test-btns">
+    <a>1</a><a>2</a><a>3</a><a>4</a><a>5</a><a>6</a><a>7</a><a>8</a><a>9</a>
 </div>
 
 <script src="https://code.jquery.com/jquery-3.0.0.min.js"
@@ -131,7 +56,7 @@
 
         function init() {
             // set HorizontalScrollingNavi extends Navi
-            var wrap = $('.slide-navi');
+            var wrap = $('.scrolling-navi');
 
             var navi = new Kihon.HorizontalScrollingNavi({
                 /*
@@ -140,22 +65,22 @@
                 wrap: wrap, // wrap
                 btns: $('.btns li a', wrap), // navi buttons
                 mouseoverCallback: function (obj) { // {event, btn, index}
-//                    console.log('Kihon.HorizontalScrollingNavi mouseoverCallback :', obj);
+                    // console.log('Kihon.HorizontalScrollingNavi mouseoverCallback :', obj);
                 },
                 mouseoutCallback: function (obj) { // {event, btn, index}
-//                    console.log('Kihon.HorizontalScrollingNavi mouseoutCallback :', obj);
+                    // console.log('Kihon.HorizontalScrollingNavi mouseoutCallback :', obj);
                 },
                 mousedownCallback: function (obj) { // {event, btn, index}
-//                    console.log('Kihon.HorizontalScrollingNavi mousedownCallback :', obj);
+                    // console.log('Kihon.HorizontalScrollingNavi mousedownCallback :', obj); // TODO - require print. change Navi.js ?
                 },
                 mouseupCallback: function (obj) { // {event, btn, index}
-//                    console.log('Kihon.HorizontalScrollingNavi mouseupCallback:', obj);
+                    // console.log('Kihon.HorizontalScrollingNavi mouseupCallback:', obj);
                 },
                 clickCallback: function (obj) { // {event, btn, prevActivatedIndex, index}
-//                    console.log('Kihon.HorizontalScrollingNavi clickCallback :', obj);
+                    // console.log('Kihon.HorizontalScrollingNavi clickCallback :', obj);
                 },
                 activateCallback: function (obj) { // {prevActivatedIndex, index}
-//                    console.log('Kihon.HorizontalScrollingNavi activateCallback :', obj);
+                    // console.log('Kihon.HorizontalScrollingNavi activateCallback :', obj);
 
                     var btns = $(navi.getBtns()),
                         btn = $(navi.getBtn(obj.index));
@@ -167,87 +92,84 @@
                 /*
                  * Kihon.HorizontalScrollingNavi options
                  */
-                // Dragdealer: window.Dragdealer,
-                handleClass: 'handle',
-
-                disabled: false,
-                slide: true,
-                loose: true,
-                speed: 0.25,
-                css3: true,
-
+                handleClass: 'handle', // handle class
+                speed: 0.25, // how fast the handle will slide to position after you mouse up (0 ~ 1)
+                positionedCallback: function(x, y) {
+                    // called when releasing handle or calling setX / setRatioX method, with the projected x, y position of the handle. projected value means the value the slider will have after finishing a sliding animation
+                    // console.log('Kihon.HorizontalScrollingNavi positionedCallback :', x, navi.getOffsetRatioByPosition(x));
+                },
                 dragStartCallback: function (x, y) {
-                    console.log('Kihon.HorizontalScrollingNavi dragStartCallback :', x, y);
+                    // called at the beginning of a drag with handle initial x, y values.
+                    // console.log('Kihon.HorizontalScrollingNavi dragStartCallback :', x, y);
                 },
                 dragStopCallback: function (x, y) {
-                    console.log('Kihon.HorizontalScrollingNavi dragStopCallback :', x, y);
+                    // same as callback(x, y) but only called after a drag, not after call setX / setRatioX method.
+                    // console.log('Kihon.HorizontalScrollingNavi dragStopCallback :', x, y);
                 },
-                slideEndCallback: function (x, y) {
-                    console.log('Kihon.HorizontalScrollingNavi slideEndCallback :', x, y);
+                animationCallback: function(x, y) {
+                    // called every animation loop, as long as the handle is being dragged or in the process of a sliding animation.
+                    // console.log('Kihon.HorizontalScrollingNavi animationCallback :', x, y);
                 }
             }).init();
 
             /*
              * HorizontalScrollingNavi public methods
              */
-            // get ratio x
-            console.log( navi.getRatioX() ); // TODO: what is this ?
+            // get all buttons
+            // console.log( navi.getBtns() );
 
-            // get offset ratio by position x
-            console.log( navi.getOffsetRatioByPosition(99) ); // TODO: what is this ?
+            // get one button. (1st button's index is 1.)
+            // console.log( navi.getBtn(button index) );
+
+            // get activated button index
+            // console.log( navi.getActivatedIndex() );
+
+            // activate one button, and deactivate other buttons. (1st button's index is 1.)
+            // navi.activate(button index);
+
+            // set buttons event handler
+            // navi.setBtnsEventHandler(true / false);
+
+            // get navi handle position ratio x (0 ~ 1)
+            // console.log( navi.getRatioX() );
+
+            // get offset ratio by position
+            // console.log( navi.getOffsetRatioByPosition(-99) );
 
             // get handle node
             // console.log( navi.getHandle() );
 
             // set navi handle position by x
-            // navi.setX(99);
+            // navi.setX(-99);
 
-            // set navi handle position by ratio(0 ~ 1)
+            // set navi handle position by ratio x (0 ~ 1)
             // navi.setRatioX(0.75);
 
             // get flag navi is draggbale
-            // console.log( navi.isDraggable() ); // TODO: test
-
-            // disable dragging
-            // navi.disable();
+            // console.log( navi.isDraggable() );
 
             // enable dragging
             // navi.enable();
+
+            // disable dragging
+            // navi.disable();
 
             // set resize event handler
             // navi.setResizeEventHandler(true / false);
 
             // resize
-            navi.resize();
+            // navi.resize();
 
             // destroy
             // navi.destroy();
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-            // TODO: arrange
-            // control HorizontalSlideNavi by external
+            /*
+             * example: control HorizontalSlideNavi by external
+             */
             $('#test-btns a').on('click', function (evt) {
                 evt.preventDefault();
 
-                const index = $('#test-btns a').index(this) + 1;
+                var index = $(this).index() + 1;
                 activateSlideNavi(index);
             });
 
@@ -260,18 +182,16 @@
                     next = (index > navi.getBtns().length) ? 0 : index + 1;
 
                 if (!prev) {
-                    // go to left end.
-                    navi.setRatioX(0);
+                    navi.setRatioX(0); // go to left end.
                     return;
                 }
 
                 if (!next) {
-                    // go to right end.
-                    navi.setRatioX(1);
+                    navi.setRatioX(1); // go to right end.
                     return;
                 }
 
-                const btn = $(navi.getBtn(prev));
+                var btn = $(navi.getBtn(prev));
                 if (btn.length) navi.setX(-btn.position().left);
             }
         }
