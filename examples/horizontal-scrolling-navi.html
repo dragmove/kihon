@@ -62,7 +62,6 @@
                 /*
                  * Kihon.Navi options
                  */
-                wrap: wrap, // wrap
                 btns: $('.btns li a', wrap), // navi buttons
                 mouseoverCallback: function (obj) { // {event, btn, index}
                     // console.log('Kihon.HorizontalScrollingNavi mouseoverCallback :', obj);
@@ -71,7 +70,7 @@
                     // console.log('Kihon.HorizontalScrollingNavi mouseoutCallback :', obj);
                 },
                 mousedownCallback: function (obj) { // {event, btn, index}
-                    // console.log('Kihon.HorizontalScrollingNavi mousedownCallback :', obj); // TODO - require print. change Navi.js ?
+                    // console.log('Kihon.HorizontalScrollingNavi mousedownCallback :', obj);
                 },
                 mouseupCallback: function (obj) { // {event, btn, index}
                     // console.log('Kihon.HorizontalScrollingNavi mouseupCallback:', obj);
@@ -92,6 +91,7 @@
                 /*
                  * Kihon.HorizontalScrollingNavi options
                  */
+                wrap: wrap, // wrap
                 handleClass: 'handle', // handle class
                 speed: 0.25, // how fast the handle will slide to position after you mouse up (0 ~ 1)
                 positionedCallback: function(x, y) {

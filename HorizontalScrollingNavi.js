@@ -1,6 +1,6 @@
 import $ from 'jquery';
 import Navi from './Navi';
-import {falsy, not, isDefined, isNotDef, isBoolean} from './_util';
+import {falsy, not, isDefined, isNotDef, isBoolean, notSingleEle} from './_util';
 
 class HorizontalScrollingNavi extends Navi {
   constructor(options) {
@@ -9,7 +9,6 @@ class HorizontalScrollingNavi extends Navi {
     let opt = $.extend({
       /*
        // Navi.js options
-       wrap,
        btns,
        mouseoverCallback,
        mouseoutCallback,
@@ -24,6 +23,7 @@ class HorizontalScrollingNavi extends Navi {
        */
       // require Dragdealer library - https://github.com/skidding/dragdealer
       Dragdealer: require('dragdealer'),
+      wrap: null,
       handleClass: 'handle',
       speed: 0.25,
       positionedCallback: null, // function(x, y)
@@ -44,6 +44,8 @@ class HorizontalScrollingNavi extends Navi {
 
     // add resize event handler to proxy object in Navi.js
     $.extend(true, _._proxy, {resizeEventHandler: null});
+
+    if (notSingleEle($(_._option.wrap))) throw new Error('HorizontalScrollingNavi: require options object has a single wrap.');
   }
 
   /*

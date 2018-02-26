@@ -1,5 +1,5 @@
 import $ from 'jquery';
-import {not, isNotDef, isBoolean, isFunction, notSingleEle} from './_util';
+import {not, isNotDef, isBoolean, isFunction, each} from './_util';
 
 class Navi {
   constructor(options) {
@@ -8,7 +8,6 @@ class Navi {
     const _ = this;
 
     _._option = $.extend({
-      wrap: null,
       btns: [],
       mouseoverCallback: null,
       mouseoutCallback: null,
@@ -35,8 +34,6 @@ class Navi {
       mouseupBtnEventHandler: null,
       clickBtnEventHandler: null
     };
-
-    if (notSingleEle($(_._option.wrap))) throw new Error('Navi: require options object has a single wrap.');
   }
 
   /*
@@ -98,20 +95,24 @@ class Navi {
 
     const _ = this;
 
-    $(_._option.wrap)
-      .off(`mouseover.kihon.navi.${_._uniqueId}`, _._proxy.mouseoverBtnEventHandler)
-      .off(`mouseout.kihon.navi.${_._uniqueId}`, _._proxy.mouseoutBtnEventHandler)
-      .off(`mousedown.kihon.navi.${_._uniqueId}`, _._proxy.mousedownBtnEventHandler)
-      .off(`mouseup.kihon.navi.${_._uniqueId}`, _._proxy.mouseupBtnEventHandler)
-      .off(`click.kihon.navi.${_._uniqueId}`, _._proxy.clickBtnEventHandler);
+    each(_.getBtns(), (btn) => {
+      $(btn)
+        .off(`mouseover.kihon.navi.${_._uniqueId}`, _._proxy.mouseoverBtnEventHandler)
+        .off(`mouseout.kihon.navi.${_._uniqueId}`, _._proxy.mouseoutBtnEventHandler)
+        .off(`mousedown.kihon.navi.${_._uniqueId}`, _._proxy.mousedownBtnEventHandler)
+        .off(`mouseup.kihon.navi.${_._uniqueId}`, _._proxy.mouseupBtnEventHandler)
+        .off(`click.kihon.navi.${_._uniqueId}`, _._proxy.clickBtnEventHandler);
+    });
 
     if (flag) {
-      $(_._option.wrap)
-        .on(`mouseover.kihon.navi.${_._uniqueId}`, _._proxy.mouseoverBtnEventHandler)
-        .on(`mouseout.kihon.navi.${_._uniqueId}`, _._proxy.mouseoutBtnEventHandler)
-        .on(`mousedown.kihon.navi.${_._uniqueId}`, _._proxy.mousedownBtnEventHandler)
-        .on(`mouseup.kihon.navi.${_._uniqueId}`, _._proxy.mouseupBtnEventHandler)
-        .on(`click.kihon.navi.${_._uniqueId}`, _._proxy.clickBtnEventHandler);
+      each(_.getBtns(), (btn) => {
+        $(btn)
+          .on(`mouseover.kihon.navi.${_._uniqueId}`, _._proxy.mouseoverBtnEventHandler)
+          .on(`mouseout.kihon.navi.${_._uniqueId}`, _._proxy.mouseoutBtnEventHandler)
+          .on(`mousedown.kihon.navi.${_._uniqueId}`, _._proxy.mousedownBtnEventHandler)
+          .on(`mouseup.kihon.navi.${_._uniqueId}`, _._proxy.mouseupBtnEventHandler)
+          .on(`click.kihon.navi.${_._uniqueId}`, _._proxy.clickBtnEventHandler);
+      });
     }
 
     return _;
@@ -142,8 +143,8 @@ class Navi {
    */
   _mouseoverBtnEventHandler(evt) {
     const _ = this,
-      ele = evt.target,
-      index = _._$btns.index(ele);
+      btn = evt.currentTarget,
+      index = _._$btns.index(btn);
 
     if (index < 0) return;
 
@@ -152,7 +153,7 @@ class Navi {
     if (isFunction(_._option.mouseoverCallback)) {
       _._option.mouseoverCallback.call(_, {
         event: evt,
-        btn: ele,
+        btn: btn,
         index: _._currentIndex
       });
     }
@@ -160,15 +161,15 @@ class Navi {
 
   _mouseoutBtnEventHandler(evt) {
     const _ = this,
-      ele = evt.target,
-      index = _._$btns.index(ele);
+      btn = evt.currentTarget,
+      index = _._$btns.index(btn);
 
     if (index < 0) return;
 
     if (isFunction(_._option.mouseoutCallback)) {
       _._option.mouseoutCallback.call(_, {
         event: evt,
-        btn: ele,
+        btn: btn,
         index: index + 1
       });
     }
@@ -176,8 +177,8 @@ class Navi {
 
   _mousedownBtnEventHandler(evt) {
     const _ = this,
-      ele = evt.target,
-      index = _._$btns.index(ele);
+      btn = evt.currentTarget,
+      index = _._$btns.index(btn);
 
     if (index < 0) return;
 
@@ -186,7 +187,7 @@ class Navi {
     if (isFunction(_._option.mousedownCallback)) {
       _._option.mousedownCallback.call(_, {
         event: evt,
-        btn: ele,
+        btn: btn,
         index: index + 1
       });
     }
@@ -194,8 +195,8 @@ class Navi {
 
   _mouseupBtnEventHandler(evt) {
     const _ = this,
-      ele = evt.target,
-      index = _._$btns.index(ele);
+      btn = evt.currentTarget,
+      index = _._$btns.index(btn);
 
     if (index < 0) return;
 
@@ -204,7 +205,7 @@ class Navi {
     if (isFunction(_._option.mouseupCallback)) {
       _._option.mouseupCallback.call(_, {
         event: evt,
-        btn: ele,
+        btn: btn,
         index: index + 1
       });
     }
@@ -212,8 +213,8 @@ class Navi {
 
   _clickBtnEventHandler(evt) {
     const _ = this,
-      ele = evt.target,
-      index = _._$btns.index(ele);
+      btn = evt.currentTarget,
+      index = _._$btns.index(btn);
 
     if (index < 0) return;
 
@@ -224,7 +225,7 @@ class Navi {
     if (isFunction(_._option.clickCallback)) {
       _._option.clickCallback.call(_, {
         event: evt,
-        btn: ele,
+        btn: btn,
         prevActivatedIndex: prevIndex,
         index: index + 1
       });

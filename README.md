@@ -179,9 +179,9 @@ setTimeout(function () {
 
 ### HorizontalScrollingNavi
 ```html
-<div class="scrolling-navi">
-    <div class="handle">
-        <ul class="btns">
+<div class="scrolling-navi"> <!-- can rename class you want -->
+    <div class="handle"> <!-- can rename class you want -->
+        <ul class="btns"> <!-- can rename class you want -->
             <li><a href="#">kihon:</a></li>
             <li><a href="#">Thanks</a></li>
             <li><a href="#">to</a></li>
@@ -217,7 +217,6 @@ var navi = new HorizontalScrollingNavi({
     /*
      * Kihon.Navi options
      */
-    wrap: wrap, // wrap
     btns: $('.btns li a', wrap), // navi buttons
     mouseoverCallback: function (obj) { // {event, btn, index}
         // console.log('Kihon.HorizontalScrollingNavi mouseoverCallback :', obj);
@@ -247,6 +246,7 @@ var navi = new HorizontalScrollingNavi({
     /*
      * Kihon.HorizontalScrollingNavi options
      */
+    wrap: wrap, // wrap
     handleClass: 'handle', // handle class
     speed: 0.25, // how fast the handle will slide to position after you mouse up (0 ~ 1)
     positionedCallback: function(x, y) {
@@ -429,7 +429,7 @@ modal.show();
 
 ### Navi
 ```html
-<ul class="navi"> <!-- can rename class you want -->
+<ul class="navi">
     <li><a href="#">kihon:</a></li>
     <li><a href="#">Thanks</a></li>
     <li><a href="#">to</a></li>
@@ -448,7 +448,6 @@ modal.show();
 import Navi from 'kihon/Navi';
 
 var navi = new Navi({
-    wrap: $('.navi'), // navi wrap
     btns: $('.navi li a'), // navi buttons
     mouseoverCallback: function (obj) { // {event, btn, index}
         console.log('Kihon.Navi mouseoverCallback :', obj);
@@ -501,7 +500,7 @@ var navi = new Navi({
 
 ### NaviHasTimer
 ```html
-<ul class="navi"> <!-- can rename class you want -->
+<ul class="navi">
     <li><a href="#">kihon:</a></li>
     <li><a href="#">Thanks</a></li>
     <li><a href="#">to</a></li>
@@ -520,7 +519,6 @@ var navi = new Navi({
 import NaviHasTimer from 'kihon/NaviHasTimer';
 
 var navi = new NaviHasTimer({
-    wrap: $('.navi'), // navi wrap
     btns: $('.navi li a'), // navi buttons
     mouseoverCallback: function (obj) { // {event, btn, index}
         console.log('Kihon.NaviHasTimer mouseoverCallback :', obj);
