@@ -48,7 +48,7 @@ class FullSizeBg {
 
     _._initialized = true;
 
-    _._proxy.resizeEventHandler = $.proxy(_.resize, _);
+    _._proxy.resizeEventHandler = _.resize.bind(_);
 
     _.setResizeEventHandler(true);
 

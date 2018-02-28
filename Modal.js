@@ -59,9 +59,9 @@ class Modal {
 
     _._$closeBtn = $(_._option.closeBtnSelector, _._$wrap);
 
-    _._proxy.closeBtnEventHandler = $.proxy(_._closeBtnEventHandler, _);
-    _._proxy.wrapEventHandler = $.proxy(_._wrapEventHandler, _);
-    _._proxy.escKeyEventHandler = $.proxy(_._escKeyEventHandler, _);
+    _._proxy.closeBtnEventHandler = _._closeBtnEventHandler.bind(_);
+    _._proxy.wrapEventHandler = _._wrapEventHandler.bind(_);
+    _._proxy.escKeyEventHandler = _._escKeyEventHandler.bind(_);
 
     if (_._$closeBtn.length > 0) _.setCloseBtnEventHandler(true);
 

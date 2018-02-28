@@ -1,6 +1,6 @@
 {
   "name": "kihon",
-  "version": "0.0.22",
+  "version": "0.0.23",
   "description": "A Bundle of Lite components which provides straightforward Interactive UI",
   "keywords": [
     "kihon",
@@ -9,6 +9,7 @@
     "fullsize",
     "background",
     "video",
+    "scroll",
     "imageLoader",
     "modal",
     "navi",

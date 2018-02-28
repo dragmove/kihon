@@ -46,11 +46,11 @@ class Navi {
 
     _._initialized = true;
 
-    _._proxy.mouseoverBtnEventHandler = $.proxy(_._mouseoverBtnEventHandler, _);
-    _._proxy.mouseoutBtnEventHandler = $.proxy(_._mouseoutBtnEventHandler, _);
-    _._proxy.mousedownBtnEventHandler = $.proxy(_._mousedownBtnEventHandler, _);
-    _._proxy.mouseupBtnEventHandler = $.proxy(_._mouseupBtnEventHandler, _);
-    _._proxy.clickBtnEventHandler = $.proxy(_._clickBtnEventHandler, _);
+    _._proxy.mouseoverBtnEventHandler = _._mouseoverBtnEventHandler.bind(_);
+    _._proxy.mouseoutBtnEventHandler = _._mouseoutBtnEventHandler.bind(_);
+    _._proxy.mousedownBtnEventHandler = _._mousedownBtnEventHandler.bind(_);
+    _._proxy.mouseupBtnEventHandler = _._mouseupBtnEventHandler.bind(_);
+    _._proxy.clickBtnEventHandler = _._clickBtnEventHandler.bind(_);
 
     _.setBtnsEventHandler(true);
 

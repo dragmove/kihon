@@ -50,7 +50,7 @@ class Overlay {
 
     _._$parentNode.append(_._$node);
 
-    _._proxy.clickOverlayEventHandler = (isFunction(_._option.clickCallback)) ? $.proxy(_._option.clickCallback, _) : null;
+    _._proxy.clickOverlayEventHandler = (isFunction(_._option.clickCallback)) ? _._option.clickCallback.bind(_) : null;
 
     _.hide();
 

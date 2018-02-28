@@ -1,5 +1,22 @@
 import $ from 'jquery';
-import {truthy, falsy, not, isDefined, isNotDef, isBoolean, isNumber, isFunction, isVideoElement, allOf, notSingleEle, each, gt, lt, lte, getSizeAspectFill} from './_util';
+import {
+  truthy,
+  falsy,
+  not,
+  isDefined,
+  isNotDef,
+  isBoolean,
+  isNumber,
+  isFunction,
+  isVideoElement,
+  allOf,
+  notSingleEle,
+  each,
+  gt,
+  lt,
+  lte,
+  getSizeAspectFill
+} from './_util';
 
 class FullSizeVideo {
   constructor(options) {
@@ -59,7 +76,7 @@ class FullSizeVideo {
 
     _._initialized = true;
 
-    _._proxy.resizeEventHandler = $.proxy(_.resize, _);
+    _._proxy.resizeEventHandler = _.resize.bind(_);
 
     _._setVideo();
 

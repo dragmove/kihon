@@ -64,19 +64,19 @@
                  */
                 btns: $('.btns li a', wrap), // navi buttons
                 mouseoverCallback: function (obj) { // {event, btn, index}
-                    // console.log('Kihon.HorizontalScrollingNavi mouseoverCallback :', obj);
+                    console.log('Kihon.HorizontalScrollingNavi mouseoverCallback :', obj);
                 },
                 mouseoutCallback: function (obj) { // {event, btn, index}
-                    // console.log('Kihon.HorizontalScrollingNavi mouseoutCallback :', obj);
+                    console.log('Kihon.HorizontalScrollingNavi mouseoutCallback :', obj);
                 },
                 mousedownCallback: function (obj) { // {event, btn, index}
-                    // console.log('Kihon.HorizontalScrollingNavi mousedownCallback :', obj);
+                    console.log('Kihon.HorizontalScrollingNavi mousedownCallback :', obj);
                 },
                 mouseupCallback: function (obj) { // {event, btn, index}
-                    // console.log('Kihon.HorizontalScrollingNavi mouseupCallback:', obj);
+                    console.log('Kihon.HorizontalScrollingNavi mouseupCallback:', obj);
                 },
                 clickCallback: function (obj) { // {event, btn, prevActivatedIndex, index}
-                    // console.log('Kihon.HorizontalScrollingNavi clickCallback :', obj);
+                    console.log('Kihon.HorizontalScrollingNavi clickCallback :', obj);
                 },
                 activateCallback: function (obj) { // {prevActivatedIndex, index}
                     // console.log('Kihon.HorizontalScrollingNavi activateCallback :', obj);
@@ -96,19 +96,19 @@
                 speed: 0.25, // how fast the handle will slide to position after you mouse up (0 ~ 1)
                 positionedCallback: function(x, y) {
                     // called when releasing handle or calling setX / setRatioX method, with the projected x, y position of the handle. projected value means the value the slider will have after finishing a sliding animation
-                    // console.log('Kihon.HorizontalScrollingNavi positionedCallback :', x, navi.getOffsetRatioByPosition(x));
+                    console.log('Kihon.HorizontalScrollingNavi positionedCallback :', x, navi.getOffsetRatioByPosition(x));
                 },
                 dragStartCallback: function (x, y) {
                     // called at the beginning of a drag with handle initial x, y values.
-                    // console.log('Kihon.HorizontalScrollingNavi dragStartCallback :', x, y);
+                    console.log('Kihon.HorizontalScrollingNavi dragStartCallback :', x, y);
                 },
                 dragStopCallback: function (x, y) {
                     // same as callback(x, y) but only called after a drag, not after call setX / setRatioX method.
-                    // console.log('Kihon.HorizontalScrollingNavi dragStopCallback :', x, y);
+                    console.log('Kihon.HorizontalScrollingNavi dragStopCallback :', x, y);
                 },
                 animationCallback: function(x, y) {
                     // called every animation loop, as long as the handle is being dragged or in the process of a sliding animation.
-                    // console.log('Kihon.HorizontalScrollingNavi animationCallback :', x, y);
+                    console.log('Kihon.HorizontalScrollingNavi animationCallback :', x, y);
                 }
             }).init();
 

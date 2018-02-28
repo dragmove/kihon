@@ -43,7 +43,13 @@ class HorizontalScrollingNavi extends Navi {
     _._dragDealer = null;
 
     // add resize event handler to proxy object in Navi.js
-    $.extend(true, _._proxy, {resizeEventHandler: null});
+    $.extend(true, _._proxy, {
+      resizeEventHandler: null,
+      positionedCallback: null,
+      dragStartCallback: null,
+      dragStopCallback: null,
+      animationCallback: null
+    });
 
     if (notSingleEle($(_._option.wrap))) throw new Error('HorizontalScrollingNavi: require options object has a single wrap.');
   }
@@ -57,7 +63,11 @@ class HorizontalScrollingNavi extends Navi {
 
     const _ = this;
 
-    _._proxy.resizeEventHandler = $.proxy(_.resize, _);
+    _._proxy.resizeEventHandler = _.resize.bind(_);
+    _._proxy.positionedCallback = _._option.positionedCallback.bind(_);
+    _._proxy.dragStartCallback = _._option.dragStartCallback.bind(_);
+    _._proxy.dragStopCallback = _._option.dragStopCallback.bind(_);
+    _._proxy.animationCallback = _._option.animationCallback.bind(_);
 
     _._setContents();
 
@@ -127,7 +137,7 @@ class HorizontalScrollingNavi extends Navi {
     return _;
   }
 
-  destroy(obj = null) {
+  destroy() {
     const _ = this;
 
     _.setResizeEventHandler(false);
@@ -138,7 +148,13 @@ class HorizontalScrollingNavi extends Navi {
 
     _._dragDealer = null;
 
-    super.destroy(obj);
+    _._proxy.resizeEventHandler = null;
+    _._proxy.positionedCallback = null;
+    _._proxy.dragStartCallback = null;
+    _._proxy.dragStopCallback = null;
+    _._proxy.animationCallback = null;
+
+    super.destroy();
 
     return _;
   }
@@ -159,10 +175,10 @@ class HorizontalScrollingNavi extends Navi {
       loose: true,
       speed: opt.speed,
       css3: true,
-      callback: opt.positionedCallback,
-      dragStartCallback: opt.dragStartCallback,
-      dragStopCallback: opt.dragStopCallback,
-      animationCallback: opt.animationCallback
+      callback: _._proxy.positionedCallback,
+      dragStartCallback: _._proxy.dragStartCallback,
+      dragStopCallback: _._proxy.dragStopCallback,
+      animationCallback: _._proxy.animationCallback
     });
 
     return _;
