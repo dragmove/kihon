@@ -19,15 +19,15 @@ npm install kihon --save-dev
 
 
 ## Components
-FullSizeBg  
-FullSizeVideo  
-HorizontalScrollingNavi (dependency to [Dragdealer.js](https://github.com/skidding/dragdealer))  
-ImageLoader  
-Navi  
-NaviHasTimer  
-Overlay  
-Modal  
-YoutubeModal  
+[FullSizeBg](https://dragmove.github.io/pages/kihon/examples/full-size-bg.html)  
+[FullSizeVideo](https://dragmove.github.io/pages/kihon/examples/full-size-video.html)  
+[HorizontalScrollingNavi](https://dragmove.github.io/pages/kihon/examples/horizontal-scrolling-navi.html) (dependency to [Dragdealer.js](https://github.com/skidding/dragdealer))  
+[ImageLoader](https://dragmove.github.io/pages/kihon/examples/image-loader.html)  
+[Navi](https://dragmove.github.io/pages/kihon/examples/navi.html)  
+[NaviHasTimer](https://dragmove.github.io/pages/kihon/examples/navi-has-timer.html)  
+[Overlay](https://dragmove.github.io/pages/kihon/examples/overlay.html)  
+[Modal](https://dragmove.github.io/pages/kihon/examples/modal.html)  
+[YoutubeModal](https://dragmove.github.io/pages/kihon/examples/youtube-modal.html)  
   
 
 ## Getting Started
