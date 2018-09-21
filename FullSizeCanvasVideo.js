@@ -70,7 +70,7 @@ class FullSizeCanvasVideo {
     if (opt.muted === true) _.video.setAttribute('muted', '');
     if (opt.autoplay === true) _.video.setAttribute('autoplay', ''); // iOS video node already has "autoplay" attribute
 
-    let size = _.getVideoSizeWidthFit(); // _.getVideoSizeAspectFill();
+    let size = _.getVideoSizeAspectFill();
     _.setVideoSize(size.width, size.height);
     _.setCanvasSize(size.width, size.height);
     _.setWrapAlign(opt.alignX, opt.alignY, size);
@@ -79,6 +79,7 @@ class FullSizeCanvasVideo {
       _.$video.hide();
 
       _.play();
+
       if (!_.option.autoplay) _.pause();
     } else {
       this.$canvas.hide();
@@ -100,6 +101,7 @@ class FullSizeCanvasVideo {
     if (_.isIOS()) {
       _.$video.on('canplay', evt => {
         _.drawVideoToCanvas();
+
         if (opt.canplayCallback) {
           opt.canplayCallback.call(null, {
             event: evt,
@@ -158,7 +160,7 @@ class FullSizeCanvasVideo {
 
       if (isVideoHasOnended && opt.endedCallback) {
         // TODO - no browser support 'ended' event now.
-        $(video).on('ended', evt => {
+        $(_.video).on('ended', evt => {
           _.isPlaying = false;
 
           opt.endedCallback.call(null, {
@@ -305,6 +307,8 @@ class FullSizeCanvasVideo {
         _.loopAnimationFrameIOS();
       });
     } else {
+      console.log('not play');
+
       cancelAnimationFrame(_.animationFrame);
       _.animationFrame = null;
     }
@@ -312,7 +316,7 @@ class FullSizeCanvasVideo {
 
   resize(evt) {
     let _ = this,
-      size = _.getVideoSizeWidthFit(); // _.getVideoSizeAspectFill();
+      size = _.getVideoSizeAspectFill();
 
     _.setVideoSize(size.width, size.height);
     _.setCanvasSize(size.width, size.height);
@@ -330,6 +334,7 @@ class FullSizeCanvasVideo {
         .split('.')
         .pop()
         .toLowerCase();
+
     videoSourceTpl += `<source src="${
       opt.videoUrl
     }" type="video/${ext}"></source>`;
@@ -337,6 +342,7 @@ class FullSizeCanvasVideo {
     let tpl = `<video class="${opt.videoClass}" poster="${
       opt.posterUrl
     }">${videoSourceTpl}</video>`;
+
     if (_.isIOS()) {
       tpl = `<video class="${opt.videoClass}" poster="${
         opt.posterUrl
@@ -391,12 +397,14 @@ class FullSizeCanvasVideo {
   }
 
   play() {
-    let _ = this;
+    const _ = this;
     if (!_.video) return;
 
     if (_.isIOS()) {
       _.lastRenderTime = Date.now();
       _.isPlaying = true;
+
+      _.video.play();
       _.loopAnimationFrameIOS();
     } else {
       _.isPlaying = true;
@@ -405,11 +413,12 @@ class FullSizeCanvasVideo {
   }
 
   pause() {
-    let _ = this;
+    const _ = this;
     if (!_.video) return;
 
     if (_.isIOS()) {
       _.isPlaying = false;
+      _.video.pause();
     } else {
       _.isPlaying = false;
       _.video.pause();
@@ -417,7 +426,7 @@ class FullSizeCanvasVideo {
   }
 
   stop() {
-    let _ = this;
+    const _ = this;
     if (!_.video) return;
 
     if (_.isIOS()) {
@@ -430,7 +439,7 @@ class FullSizeCanvasVideo {
   }
 
   seek(second) {
-    let _ = this;
+    const _ = this;
     if (!_.video) return;
 
     if (_.isIOS()) {
