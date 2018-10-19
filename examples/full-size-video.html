@@ -41,7 +41,7 @@
                 alignY: 'center', // top, center, bottom
                 isAutoPlay: false, // auto play flag
                 isLoop: false, // loop flag
-                isMuted: false, // mute flag
+                isMuted: true, // mute flag
                 canplayCallback: function (obj) { // {event}
                     console.log('Kihon.FullSizeVideo canplayCallback obj :', obj);
                 },
@@ -52,17 +52,18 @@
                     console.log('Kihon.FullSizeVideo endedCallback obj :', obj);
                 }
             }).init();
-
+            
             setTimeout(function () {
                 fullSizeVideo.play().setVolume(0.5);
             }, 2000);
 
             setTimeout(function () {
                 fullSizeVideo.pause();
+                fullSizeVideo.mute(false);
             }, 5000);
 
             setTimeout(function () {
-                fullSizeVideo.seek(30).play().setVolume(1.0);
+                fullSizeVideo.seek(30).play();
             }, 8000);
 
             /*
