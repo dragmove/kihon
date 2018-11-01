@@ -291,9 +291,9 @@ class FullSizeVideo {
       }"></source>`;
     });
 
-    _._$videoWrap.append(`<video>${videoSourceTpl}</video>`);
+    _._$video = $(`<video>${videoSourceTpl}</video>`);
 
-    _._$video = $('video', _._$videoWrap);
+    _._$videoWrap.append(_._$video);
 
     const video = _._$video.get(0);
     if (opt.isAutoPlay === true) video.setAttribute('autoplay', '');
