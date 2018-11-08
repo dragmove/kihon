@@ -1,3 +1,4 @@
+import { from } from 'rxjs';
 import $ from 'jquery';
 import {
   truthy,
@@ -62,6 +63,10 @@ class FullSizeVideo {
     _._proxy = {
       resizeEventHandler: null
     };
+
+    _._isPlay = false;
+
+    _._play$ = null;
 
     if (notSingleEle(_._$wrap)) {
       throw new Error(
@@ -162,7 +167,14 @@ class FullSizeVideo {
     const video = _._$video.get(0);
     if (not(isVideoElement)(video)) return _;
 
-    video.play();
+    if (truthy(_._isPlay)) return _;
+
+    _._isPlay = true;
+
+    console.log('_._isPlay :', _._isPlay);
+
+    // TODO: when call play, pause, stop, seek randomly
+    _._play$ = from(video.play());
 
     return _;
   }
@@ -175,7 +187,36 @@ class FullSizeVideo {
     const video = _._$video.get(0);
     if (not(isVideoElement)(video)) return _;
 
-    video.pause();
+    if (truthy(_._isPlay)) {
+      console.log('pause');
+
+      _._isPlay = false;
+
+      if (isDefined(_._play$)) {
+        // TODO:
+        /*
+        _._play$.subscribe(
+          () => {
+            console.log('resolve play observable :', _._isPlay);
+            if (falsy(_._isPlay)) {
+              video.pause();
+
+              console.log('resolve pause');
+            }
+          },
+          error => {
+            console.log('error play observable :', error);
+          },
+          () => {
+            console.log('complete play observable');
+            _._play$ = null;
+          }
+        );
+        */
+      } else {
+        video.pause();
+      }
+    }
 
     return _;
   }
