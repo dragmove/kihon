@@ -267,7 +267,7 @@ class FullSizeVideo {
 
     _.setResizeEventHandler(false);
 
-    _.proxy.resizeEventHandler = null;
+    _._proxy.resizeEventHandler = null;
 
     return _;
   }
