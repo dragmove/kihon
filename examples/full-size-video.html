@@ -46,13 +46,24 @@
                     console.log('Kihon.FullSizeVideo canplayCallback obj :', obj);
                 },
                 timeupdateCallback: function (obj) { // {event, currentTime, duration}
-                    console.log('Kihon.FullSizeVideo timeupdateCallback obj :', obj);
+                    // console.log('Kihon.FullSizeVideo timeupdateCallback obj :', obj);
                 },
                 endedCallback: function (obj) { // {event, currentTime, duration}
                     console.log('Kihon.FullSizeVideo endedCallback obj :', obj);
                 }
             }).init();
+
+            fullSizeVideo.play();
             
+            window.setTimeout(function() {
+                fullSizeVideo.stop();
+                fullSizeVideo.play();
+                fullSizeVideo.pause();
+            }, 3000);
+
+            // TODO: seek
+
+            /*
             setTimeout(function () {
                 fullSizeVideo.play().setVolume(0.5);
             }, 2000);
@@ -65,6 +76,7 @@
             setTimeout(function () {
                 fullSizeVideo.seek(30).play();
             }, 8000);
+            */
 
             /*
              * FullSizeVideo public methods

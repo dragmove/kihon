@@ -64,9 +64,11 @@ class FullSizeVideo {
       resizeEventHandler: null
     };
 
-    _._isPlay = false;
+    _._isPlaying = false;
 
-    _._play$ = null;
+    _._play$ = null; // true: play / false : pause, stop
+
+    _._subscribePlay = null;
 
     if (notSingleEle(_._$wrap)) {
       throw new Error(
@@ -167,14 +169,21 @@ class FullSizeVideo {
     const video = _._$video.get(0);
     if (not(isVideoElement)(video)) return _;
 
-    if (truthy(_._isPlay)) return _;
+    if (truthy(_._isPlaying)) return _;
 
-    _._isPlay = true;
+    if (_._subscribePlay) {
+      _._subscribePlay.unsubscribe();
+      _._subscribePlay = null;
+    }
 
-    console.log('_._isPlay :', _._isPlay);
+    _._isPlaying = true;
+
+    console.log('_._isPlaying :', _._isPlaying);
 
     // TODO: when call play, pause, stop, seek randomly
-    _._play$ = from(video.play());
+    const promise = video.play();
+
+    _._play$ = isDefined(promise) ? from(promise) : null;
 
     return _;
   }
@@ -187,35 +196,30 @@ class FullSizeVideo {
     const video = _._$video.get(0);
     if (not(isVideoElement)(video)) return _;
 
-    if (truthy(_._isPlay)) {
-      console.log('pause');
+    _._isPlaying = false;
 
-      _._isPlay = false;
+    if (_._subscribePlay) _._subscribePlay.unsubscribe();
 
-      if (isDefined(_._play$)) {
-        // TODO:
-        /*
-        _._play$.subscribe(
-          () => {
-            console.log('resolve play observable :', _._isPlay);
-            if (falsy(_._isPlay)) {
-              video.pause();
+    if (isDefined(_._play$)) {
+      console.log('there is _._play$. pause.');
 
-              console.log('resolve pause');
-            }
-          },
-          error => {
-            console.log('error play observable :', error);
-          },
-          () => {
-            console.log('complete play observable');
-            _._play$ = null;
+      _._subscribePlay = _._play$.subscribe(
+        () => {
+          if (falsy(_._isPlaying)) {
+            console.log('resolve play. pause.');
+            video.pause();
           }
-        );
-        */
-      } else {
-        video.pause();
-      }
+        },
+        error => {
+          console.log('reject play observable. pause. :', error);
+        },
+        () => {
+          console.log('complete play observable. pause.');
+        }
+      );
+    } else {
+      console.log('no promise. pause.');
+      video.pause();
     }
 
     return _;
@@ -229,9 +233,33 @@ class FullSizeVideo {
     const video = _._$video.get(0);
     if (not(isVideoElement)(video)) return _;
 
-    video.pause();
+    _._isPlaying = false;
 
-    video.currentTime = 0;
+    if (_._subscribePlay) _._subscribePlay.unsubscribe();
+
+    if (isDefined(_._play$)) {
+      console.log('there is _._play$. stop.');
+
+      _._subscribePlay = _._play$.subscribe(
+        () => {
+          if (falsy(_._isPlaying)) {
+            console.log('resolve play. stop.');
+            video.pause();
+            video.currentTime = 0;
+          }
+        },
+        error => {
+          console.log('reject play observable. stop. :', error);
+        },
+        () => {
+          console.log('complete play observable. stop.');
+        }
+      );
+    } else {
+      console.log('no promise. stop.');
+      video.pause();
+      video.currentTime = 0;
+    }
 
     return _;
   }
@@ -243,6 +271,8 @@ class FullSizeVideo {
 
     const video = _._$video.get(0);
     if (not(isVideoElement)(video)) return _;
+
+    // TODO:
 
     video.currentTime = second;
 
