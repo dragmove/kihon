@@ -265,7 +265,8 @@ class FullSizeVideo {
   }
 
   seek(second) {
-    const _ = this;
+    const _ = this,
+      opt = _._option;
 
     if (isNotDef(_._$video) || notSingleEle(_._$video)) return _;
 
@@ -274,7 +275,21 @@ class FullSizeVideo {
 
     // TODO:
 
-    video.currentTime = second;
+    console.log('video.currentTime :', video.currentTime);
+    console.log('video.duration :', video.duration);
+
+    if (allOf(isFunction(opt.endedCallback), lte(second)(video.duration))) {
+      console.log('end ?');
+      video.currentTime = video.duration;
+
+      opt.endedCallback.call(_, {
+        currentTime: video.duration,
+        duration: video.duration
+      });
+    } else {
+      console.log('no end');
+      video.currentTime = second;
+    }
 
     return _;
   }

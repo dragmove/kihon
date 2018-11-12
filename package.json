@@ -47,6 +47,7 @@
     "eslint-loader": "^1.9.0",
     "gulp": "^3.9.1",
     "gulp-eslint": "^4.0.1",
+    "rxjs": "^6.3.3",
     "webpack": "^3.10.0",
     "webpack-dev-server": "^2.10.0"
   },
