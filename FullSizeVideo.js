@@ -1,4 +1,5 @@
 import { from } from 'rxjs';
+import { switchAll, switchMap } from 'rxjs/operators';
 import $ from 'jquery';
 import {
   truthy,
@@ -169,12 +170,14 @@ class FullSizeVideo {
     const video = _._$video.get(0);
     if (not(isVideoElement)(video)) return _;
 
+    /*
     if (truthy(_._isPlaying)) return _;
 
     if (_._subscribePlay) {
       _._subscribePlay.unsubscribe();
       _._subscribePlay = null;
     }
+    */
 
     _._isPlaying = true;
 
@@ -184,6 +187,18 @@ class FullSizeVideo {
     const promise = video.play();
 
     _._play$ = isDefined(promise) ? from(promise) : null;
+
+    _._subscribePlay = _._play$.subscribe(
+      x => {
+        console.log('resolve play. play. :', x);
+      },
+      error => {
+        console.log('reject play observable. play. :', error);
+      },
+      y => {
+        console.log('complete play observable. play. :', y);
+      }
+    );
 
     return _;
   }
