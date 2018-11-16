@@ -1,5 +1,5 @@
 import { from } from 'rxjs';
-import { switchAll, switchMap } from 'rxjs/operators';
+import { switchMap, catchError } from 'rxjs/operators';
 import $ from 'jquery';
 import {
   truthy,
@@ -170,37 +170,58 @@ class FullSizeVideo {
     const video = _._$video.get(0);
     if (not(isVideoElement)(video)) return _;
 
-    /*
-    if (truthy(_._isPlaying)) return _;
-
-    if (_._subscribePlay) {
-      _._subscribePlay.unsubscribe();
-      _._subscribePlay = null;
-    }
-    */
-
-    _._isPlaying = true;
-
-    console.log('_._isPlaying :', _._isPlaying);
+    // if (truthy(_._isPlaying)) return _;
 
     // TODO: when call play, pause, stop, seek randomly
+    _._isPlaying = true;
+
     const promise = video.play();
-
-    _._play$ = isDefined(promise) ? from(promise) : null;
-
-    _._subscribePlay = _._play$.subscribe(
-      x => {
-        console.log('resolve play. play. :', x);
-      },
-      error => {
-        console.log('reject play observable. play. :', error);
-      },
-      y => {
-        console.log('complete play observable. play. :', y);
-      }
-    );
+    _._subscribePlayPromise(promise);
 
     return _;
+  }
+
+  _subscribePlayPromise(promise) {
+    const _ = this;
+
+    if (isNotDef(promise)) return;
+
+    if (_._subscribePlay) _._subscribePlay.unsubscribe();
+
+    /*
+    if (_._play$) {
+      // 2nd, 3rd, ... play
+      _._play$ = _._play$.pipe(switchMap(() => promise));
+    } else {
+      // 1st play
+      _._play$ = from(promise).pipe(
+        catchError((error, observable) => {
+          // server error. but, continue subscription.
+          return observable;
+        })
+      );
+    }
+    */
+    _._play$ = from(promise).pipe(
+      catchError((error, observable) => {
+        // server error. but, continue subscription.
+        return observable;
+      })
+    );
+
+    _._subscribePlay = _._play$.subscribe({
+      next: () => {
+        console.log('can pause video safely');
+
+        if (truthy(_._isPlaying)) {
+          // TODO: play
+        } else {
+          // TODO: pause
+        }
+      }
+      // error: error => console.log('error :', error),
+      // complete: () => console.log('complete :')
+    });
   }
 
   pause() {
@@ -213,13 +234,16 @@ class FullSizeVideo {
 
     _._isPlaying = false;
 
+    /*
     if (_._subscribePlay) _._subscribePlay.unsubscribe();
 
     if (isDefined(_._play$)) {
       console.log('there is _._play$. pause.');
 
       _._subscribePlay = _._play$.subscribe(
-        () => {
+        what => {
+          console.log('pause. what :', what);
+
           if (falsy(_._isPlaying)) {
             console.log('resolve play. pause.');
             video.pause();
@@ -236,6 +260,7 @@ class FullSizeVideo {
       console.log('no promise. pause.');
       video.pause();
     }
+    */
 
     return _;
   }

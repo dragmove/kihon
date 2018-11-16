@@ -7,6 +7,7 @@ import NaviHasTimer from './NaviHasTimer';
 import Overlay from './Overlay';
 import Modal from './Modal';
 import YoutubeModal from './YoutubeModal';
+import DropDown from './DropDown';
 
 export default {
   FullSizeBg: FullSizeBg,
@@ -17,5 +18,6 @@ export default {
   NaviHasTimer: NaviHasTimer,
   Overlay: Overlay,
   Modal: Modal,
-  YoutubeModal: YoutubeModal
+  YoutubeModal: YoutubeModal,
+  DropDown: DropDown
 };
