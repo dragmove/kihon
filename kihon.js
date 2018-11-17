@@ -8,6 +8,7 @@ import Overlay from './Overlay';
 import Modal from './Modal';
 import YoutubeModal from './YoutubeModal';
 import DropDown from './DropDown';
+import Video from './Video';
 
 export default {
   FullSizeBg: FullSizeBg,
@@ -19,5 +20,6 @@ export default {
   Overlay: Overlay,
   Modal: Modal,
   YoutubeModal: YoutubeModal,
-  DropDown: DropDown
+  DropDown: DropDown,
+  Video: Video
 };

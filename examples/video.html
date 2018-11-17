@@ -5,21 +5,18 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     <meta name="viewport"
           content="user-scalable=no, maximum-scale=1.0, minimum-scale=1.0, width=device-width, initial-scale=1.0">
-    <meta name="description" content="Kihon.FullSizeVideo"/>
+    <meta name="description" content="Kihon.Video"/>
     <meta name="keywords" content="kihon"/>
     <meta name="author" content="dragmove"/>
-    <title>Kihon.FullSizeVideo</title>
+    <title>Kihon.Video</title>
     <style>
         html, body {margin: 0; padding: 0;}
-        .wrap-full-size-video {position: relative; overflow: hidden; background: #333;}
-        .full-size-video {position: absolute;}
-        .full-size-video video {position: absolute; top: 0; left: 0;}
+        .wrap-video {position: relative; background: #333; width: 640px; height: 360px;}
     </style>
 </head>
 
 <body>
-<div class="wrap-full-size-video">
-    <div class="full-size-video"></div>
+<div class="wrap-video">
 </div>
 
 <script src="https://code.jquery.com/jquery-3.0.0.min.js"
@@ -31,78 +28,77 @@
         $(document).ready(init);
 
         function init() {
-            var fullSizeVideo = new Kihon.FullSizeVideo({
-                wrap: $('.wrap-full-size-video'), // wrap
-                videoWrap: $('.full-size-video'), // video wrap
+            var video = new Kihon.Video({
+                wrap: $('.wrap-video'), // wrap
                 videoUrls: ['https://www.quirksmode.org/html5/videos/big_buck_bunny.mp4', 'https://www.quirksmode.org/html5/videos/big_buck_bunny.ogv'], // video sources
                 videoWidth: 640, // video width
                 videoHeight: 360, // video height
-                alignX: 'center', // left, center, right
-                alignY: 'center', // top, center, bottom
                 isAutoPlay: false, // auto play flag
                 isLoop: false, // loop flag
                 isMuted: true, // mute flag
                 canplayCallback: function (obj) { // {event}
-                    console.log('Kihon.FullSizeVideo canplayCallback obj :', obj);
+                    console.log('Kihon.Video canplayCallback obj :', obj);
                 },
                 timeupdateCallback: function (obj) { // {event, currentTime, duration}
-                    // console.log('Kihon.FullSizeVideo timeupdateCallback obj :', obj);
+                    // console.log('Kihon.Video timeupdateCallback obj :', obj);
                 },
                 endedCallback: function (obj) { // {event, currentTime, duration}
-                    console.log('Kihon.FullSizeVideo endedCallback obj :', obj);
+                    console.log('Kihon.Video endedCallback obj :', obj);
                 }
             }).init();
 
-            fullSizeVideo.play();
+            video.play();
 
             $('body').on('click', evt => {
-                if(fullSizeVideo.isMuted()) {
+                console.log('video.isMuted() :', video.isMuted())
+
+                if(video.isMuted()) {
                   console.log('true')
-                  fullSizeVideo.mute(false);
+                  video.mute(false);
                 } else {
                   console.log('false');
-                  fullSizeVideo.play().seek(3.5).mute(true);
+                  video.play().seek(3.5).mute(true);
                 }
             })
 
             /*
-             * FullSizeVideo public methods
+             * video public methods
              */
             // get video node
-            // console.log( fullSizeVideo.getVideoNode() );
+            // console.log( video.getVideoNode() );
 
             // get video size based on aspect fill calculation
-            // console.log( fullSizeVideo.getVideoSizeAspectFill(srcWidth, srcHeight) );
+            // console.log( video.getVideoSizeAspectFill(srcWidth, srcHeight) );
 
             // get volume (0 ~ 1)
-            // console.log( fullSizeVideo.getVolume() );
+            // console.log( video.getVolume() );
 
             // set volume
-            // console.log( fullSizeVideo.setVolume(0 ~ 1) );
+            // console.log( video.setVolume(0 ~ 1) );
 
             // get video muted
-            // console.log( fullSizeVideo.isMuted() );
+            // console.log( video.isMuted() );
 
             // play video
-            // fullSizeVideo.play();
+            // video.play();
 
             // pause video
-            // fullSizeVideo.pause();
+            // video.pause();
 
             // stop video
-            // fullSizeVideo.stop();
+            // video.stop();
 
             // seek video
-            // fullSizeVideo.seek(second);
+            // video.seek(second);
 
             // set resize event handler
-            // fullSizeVideo.setResizeEventHandler(true / false);
+            // video.setResizeEventHandler(true / false);
 
             // resize
-            // fullSizeVideo.resize();
+            // video.resize();
 
             // destroy
-            // fullSizeVideo.destroy();
+            // video.destroy();
         }
     }(jQuery));
 </script>
