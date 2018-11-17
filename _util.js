@@ -1,74 +1,80 @@
-export const truthy = (obj) => !!obj;
+export const truthy = any => !!any;
 
-export const falsy = (obj) => !!!obj;
+export const falsy = any => !!!any;
 
-export const not = (func) => {
-  return (object) => {
-    return !func(object);
+export const not = func => {
+  return any => {
+    return !func(any);
   };
 };
 
-export const existy = (obj) => (obj != null);
+export const existy = any => any != null;
 
-export const isDefined = (obj) => {
-  if (obj === null || typeof obj === 'undefined') return false;
+export const isDefined = any => {
+  if (any === null || typeof any === 'undefined') return false;
 
   return true;
 };
 
 export const isNotDef = not(isDefined);
 
-export const isBoolean = (obj) => {
-  if (isNotDef(obj)) return false;
+export const isBoolean = any => {
+  if (isNotDef(any)) return false;
 
-  return (obj.constructor === Boolean);
+  return any.constructor === Boolean;
 };
 
-export const isNumber = (obj) => {
-  if (isNotDef(obj)) return false;
+export const isNumber = any => {
+  if (isNotDef(any)) return false;
 
-  return (obj.constructor === Number);
+  return any.constructor === Number;
 };
 
-export const isString = (obj) => {
-  if (isNotDef(obj)) return false;
+export const isString = any => {
+  if (isNotDef(any)) return false;
 
-  return (obj.constructor === String);
+  return any.constructor === String;
 };
 
-export const isObject = (obj) => {
-  if (isNotDef(obj)) return false;
+export const isObject = any => {
+  if (isNotDef(any)) return false;
 
-  return (obj.constructor === Object);
+  return any.constructor === Object;
 };
 
-export const isFunction = (obj) => {
-  if (isNotDef(obj)) return false;
+export const isFunction = any => {
+  if (isNotDef(any)) return false;
 
-  return (obj.constructor === Function);
+  return any.constructor === Function;
 };
 
-export const isVideoElement = (ele) => {
+export const isPromise = any => {
+  if (isNotDef(any)) return false;
+
+  return any.constructor === Promise;
+};
+
+export const isVideoElement = ele => {
   if (isNotDef(ele)) return false;
 
-  return (ele.constructor === HTMLVideoElement);
+  return ele.constructor === HTMLVideoElement;
 };
 
-export const allOf = function (/*args*/) {
+export const allOf = function(/*args*/) {
   const args = Array.prototype.slice.call(arguments);
 
-  return args.every((val) => (val === true));
+  return args.every(val => val === true);
 };
 
 export const anyOf = (/*args*/) => {
   const args = Array.prototype.slice.call(arguments);
 
-  return args.some(function (val) {
-    return (val === true);
+  return args.some(function(val) {
+    return val === true;
   });
 };
 
-export const singleEle = ($ele) => ($ele.length === 1);
+export const singleEle = $ele => $ele && $ele.length === 1;
 
 export const notSingleEle = not(singleEle);
 
@@ -77,38 +83,44 @@ export const each = (dataCanLoop, func, context) => {
     throw new TypeError('dataCanLoop parameter type of each() should be Array or String.');
   }
 
-  const _context = (existy(context)) ? context : null;
+  const _context = existy(context) ? context : null;
 
   for (let i = 0, max = dataCanLoop.length; i < max; i++) {
     func.call(_context, dataCanLoop[i]);
   }
 };
 
-export const curry2 = (func) => {
+export const curry2 = func => {
   if (!isFunction(func)) throw new TypeError('func parameter type of curry2() should be Function.');
 
-  return (secondArg) => (firstArg) => func(firstArg, secondArg);
+  return secondArg => firstArg => func(firstArg, secondArg);
 };
 
-export const gt = curry2(function (lhs, rhs) {
+export const gt = curry2(function(lhs, rhs) {
   if (!allOf(isNumber(lhs), isNumber(rhs))) throw new TypeError('gt requires Number parameters.');
 
   return lhs > rhs;
 });
 
-export const lt = curry2(function (lhs, rhs) {
+export const gte = curry2(function(lhs, rhs) {
+  if (!allOf(isNumber(lhs), isNumber(rhs))) throw new TypeError('gte requires Number parameters.');
+
+  return lhs >= rhs;
+});
+
+export const lt = curry2(function(lhs, rhs) {
   if (!allOf(isNumber(lhs), isNumber(rhs))) throw new TypeError('lt requires Number parameters.');
 
   return lhs < rhs;
 });
 
-export const lte = curry2(function (lhs, rhs) {
+export const lte = curry2(function(lhs, rhs) {
   if (!allOf(isNumber(lhs), isNumber(rhs))) throw new TypeError('lte requires Number parameters.');
 
   return lhs <= rhs;
 });
 
-export const eq = curry2(function (lhs, rhs) {
+export const eq = curry2(function(lhs, rhs) {
   return lhs === rhs;
 });
 
@@ -125,7 +137,7 @@ export const getSizeAspectFill = (srcWidth, srcHeight, fillWidth, fillHeight) =>
     modifiedSizeH = fillHeight;
   }
 
-  return {width: modifiedSizeW, height: modifiedSizeH};
+  return { width: modifiedSizeW, height: modifiedSizeH };
 };
 
 export const getUriCombinedParams = (uri = '', params = {}) => {
@@ -142,8 +154,8 @@ export const getUriCombinedParams = (uri = '', params = {}) => {
   const uris = uri.split('#');
   uri = uris[0];
 
-  const hashStr = (isDefined(uris[1])) ? '#' + uris[1] : '';
-  uri = ((uri.indexOf('?') >= 0) ? (uri + str) : (uri + '?' + str.substr(1))) + hashStr;
+  const hashStr = isDefined(uris[1]) ? '#' + uris[1] : '';
+  uri = (uri.indexOf('?') >= 0 ? uri + str : uri + '?' + str.substr(1)) + hashStr;
 
   return uri;
 };

@@ -55,37 +55,13 @@
 
             fullSizeVideo.play();
 
-            /*
-            window.setTimeout(function() {
-                fullSizeVideo.stop();
-                
-                fullSizeVideo.play();
-                fullSizeVideo.pause();
-
-                // TODO: 아직 reject play observable. pause. : DOMException: The play() request was interrupted by a call to pause(). https://goo.gl/LdLk22 
-                // Error 가 발생하고 있다. 'ㅅ') 재설계가 필요.
-
-                fullSizeVideo.seek(90);
-                // fullSizeVideo.play();
-            }, 3000);
-            */
-
-            // TODO: seek
-
-            /*
-            setTimeout(function () {
-                fullSizeVideo.play().setVolume(0.5);
-            }, 2000);
-
-            setTimeout(function () {
-                fullSizeVideo.pause();
-                fullSizeVideo.mute(false);
-            }, 5000);
-
-            setTimeout(function () {
-                fullSizeVideo.seek(30).play();
-            }, 8000);
-            */
+            $('body').on('click', evt => {
+                if(fullSizeVideo.isMuted()) {
+                    fullSizeVideo.mute(true);
+                } else {
+                    fullSizeVideo.play().seek(3.5).mute(false);
+                }
+            })
 
             /*
              * FullSizeVideo public methods
@@ -101,6 +77,9 @@
 
             // set volume
             // console.log( fullSizeVideo.setVolume(0 ~ 1) );
+
+            // get video muted
+            // console.log( fullSizeVideo.isMuted() );
 
             // play video
             // fullSizeVideo.play();
