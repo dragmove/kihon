@@ -28,6 +28,7 @@ npm install kihon --save-dev
 [Overlay](https://dragmove.github.io/pages/kihon/examples/overlay.html)  
 [Modal](https://dragmove.github.io/pages/kihon/examples/modal.html)  
 [YoutubeModal](https://dragmove.github.io/pages/kihon/examples/youtube-modal.html)  
+[Video](https://dragmove.github.io/pages/kihon/examples/video.html)  
   
 
 ## Getting Started
@@ -91,23 +92,23 @@ var fullSizeBg = new FullSizeBg({
 ### FullSizeVideo
 ```html
 <div class="wrap-full-size-video"> <!-- can rename class you want -->
-    <div class="full-size-video"></div> <!-- can rename class you want -->
+    <div class="wrap-video"></div> <!-- can rename class you want -->
 </div>
 ```  
 
 ```css
 html, body {margin: 0; padding: 0;}
 .wrap-full-size-video {position: relative; overflow: hidden; background: #333;}
-.full-size-video {position: absolute;}
-.full-size-video video {position: absolute; top: 0; left: 0;}
+.wrap-video {position: absolute;}
+.wrap-video video {position: absolute; top: 0; left: 0;}
 ```
 
 ```js
 import FullSizeVideo from 'kihon/FullSizeVideo';
 
 var fullSizeVideo = new FullSizeVideo({
-    wrap: $('.wrap-full-size-video'), // wrap
-    videoWrap: $('.full-size-video'), // video wrap
+    outerWrap: $('.wrap-full-size-video'), // outer wrap
+    wrap: $('.wrap-video'), // video wrap
     videoUrls: ['https://www.quirksmode.org/html5/videos/big_buck_bunny.mp4', 'https://www.quirksmode.org/html5/videos/big_buck_bunny.ogv'], // video sources
     videoWidth: 640, // video width
     videoHeight: 360, // video height
@@ -136,7 +137,7 @@ setTimeout(function () {
 }, 5000);
 
 setTimeout(function () {
-    fullSizeVideo.seek(30).play().setVolume(1.0);
+    fullSizeVideo.seek(5).play().setVolume(1.0);
 }, 8000);
 
 /*
@@ -700,6 +701,83 @@ youtubeModal.show();
 // destroy
 // youtubeModal.destroy();
 // youtubeModal.destroy({isRemoveNode: true, isRemoveOverlay: true});
+```  
+
+
+### Video
+```html
+<div class="wrap-video"> <!-- can rename class you want -->
+</div>
+```  
+
+```css
+html, body {margin: 0; padding: 0;}
+.wrap-video {position: relative; background: #333; width: 640px; height: 360px;}
+```
+
+```js
+import FullSizeVideo from 'kihon/Video';
+
+var video = new Kihon.Video({
+    wrap: $('.wrap-video'), // wrap
+    videoUrls: ['https://www.quirksmode.org/html5/videos/big_buck_bunny.mp4', 'https://www.quirksmode.org/html5/videos/big_buck_bunny.ogv'], // video sources
+    videoWidth: 640, // video width
+    videoHeight: 360, // video height
+    isAutoPlay: false, // auto play flag
+    isLoop: false, // loop flag
+    isMuted: true, // mute flag
+    canplayCallback: function (obj) { // {event}
+        console.log('Kihon.Video canplayCallback obj :', obj);
+    },
+    timeupdateCallback: function (obj) { // {event, currentTime, duration}
+        // console.log('Kihon.Video timeupdateCallback obj :', obj);
+    },
+    endedCallback: function (obj) { // {event, currentTime, duration}
+        console.log('Kihon.Video endedCallback obj :', obj);
+    }
+}).init();
+
+setTimeout(function () {
+    video.play().setVolume(0.5);
+}, 2000);
+
+setTimeout(function () {
+    video.pause();
+}, 5000);
+
+setTimeout(function () {
+    video.seek(5).play().setVolume(1.0);
+}, 8000);
+
+/*
+ * video public methods
+ */
+// get video node
+// console.log( video.getVideoNode() );
+
+// get volume (0 ~ 1)
+// console.log( video.getVolume() );
+
+// set volume
+// console.log( video.setVolume(0 ~ 1) );
+
+// get video muted
+// console.log( video.isMuted() );
+
+// play video
+// video.play();
+
+// pause video
+// video.pause();
+
+// stop video
+// video.stop();
+
+// seek video
+// video.seek(second);
+
+// destroy
+// video.destroy();
 ```  
 
 

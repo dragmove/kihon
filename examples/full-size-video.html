@@ -12,14 +12,14 @@
     <style>
         html, body {margin: 0; padding: 0;}
         .wrap-full-size-video {position: relative; overflow: hidden; background: #333;}
-        .full-size-video {position: absolute;}
-        .full-size-video video {position: absolute; top: 0; left: 0;}
+        .wrap-video {position: absolute;}
+        .wrap-video video {position: absolute; top: 0; left: 0;}
     </style>
 </head>
 
 <body>
 <div class="wrap-full-size-video">
-    <div class="full-size-video"></div>
+    <div class="wrap-video"></div>
 </div>
 
 <script src="https://code.jquery.com/jquery-3.0.0.min.js"
@@ -32,8 +32,8 @@
 
         function init() {
             var fullSizeVideo = new Kihon.FullSizeVideo({
-                wrap: $('.wrap-full-size-video'), // wrap
-                videoWrap: $('.full-size-video'), // video wrap
+                outerWrap: $('.wrap-full-size-video'), // outer wrap
+                wrap: $('.wrap-video'), // video wrap
                 videoUrls: ['https://www.quirksmode.org/html5/videos/big_buck_bunny.mp4', 'https://www.quirksmode.org/html5/videos/big_buck_bunny.ogv'], // video sources
                 videoWidth: 640, // video width
                 videoHeight: 360, // video height
@@ -53,17 +53,17 @@
                 }
             }).init();
 
-            fullSizeVideo.play();
+            setTimeout(function () {
+                fullSizeVideo.play().setVolume(0.5);
+            }, 2000);
 
-            $('body').on('click', evt => {
-                if(fullSizeVideo.isMuted()) {
-                  console.log('true')
-                  fullSizeVideo.mute(false);
-                } else {
-                  console.log('false');
-                  fullSizeVideo.play().seek(3.5).mute(true);
-                }
-            })
+            setTimeout(function () {
+                fullSizeVideo.pause();
+            }, 5000);
+
+            setTimeout(function () {
+                fullSizeVideo.seek(5).play().setVolume(1.0);
+            }, 8000);
 
             /*
              * FullSizeVideo public methods

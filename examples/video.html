@@ -47,28 +47,23 @@
                 }
             }).init();
 
-            video.play();
+            setTimeout(function () {
+                video.play().setVolume(0.5);
+            }, 2000);
 
-            $('body').on('click', evt => {
-                console.log('video.isMuted() :', video.isMuted())
+            setTimeout(function () {
+                video.pause();
+            }, 5000);
 
-                if(video.isMuted()) {
-                  console.log('true')
-                  video.mute(false);
-                } else {
-                  console.log('false');
-                  video.play().seek(3.5).mute(true);
-                }
-            })
+            setTimeout(function () {
+                video.seek(5).play().setVolume(1.0);
+            }, 8000);
 
             /*
              * video public methods
              */
             // get video node
             // console.log( video.getVideoNode() );
-
-            // get video size based on aspect fill calculation
-            // console.log( video.getVideoSizeAspectFill(srcWidth, srcHeight) );
 
             // get volume (0 ~ 1)
             // console.log( video.getVolume() );
@@ -90,12 +85,6 @@
 
             // seek video
             // video.seek(second);
-
-            // set resize event handler
-            // video.setResizeEventHandler(true / false);
-
-            // resize
-            // video.resize();
 
             // destroy
             // video.destroy();

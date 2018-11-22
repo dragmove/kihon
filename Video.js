@@ -74,7 +74,7 @@ class Video {
   /*
    * public methods
    */
-  init() {
+  init(obj = null) {
     const _ = this;
 
     if (_._initialized) return _;
@@ -195,7 +195,7 @@ class Video {
     return _;
   }
 
-  destroy() {
+  destroy(obj = null) {
     const _ = this;
 
     _._initialized = false;
