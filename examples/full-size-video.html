@@ -1,110 +1,133 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
-    <meta name="viewport"
-          content="user-scalable=no, maximum-scale=1.0, minimum-scale=1.0, width=device-width, initial-scale=1.0">
-    <meta name="description" content="Kihon.FullSizeVideo"/>
-    <meta name="keywords" content="kihon"/>
-    <meta name="author" content="dragmove"/>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta
+      name="viewport"
+      content="user-scalable=no, maximum-scale=1.0, minimum-scale=1.0, width=device-width, initial-scale=1.0"
+    />
+    <meta name="description" content="Kihon.FullSizeVideo" />
+    <meta name="keywords" content="kihon" />
+    <meta name="author" content="dragmove" />
     <title>Kihon.FullSizeVideo</title>
+    <link rel="stylesheet" href="./styles/example.css" />
     <style>
-        html, body {margin: 0; padding: 0;}
-        .wrap-full-size-video {position: relative; overflow: hidden; background: #333;}
-        .wrap-video {position: absolute;}
-        .wrap-video video {position: absolute; top: 0; left: 0;}
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+      }
+      .wrap-full-size-video {
+        position: relative;
+        overflow: hidden;
+        background: #333;
+      }
+      .wrap-video {
+        position: absolute;
+      }
+      .wrap-video video {
+        position: absolute;
+        top: 0;
+        left: 0;
+      }
     </style>
-</head>
+  </head>
 
-<body>
-<div class="wrap-full-size-video">
-    <div class="wrap-video"></div>
-</div>
+  <body>
+    <div class="wrap-full-size-video"><div class="wrap-video"></div></div>
 
-<script src="https://code.jquery.com/jquery-3.0.0.min.js"
-        integrity="sha256-JmvOoLtYsmqlsWxa7mDSLMwa6dZ9rrIdtrrVYRnDRH0="
-        crossorigin="anonymous"></script>
-<script src="kihon.min.js"></script>
-<script>
-    (function ($) {
+    <script
+      src="https://code.jquery.com/jquery-3.0.0.min.js"
+      integrity="sha256-JmvOoLtYsmqlsWxa7mDSLMwa6dZ9rrIdtrrVYRnDRH0="
+      crossorigin="anonymous"
+    ></script>
+    <script src="kihon.min.js"></script>
+    <script>
+      (function($) {
         $(document).ready(init);
 
         function init() {
-            var fullSizeVideo = new Kihon.FullSizeVideo({
-                outerWrap: $('.wrap-full-size-video'), // outer wrap
-                wrap: $('.wrap-video'), // video wrap
-                videoUrls: ['https://www.quirksmode.org/html5/videos/big_buck_bunny.mp4', 'https://www.quirksmode.org/html5/videos/big_buck_bunny.ogv'], // video sources
-                videoWidth: 640, // video width
-                videoHeight: 360, // video height
-                alignX: 'center', // left, center, right
-                alignY: 'center', // top, center, bottom
-                isAutoPlay: false, // auto play flag
-                isLoop: false, // loop flag
-                isMuted: true, // mute flag
-                canplayCallback: function (obj) { // {event}
-                    console.log('Kihon.FullSizeVideo canplayCallback obj :', obj);
-                },
-                timeupdateCallback: function (obj) { // {event, currentTime, duration}
-                    // console.log('Kihon.FullSizeVideo timeupdateCallback obj :', obj);
-                },
-                endedCallback: function (obj) { // {event, currentTime, duration}
-                    console.log('Kihon.FullSizeVideo endedCallback obj :', obj);
-                }
-            }).init();
+          var fullSizeVideo = new Kihon.FullSizeVideo({
+            outerWrap: $('.wrap-full-size-video'), // outer wrap
+            wrap: $('.wrap-video'), // video wrap
+            videoUrls: [
+              'https://www.quirksmode.org/html5/videos/big_buck_bunny.mp4',
+              'https://www.quirksmode.org/html5/videos/big_buck_bunny.ogv'
+            ], // video sources
+            videoWidth: 640, // video width
+            videoHeight: 360, // video height
+            alignX: 'center', // left, center, right
+            alignY: 'center', // top, center, bottom
+            isAutoPlay: false, // auto play flag
+            isLoop: false, // loop flag
+            isMuted: true, // mute flag
+            canplayCallback: function(obj) {
+              // {event}
+              console.log('Kihon.FullSizeVideo canplayCallback obj :', obj);
+            },
+            timeupdateCallback: function(obj) {
+              // {event, currentTime, duration}
+              // console.log('Kihon.FullSizeVideo timeupdateCallback obj :', obj);
+            },
+            endedCallback: function(obj) {
+              // {event, currentTime, duration}
+              console.log('Kihon.FullSizeVideo endedCallback obj :', obj);
+            }
+          }).init();
 
-            setTimeout(function () {
-                fullSizeVideo.play().setVolume(0.5);
-            }, 2000);
+          setTimeout(function() {
+            fullSizeVideo.play();
+          }, 2000);
 
-            setTimeout(function () {
-                fullSizeVideo.pause();
-            }, 5000);
+          setTimeout(function() {
+            fullSizeVideo.pause();
+          }, 5000);
 
-            setTimeout(function () {
-                fullSizeVideo.seek(5).play().setVolume(1.0);
-            }, 8000);
+          setTimeout(function() {
+            fullSizeVideo.seek(5).play();
+          }, 8000);
 
-            /*
-             * FullSizeVideo public methods
-             */
-            // get video node
-            // console.log( fullSizeVideo.getVideoNode() );
+          /*
+           * FullSizeVideo public methods
+           */
+          // get video node
+          // console.log( fullSizeVideo.getVideoNode() );
 
-            // get video size based on aspect fill calculation
-            // console.log( fullSizeVideo.getVideoSizeAspectFill(srcWidth, srcHeight) );
+          // get video size based on aspect fill calculation
+          // console.log( fullSizeVideo.getVideoSizeAspectFill(srcWidth, srcHeight) );
 
-            // get volume (0 ~ 1)
-            // console.log( fullSizeVideo.getVolume() );
+          // get volume (0 ~ 1)
+          // console.log( fullSizeVideo.getVolume() );
 
-            // set volume
-            // console.log( fullSizeVideo.setVolume(0 ~ 1) );
+          // set volume
+          // console.log( fullSizeVideo.setVolume(0 ~ 1) );
 
-            // get video muted
-            // console.log( fullSizeVideo.isMuted() );
+          // get video muted
+          // console.log( fullSizeVideo.isMuted() );
 
-            // play video
-            // fullSizeVideo.play();
+          // play video
+          // fullSizeVideo.play();
 
-            // pause video
-            // fullSizeVideo.pause();
+          // pause video
+          // fullSizeVideo.pause();
 
-            // stop video
-            // fullSizeVideo.stop();
+          // stop video
+          // fullSizeVideo.stop();
 
-            // seek video
-            // fullSizeVideo.seek(second);
+          // seek video
+          // fullSizeVideo.seek(second);
 
-            // set resize event handler
-            // fullSizeVideo.setResizeEventHandler(true / false);
+          // set resize event handler
+          // fullSizeVideo.setResizeEventHandler(true / false);
 
-            // resize
-            // fullSizeVideo.resize();
+          // resize
+          // fullSizeVideo.resize();
 
-            // destroy
-            // fullSizeVideo.destroy();
+          // destroy
+          // fullSizeVideo.destroy();
         }
-    }(jQuery));
-</script>
-</body>
+      })(jQuery);
+    </script>
+  </body>
 </html>

@@ -1,17 +1,20 @@
 import $ from 'jquery';
-import {not, isBoolean, isFunction} from './_util';
+import { not, isBoolean, isFunction } from './_util';
 
 class Overlay {
   constructor(options) {
     const _ = this;
 
-    _._option = $.extend({
-      class: 'overlay',
-      color: '#000',
-      opacity: 0.5,
-      appendTo: $('body'),
-      clickCallback: null
-    }, options);
+    _._option = $.extend(
+      {
+        class: 'overlay',
+        color: '#000',
+        opacity: 0.5,
+        appendTo: $('body'),
+        clickCallback: null
+      },
+      options
+    );
 
     _._initialized = false;
 
@@ -50,7 +53,7 @@ class Overlay {
 
     _._$parentNode.append(_._$node);
 
-    _._proxy.clickOverlayEventHandler = (isFunction(_._option.clickCallback)) ? _._option.clickCallback.bind(_) : null;
+    _._proxy.clickOverlayEventHandler = isFunction(_._option.clickCallback) ? _._option.clickCallback.bind(_) : null;
 
     _.hide();
 
@@ -114,11 +117,15 @@ class Overlay {
   destroy(obj = null) {
     const _ = this;
 
-    obj = $.extend({
-      isRemoveNode: true
-    }, obj);
+    obj = $.extend(
+      {
+        isRemoveNode: true
+      },
+      obj
+    );
 
-    if (not(isBoolean)(obj.isRemoveNode)) throw new TypeError('Overlay: destroy isRemoveNode variable type of option should be boolean.');
+    if (not(isBoolean)(obj.isRemoveNode))
+      throw new TypeError('Overlay: destroy isRemoveNode variable type of option should be boolean.');
 
     _._initialized = false;
 

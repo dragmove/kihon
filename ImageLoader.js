@@ -1,4 +1,4 @@
-import {not, isNotDef, isFunction} from './_util';
+import { not, isNotDef, isFunction } from './_util';
 
 class ImageLoader {
   constructor(options) {
@@ -138,17 +138,18 @@ class ImageLoader {
       _._isLoading = false;
       _._isFinish = true;
 
-      if (_._loadCompleteCallback) _._loadCompleteCallback.call(_, {
-        imgs: _._loadedImgs,
-        percentage: _._percentageLoaded
-      });
+      if (_._loadCompleteCallback)
+        _._loadCompleteCallback.call(_, {
+          imgs: _._loadedImgs,
+          percentage: _._percentageLoaded
+        });
 
       return;
     }
 
     let img = document.createElement('img');
 
-    img.onload = function (evt) {
+    img.onload = function(evt) {
       const img = this;
       if (img) _._loadedImgs.push(img);
 
@@ -168,7 +169,7 @@ class ImageLoader {
       _._loadNext();
     };
 
-    img.onerror = function (evt) {
+    img.onerror = function(evt) {
       const img = this;
       _._loadedImgs.push(null);
 

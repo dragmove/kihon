@@ -98,7 +98,6 @@ class FullSizeVideo extends Video {
   /*
    * private methods
    */
-
   _subscribePlayPromise(promise) {
     const _ = this;
 

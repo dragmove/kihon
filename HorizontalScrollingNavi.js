@@ -1,38 +1,41 @@
 import $ from 'jquery';
 import Navi from './Navi';
-import {falsy, not, isDefined, isNotDef, isBoolean, notSingleEle} from './_util';
+import { falsy, not, isDefined, isNotDef, isBoolean, notSingleEle } from './_util';
 
 class HorizontalScrollingNavi extends Navi {
   constructor(options) {
     if (isNotDef(options)) throw new Error('HorizontalScrollingNavi: require options object when create instance.');
 
-    let opt = $.extend({
-      /*
-       // Navi.js options
-       btns,
-       mouseoverCallback,
-       mouseoutCallback,
-       mousedownCallback,
-       mouseupCallback,
-       clickCallback,
-       activateCallback,
-       */
+    let opt = $.extend(
+      {
+        /*
+        // Navi.js options
+        btns,
+        mouseoverCallback,
+        mouseoutCallback,
+        mousedownCallback,
+        mouseupCallback,
+        clickCallback,
+        activateCallback,
+        */
 
-      /*
-       * HorizontalScrollingNavi.js options
-       */
-      // require Dragdealer library - https://github.com/skidding/dragdealer
-      Dragdealer: require('dragdealer'),
-      wrap: null,
-      handleClass: 'handle',
-      speed: 0.25,
-      positionedCallback: null, // function(x, y)
-      dragStartCallback: null, // function(x, y)
-      dragStopCallback: null, // function(x, y)
-      animationCallback: null, // function(x, y)
+        /*
+         * HorizontalScrollingNavi.js options
+         */
+        // require Dragdealer library - https://github.com/skidding/dragdealer
+        Dragdealer: require('dragdealer'),
+        wrap: null,
+        handleClass: 'handle',
+        speed: 0.25,
+        positionedCallback: null, // function(x, y)
+        dragStartCallback: null, // function(x, y)
+        dragStopCallback: null, // function(x, y)
+        animationCallback: null, // function(x, y)
 
-      global: window
-    }, options);
+        global: window
+      },
+      options
+    );
 
     super(opt);
 
@@ -51,7 +54,8 @@ class HorizontalScrollingNavi extends Navi {
       animationCallback: null
     });
 
-    if (notSingleEle($(_._option.wrap))) throw new Error('HorizontalScrollingNavi: require options object has a single wrap.');
+    if (notSingleEle($(_._option.wrap)))
+      throw new Error('HorizontalScrollingNavi: require options object has a single wrap.');
   }
 
   /*
@@ -185,7 +189,8 @@ class HorizontalScrollingNavi extends Navi {
   }
 
   setResizeEventHandler(flag) {
-    if (not(isBoolean)(flag)) throw new TypeError('HorizontalScrollingNavi: setResizeEventHandler require boolean parameter.');
+    if (not(isBoolean)(flag))
+      throw new TypeError('HorizontalScrollingNavi: setResizeEventHandler require boolean parameter.');
 
     const _ = this,
       evtName = `resize.kihon.horizontalscrollingnavi.${_._uniqueId}`;
@@ -203,7 +208,6 @@ class HorizontalScrollingNavi extends Navi {
     if (isDefined(_._dragDealer)) {
       if ($(_.getHandle()).outerWidth() > $(_._option.wrap).width()) {
         _.enable();
-
       } else {
         if (falsy(_._dragDealer.disabled)) _.disable();
 

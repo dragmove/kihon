@@ -1,11 +1,12 @@
 {
   "name": "kihon",
-  "version": "0.0.25",
+  "version": "0.1.0",
   "description": "A Bundle of Lite components which provides straightforward Interactive UI",
   "keywords": [
     "kihon",
     "component",
     "ui",
+    "emitter",
     "fullsize",
     "background",
     "video",
@@ -31,7 +32,7 @@
   "author": {
     "name": "Hyun-Seok.Kim",
     "email": "dragmove@gmail.com",
-    "url": "http://dragmove.com"
+    "url": "http://dragmove.xyz"
   },
   "license": "MIT",
   "repository": {
@@ -48,6 +49,7 @@
     "gulp": "^3.9.1",
     "gulp-eslint": "^4.0.1",
     "rxjs": "^6.3.3",
+    "rxjs-compat": "^6.3.3",
     "webpack": "^3.10.0",
     "webpack-dev-server": "^2.10.0"
   },

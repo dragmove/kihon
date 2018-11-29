@@ -19,6 +19,7 @@ npm install kihon --save-dev
 
 
 ## Components
+[Emitter](https://dragmove.github.io/pages/kihon/examples/emitter.html) (dependency to [RxJS](https://github.com/reactivex/rxjs))  
 [FullSizeBg](https://dragmove.github.io/pages/kihon/examples/full-size-bg.html)  
 [FullSizeVideo](https://dragmove.github.io/pages/kihon/examples/full-size-video.html)  
 [HorizontalScrollingNavi](https://dragmove.github.io/pages/kihon/examples/horizontal-scrolling-navi.html) (dependency to [Dragdealer.js](https://github.com/skidding/dragdealer))  
@@ -45,6 +46,45 @@ import FullSizeBg from 'kihon/FullSizeBg' // Import single component. You can us
   
 
 ## Examples
+### Emitter 
+```js
+import Emitter from 'kihon/Emitter';
+
+var emitter = new Emitter();
+
+var subscribeHello = emitter.listen('hello', function(data) {
+    console.log('hello :', data);
+});
+
+var subscribeWorld_1 = emitter.listen('world', function(data) {
+        console.log('world_1 :', data);
+    }),
+    subscribeWorld_2 = emitter.listen('world', function(data) {
+        console.log('world_2 :', data);
+    });
+
+// Unsubscribe subscriptions.
+// subscribeHello.unsubscribe();
+// subscribeWorld_1.unsubscribe();
+// subscribeWorld_2.unsubscribe();
+
+emitter.emit('hello', { value: 1 });
+emitter.emit('world', { value: 99 });
+
+/*
+ * Emitter public methods
+ */
+// set event, event handler
+// emitter.listen(event name, event handler);
+
+// emii event
+// emitter.emit(event name, data)
+
+// dispose of all subscriptions
+// emitter.dispose();
+```  
+
+
 ### FullSizeBg 
 ```html
 <div class="wrap-full-size-bg"> <!-- can rename class you want -->
@@ -129,7 +169,7 @@ var fullSizeVideo = new FullSizeVideo({
 }).init();
 
 setTimeout(function () {
-    fullSizeVideo.play().setVolume(0.5);
+    fullSizeVideo.play();
 }, 2000);
 
 setTimeout(function () {
@@ -137,7 +177,7 @@ setTimeout(function () {
 }, 5000);
 
 setTimeout(function () {
-    fullSizeVideo.seek(5).play().setVolume(1.0);
+    fullSizeVideo.seek(5).play();
 }, 8000);
 
 /*
@@ -716,9 +756,9 @@ html, body {margin: 0; padding: 0;}
 ```
 
 ```js
-import FullSizeVideo from 'kihon/Video';
+import Video from 'kihon/Video';
 
-var video = new Kihon.Video({
+var video = new Video({
     wrap: $('.wrap-video'), // wrap
     videoUrls: ['https://www.quirksmode.org/html5/videos/big_buck_bunny.mp4', 'https://www.quirksmode.org/html5/videos/big_buck_bunny.ogv'], // video sources
     videoWidth: 640, // video width
@@ -738,7 +778,7 @@ var video = new Kihon.Video({
 }).init();
 
 setTimeout(function () {
-    video.play().setVolume(0.5);
+    video.play();
 }, 2000);
 
 setTimeout(function () {
@@ -746,7 +786,7 @@ setTimeout(function () {
 }, 5000);
 
 setTimeout(function () {
-    video.seek(5).play().setVolume(1.0);
+    video.seek(5).play();
 }, 8000);
 
 /*
@@ -782,7 +822,7 @@ setTimeout(function () {
 
 
 ## Contact
-* @Website : http://www.dragmove.com
+* @Website : http://www.dragmove.xyz
 * @Blog : http://blog.naver.com/dragmove
 * @LinkedIn : https://www.linkedin.com/in/hyun-seok-kim-99748295/
 * @E-mail : dragmove@gmail.com

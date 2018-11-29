@@ -1,21 +1,24 @@
 import $ from 'jquery';
-import {truthy, falsy, not, isDefined, isNotDef, isBoolean, isFunction} from './_util';
+import { truthy, falsy, not, isDefined, isNotDef, isBoolean, isFunction } from './_util';
 
 class Modal {
   constructor(options) {
     const _ = this;
 
-    _._option = $.extend({
-      wrapClass: 'modal-wrap',
-      contents: '',
-      appendTo: $('body'),
-      closeBtnSelector: '.btn-close',
-      isCloseByClickOutside: true,
-      isCloseByEscKey: true,
-      showCallback: null,
-      hideCallback: null,
-      overlay: null
-    }, options);
+    _._option = $.extend(
+      {
+        wrapClass: 'modal-wrap',
+        contents: '',
+        appendTo: $('body'),
+        closeBtnSelector: '.btn-close',
+        isCloseByClickOutside: true,
+        isCloseByEscKey: true,
+        showCallback: null,
+        hideCallback: null,
+        overlay: null
+      },
+      options
+    );
 
     _._initialized = false;
 
@@ -168,13 +171,18 @@ class Modal {
 
     const _ = this;
 
-    obj = $.extend({
-      isRemoveNode: true,
-      isRemoveOverlay: true
-    }, obj);
+    obj = $.extend(
+      {
+        isRemoveNode: true,
+        isRemoveOverlay: true
+      },
+      obj
+    );
 
-    if (not(isBoolean)(obj.isRemoveNode)) throw new TypeError('Modal: destroy isRemoveNode variable type of option should be boolean.');
-    if (not(isBoolean)(obj.isRemoveOverlay)) throw new TypeError('Modal: destroy isRemoveOverlay variable type of option should be boolean.');
+    if (not(isBoolean)(obj.isRemoveNode))
+      throw new TypeError('Modal: destroy isRemoveNode variable type of option should be boolean.');
+    if (not(isBoolean)(obj.isRemoveOverlay))
+      throw new TypeError('Modal: destroy isRemoveOverlay variable type of option should be boolean.');
 
     _._initialized = false;
 
@@ -195,7 +203,7 @@ class Modal {
     _._$closeBtn = null;
 
     if (isDefined(_._overlay)) {
-      _._overlay.destroy({isRemoveNode: obj.isRemoveOverlay});
+      _._overlay.destroy({ isRemoveNode: obj.isRemoveOverlay });
       _._overlay = null;
     }
 
@@ -213,7 +221,7 @@ class Modal {
     evt.preventDefault();
 
     switch (evt.type) {
-      case 'click' :
+      case 'click':
         this.hide();
 
         break;
@@ -224,7 +232,7 @@ class Modal {
     const _ = this;
 
     switch (evt.type) {
-      case 'click' :
+      case 'click':
         if (falsy(_._option.isCloseByClickOutside)) return;
 
         if (evt.target === _._$contents.get(0) || $.contains(_._$contents.get(0), evt.target)) return;
@@ -237,7 +245,7 @@ class Modal {
 
   _escKeyEventHandler(evt) {
     switch (evt.type) {
-      case 'keydown' :
+      case 'keydown':
         if (evt.keyCode === 27) this.hide();
 
         break;

@@ -1,25 +1,25 @@
+import Emitter from './Emitter';
 import FullSizeBg from './FullSizeBg';
 import FullSizeVideo from './FullSizeVideo';
 import HorizontalScrollingNavi from './HorizontalScrollingNavi';
 import ImageLoader from './ImageLoader';
+import Modal from './Modal';
 import Navi from './Navi';
 import NaviHasTimer from './NaviHasTimer';
 import Overlay from './Overlay';
-import Modal from './Modal';
-import YoutubeModal from './YoutubeModal';
-import DropDown from './DropDown';
 import Video from './Video';
+import YoutubeModal from './YoutubeModal';
 
 export default {
-  FullSizeBg: FullSizeBg,
-  FullSizeVideo: FullSizeVideo,
-  HorizontalScrollingNavi: HorizontalScrollingNavi,
-  ImageLoader: ImageLoader,
-  Navi: Navi,
-  NaviHasTimer: NaviHasTimer,
-  Overlay: Overlay,
-  Modal: Modal,
-  YoutubeModal: YoutubeModal,
-  DropDown: DropDown,
-  Video: Video
+  Emitter,
+  FullSizeBg,
+  FullSizeVideo,
+  HorizontalScrollingNavi,
+  ImageLoader,
+  Modal,
+  Navi,
+  NaviHasTimer,
+  Overlay,
+  Video,
+  YoutubeModal
 };

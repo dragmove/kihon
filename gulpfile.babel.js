@@ -20,16 +20,16 @@ function banner() {
 }
 
 // tasks
-gulp.task('webpack-dev-server', function () {
+gulp.task('webpack-dev-server', function() {
   const compiler = webpack(devConfig);
 
   var server = new WebpackDevServer(compiler, devConfig.devServer);
-  server.listen(devConfig.devServer.port, 'localhost', (err) => {
+  server.listen(devConfig.devServer.port, 'localhost', err => {
     if (err) console.error('[webpack-dev-server failed to start :', err);
   });
 });
 
-gulp.task('build:dev', function (callback) {
+gulp.task('build:dev', function(callback) {
   const compiler = webpack(devConfig);
 
   compiler.run((error, stats) => {
@@ -38,7 +38,7 @@ gulp.task('build:dev', function (callback) {
   });
 });
 
-gulp.task('build', function (callback) {
+gulp.task('build', function(callback) {
   const compiler = webpack(prodConfig);
 
   compiler.run((error, stats) => {

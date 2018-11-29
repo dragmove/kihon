@@ -1,95 +1,114 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
-    <meta name="viewport"
-          content="user-scalable=no, maximum-scale=1.0, minimum-scale=1.0, width=device-width, initial-scale=1.0">
-    <meta name="description" content="Kihon.Video"/>
-    <meta name="keywords" content="kihon"/>
-    <meta name="author" content="dragmove"/>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta
+      name="viewport"
+      content="user-scalable=no, maximum-scale=1.0, minimum-scale=1.0, width=device-width, initial-scale=1.0"
+    />
+    <meta name="description" content="Kihon.Video" />
+    <meta name="keywords" content="kihon" />
+    <meta name="author" content="dragmove" />
     <title>Kihon.Video</title>
+    <link rel="stylesheet" href="./styles/example.css" />
     <style>
-        html, body {margin: 0; padding: 0;}
-        .wrap-video {position: relative; background: #333; width: 640px; height: 360px;}
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+      }
+      .wrap-video {
+        position: relative;
+        background: #333;
+        width: 640px;
+        height: 360px;
+      }
     </style>
-</head>
+  </head>
 
-<body>
-<div class="wrap-video">
-</div>
+  <body>
+    <div class="wrap-video"></div>
 
-<script src="https://code.jquery.com/jquery-3.0.0.min.js"
-        integrity="sha256-JmvOoLtYsmqlsWxa7mDSLMwa6dZ9rrIdtrrVYRnDRH0="
-        crossorigin="anonymous"></script>
-<script src="kihon.min.js"></script>
-<script>
-    (function ($) {
+    <script
+      src="https://code.jquery.com/jquery-3.0.0.min.js"
+      integrity="sha256-JmvOoLtYsmqlsWxa7mDSLMwa6dZ9rrIdtrrVYRnDRH0="
+      crossorigin="anonymous"
+    ></script>
+    <script src="kihon.min.js"></script>
+    <script>
+      (function($) {
         $(document).ready(init);
 
         function init() {
-            var video = new Kihon.Video({
-                wrap: $('.wrap-video'), // wrap
-                videoUrls: ['https://www.quirksmode.org/html5/videos/big_buck_bunny.mp4', 'https://www.quirksmode.org/html5/videos/big_buck_bunny.ogv'], // video sources
-                videoWidth: 640, // video width
-                videoHeight: 360, // video height
-                isAutoPlay: false, // auto play flag
-                isLoop: false, // loop flag
-                isMuted: true, // mute flag
-                canplayCallback: function (obj) { // {event}
-                    console.log('Kihon.Video canplayCallback obj :', obj);
-                },
-                timeupdateCallback: function (obj) { // {event, currentTime, duration}
-                    // console.log('Kihon.Video timeupdateCallback obj :', obj);
-                },
-                endedCallback: function (obj) { // {event, currentTime, duration}
-                    console.log('Kihon.Video endedCallback obj :', obj);
-                }
-            }).init();
+          var video = new Kihon.Video({
+            wrap: $('.wrap-video'), // wrap
+            videoUrls: [
+              'https://www.quirksmode.org/html5/videos/big_buck_bunny.mp4',
+              'https://www.quirksmode.org/html5/videos/big_buck_bunny.ogv'
+            ], // video sources
+            videoWidth: 640, // video width
+            videoHeight: 360, // video height
+            isAutoPlay: false, // auto play flag
+            isLoop: false, // loop flag
+            isMuted: true, // mute flag
+            canplayCallback: function(obj) {
+              // {event}
+              console.log('Kihon.Video canplayCallback obj :', obj);
+            },
+            timeupdateCallback: function(obj) {
+              // {event, currentTime, duration}
+              // console.log('Kihon.Video timeupdateCallback obj :', obj);
+            },
+            endedCallback: function(obj) {
+              // {event, currentTime, duration}
+              console.log('Kihon.Video endedCallback obj :', obj);
+            }
+          }).init();
 
-            setTimeout(function () {
-                video.play().setVolume(0.5);
-            }, 2000);
+          setTimeout(function() {
+            video.play();
+          }, 2000);
 
-            setTimeout(function () {
-                video.pause();
-            }, 5000);
+          setTimeout(function() {
+            video.pause();
+          }, 5000);
 
-            setTimeout(function () {
-                video.seek(5).play().setVolume(1.0);
-            }, 8000);
+          setTimeout(function() {
+            video.seek(5).play();
+          }, 8000);
 
-            /*
-             * video public methods
-             */
-            // get video node
-            // console.log( video.getVideoNode() );
+          /*
+           * video public methods
+           */
+          // get video node
+          // console.log( video.getVideoNode() );
 
-            // get volume (0 ~ 1)
-            // console.log( video.getVolume() );
+          // get volume (0 ~ 1)
+          // console.log( video.getVolume() );
 
-            // set volume
-            // console.log( video.setVolume(0 ~ 1) );
+          // set volume
+          // console.log( video.setVolume(0 ~ 1) );
 
-            // get video muted
-            // console.log( video.isMuted() );
+          // get video muted
+          // console.log( video.isMuted() );
 
-            // play video
-            // video.play();
+          // play video
+          // video.play();
 
-            // pause video
-            // video.pause();
+          // pause video
+          // video.pause();
 
-            // stop video
-            // video.stop();
+          // stop video
+          // video.stop();
 
-            // seek video
-            // video.seek(second);
+          // seek video
+          // video.seek(second);
 
-            // destroy
-            // video.destroy();
+          // destroy
+          // video.destroy();
         }
-    }(jQuery));
-</script>
-</body>
+      })(jQuery);
+    </script>
+  </body>
 </html>

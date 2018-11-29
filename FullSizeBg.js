@@ -1,5 +1,5 @@
 import $ from 'jquery';
-import {not, isNotDef, isBoolean, anyOf, notSingleEle, getSizeAspectFill} from './_util';
+import { not, isNotDef, isBoolean, anyOf, notSingleEle, getSizeAspectFill } from './_util';
 
 class FullSizeBg {
   constructor(options) {
@@ -7,15 +7,18 @@ class FullSizeBg {
 
     const _ = this;
 
-    _._option = $.extend({
-      wrap: null, // wrap
-      imgWrap: null, // image wrap
-      imgWidth: 320, // natural image width
-      imgHeight: 240, // natural image height
-      alignX: 'center', // 'left' or 'center' or 'right'
-      alignY: 'center', // 'top' or 'center' or 'bottom'
-      global: window
-    }, options);
+    _._option = $.extend(
+      {
+        wrap: null, // wrap
+        imgWrap: null, // image wrap
+        imgWidth: 320, // natural image width
+        imgHeight: 240, // natural image height
+        alignX: 'center', // 'left' or 'center' or 'right'
+        alignY: 'center', // 'top' or 'center' or 'bottom'
+        global: window
+      },
+      options
+    );
 
     _._global = _._option.global;
 
@@ -74,11 +77,11 @@ class FullSizeBg {
     const _ = this,
       size = _.getImageSizeAspectFill(_._option.imgWidth, _._option.imgHeight, _._global);
 
-    _._$img.css({width: size.width, height: size.height});
+    _._$img.css({ width: size.width, height: size.height });
 
     _._setWrapAlign(_._option.alignX, _._option.alignY, size, _._global);
 
-    _._$wrap.css({width: _._global.innerWidth, height: _._global.innerHeight});
+    _._$wrap.css({ width: _._global.innerWidth, height: _._global.innerHeight });
 
     return _;
   }
@@ -108,7 +111,7 @@ class FullSizeBg {
   /*
    * private methods
    */
-  _setWrapAlign(alignX = 'center', alignY = 'center', modifiedSize = {width: 0, height: 0}, global = window) {
+  _setWrapAlign(alignX = 'center', alignY = 'center', modifiedSize = { width: 0, height: 0 }, global = window) {
     const _ = this,
       winWidth = global.innerWidth,
       winHeight = global.innerHeight;
@@ -144,7 +147,7 @@ class FullSizeBg {
         break;
     }
 
-    _._$imgWrap.css({left: left, top: top});
+    _._$imgWrap.css({ left: left, top: top });
 
     return _;
   }

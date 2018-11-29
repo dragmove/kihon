@@ -1,103 +1,148 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
-    <meta name="viewport"
-          content="user-scalable=no, maximum-scale=1.0, minimum-scale=1.0, width=device-width, initial-scale=1.0">
-    <meta name="description" content="Kihon.YoutubeModal"/>
-    <meta name="keywords" content="kihon"/>
-    <meta name="author" content="dragmove"/>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta
+      name="viewport"
+      content="user-scalable=no, maximum-scale=1.0, minimum-scale=1.0, width=device-width, initial-scale=1.0"
+    />
+    <meta name="description" content="Kihon.YoutubeModal" />
+    <meta name="keywords" content="kihon" />
+    <meta name="author" content="dragmove" />
     <title>Kihon.YoutubeModal</title>
+    <link rel="stylesheet" href="./styles/example.css" />
     <style>
-        .modal-wrap {position: fixed; top: 0; right: 0; bottom: 0; left: 0;}
-        .modal {position: relative; display: block; margin: 0 auto; top: 50%; width: 100%; max-width: 640px; background-color: #CFD8DC; color: #FFFFFF; -webkit-transform: translateY(-50%); -moz-transform: translateY(-50%); -ms-transform: translateY(-50%); -o-transform: translateY(-50%); transform: translateY(-50%);}
-        .btn-close {position: absolute; top: 0; right: 0; background-color: #FF5252;}
-        .embed-responsive-video {position: relative; padding-top: 56.25%; /* 16:9 ratio */ background-color: #CFD8DC;}
-        .embed-responsive-video .iframe-wrap {position: absolute; overflow: hidden; top: 0; left: 0; width: 100%; height: 100%;}
+      .modal-wrap {
+        position: fixed;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+      }
+      .modal {
+        position: relative;
+        display: block;
+        margin: 0 auto;
+        top: 50%;
+        width: 100%;
+        max-width: 640px;
+        background-color: #cfd8dc;
+        color: #ffffff;
+        -webkit-transform: translateY(-50%);
+        -moz-transform: translateY(-50%);
+        -ms-transform: translateY(-50%);
+        -o-transform: translateY(-50%);
+        transform: translateY(-50%);
+      }
+      .btn-close {
+        position: absolute;
+        top: 0;
+        right: 0;
+        background-color: #ff5252;
+      }
+      .embed-responsive-video {
+        position: relative;
+        padding-top: 56.25%; /* 16:9 ratio */
+        background-color: #cfd8dc;
+      }
+      .embed-responsive-video .iframe-wrap {
+        position: absolute;
+        overflow: hidden;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+      }
     </style>
-</head>
+  </head>
 
-<body>
-<script src="https://code.jquery.com/jquery-3.0.0.min.js"
-        integrity="sha256-JmvOoLtYsmqlsWxa7mDSLMwa6dZ9rrIdtrrVYRnDRH0="
-        crossorigin="anonymous"></script>
-<script src="kihon.min.js"></script>
-<script>
-    (function ($) {
+  <body>
+    <script
+      src="https://code.jquery.com/jquery-3.0.0.min.js"
+      integrity="sha256-JmvOoLtYsmqlsWxa7mDSLMwa6dZ9rrIdtrrVYRnDRH0="
+      crossorigin="anonymous"
+    ></script>
+    <script src="kihon.min.js"></script>
+    <script>
+      (function($) {
         $(document).ready(init);
 
         function init() {
-            var youtubeModal = new Kihon.YoutubeModal({
-                wrapClass: 'modal-wrap', // modal wrap class
-                contents: '<div class="modal"><div class="embed-responsive-video"><div class="iframe-wrap"></div></div><a href="#" class="btn-close">close</a></div>', // modal contents html
-                // appendTo: $('body'), // element to append modal wrap
-                // closeBtnSelector: '.btn-close', // jQuery selector of close button
-                // isCloseByClickOutside: true, // hide modal when click outside of modal contents
-                // isCloseByEscKey: true, // hide modal when keydown escape key
-                showCallback: function () { // call just before show modal
-                    console.log('Kihon.YoutubeModal showCallback :', this);
-                },
-                hideCallback: function () { // call just before hide modal
-                    console.log('Kihon.YoutubeModal hideCallback :', this);
-                },
-                // overlay: new Kihon.Overlay().init(),
-                iFrameWrapSelector: '.iframe-wrap', // youtube iframe wrap selector
-                youtube: { // youtube player info
-                    id: 'YzKLbB5B0tg',
-                    width: '',
-                    height: '',
-                    playerVars: {
-                        // https://developers.google.com/youtube/player_parameters?playerVersion=HTML5#Parameters
-                        autoplay: 1,
-                        rel: 0
-                    }
-                }
-            }).init();
+          var youtubeModal = new Kihon.YoutubeModal({
+            wrapClass: 'modal-wrap', // modal wrap class
+            contents:
+              '<div class="modal"><div class="embed-responsive-video"><div class="iframe-wrap"></div></div><a href="#" class="btn-close">close</a></div>', // modal contents html
+            // appendTo: $('body'), // element to append modal wrap
+            // closeBtnSelector: '.btn-close', // jQuery selector of close button
+            // isCloseByClickOutside: true, // hide modal when click outside of modal contents
+            // isCloseByEscKey: true, // hide modal when keydown escape key
+            showCallback: function() {
+              // call just before show modal
+              console.log('Kihon.YoutubeModal showCallback :', this);
+            },
+            hideCallback: function() {
+              // call just before hide modal
+              console.log('Kihon.YoutubeModal hideCallback :', this);
+            },
+            // overlay: new Kihon.Overlay().init(),
+            iFrameWrapSelector: '.iframe-wrap', // youtube iframe wrap selector
+            youtube: {
+              // youtube player info
+              id: 'YzKLbB5B0tg',
+              width: '',
+              height: '',
+              playerVars: {
+                // https://developers.google.com/youtube/player_parameters?playerVersion=HTML5#Parameters
+                autoplay: 1,
+                rel: 0
+              }
+            }
+          }).init();
 
-            youtubeModal.show();
+          youtubeModal.show();
 
-            /*
-             * YoutubeModal public methods
-             */
-            // set close button event handler
-            // youtubeModal.setCloseBtnEventHandler(true / false);
+          /*
+           * YoutubeModal public methods
+           */
+          // set close button event handler
+          // youtubeModal.setCloseBtnEventHandler(true / false);
 
-            // set modal wrap event handler
-            // youtubeModal.setWrapEventHandler(true / false);
+          // set modal wrap event handler
+          // youtubeModal.setWrapEventHandler(true / false);
 
-            // set escape key event handler
-            // youtubeModal.setEscKeyEventHandler(true / false);
+          // set escape key event handler
+          // youtubeModal.setEscKeyEventHandler(true / false);
 
-            // get modal node
-            // console.log( youtubeModal.getNode() );
+          // get modal node
+          // console.log( youtubeModal.getNode() );
 
-            // append to other element
-            // youtubeModal.appendTo(parent element);
+          // append to other element
+          // youtubeModal.appendTo(parent element);
 
-            // show modal
-            // youtubeModal.show();
+          // show modal
+          // youtubeModal.show();
 
-            // hide overlay
-            // youtubeModal.hide();
+          // hide overlay
+          // youtubeModal.hide();
 
-            // change youtube iframe
-            // youtubeModal.changeYoutubeIFrame('mJEZFTbxm4o');
-            // youtubeModal.changeYoutubeIFrame({id: 'mJEZFTbxm4o', width: '', height: '', playerVars: {autoplay: 1, rel: 0, controls: 0}});
+          // change youtube iframe
+          // youtubeModal.changeYoutubeIFrame('mJEZFTbxm4o');
+          // youtubeModal.changeYoutubeIFrame({id: 'mJEZFTbxm4o', width: '', height: '', playerVars: {autoplay: 1, rel: 0, controls: 0}});
 
-            // get youtube iframe
-            // console.log( youtubeModal.getYoutubeIFrame() );
+          // get youtube iframe
+          // console.log( youtubeModal.getYoutubeIFrame() );
 
-            // get youtube id
-            // console.log( youtubeModal.getYoutubeId() );
+          // get youtube id
+          // console.log( youtubeModal.getYoutubeId() );
 
-            // get flag modal is hide
+          // get flag modal is hide
 
-            // destroy
-            // youtubeModal.destroy();
-            // youtubeModal.destroy({isRemoveNode: true, isRemoveOverlay: true});
+          // destroy
+          // youtubeModal.destroy();
+          // youtubeModal.destroy({isRemoveNode: true, isRemoveOverlay: true});
         }
-    }(jQuery));
-</script>
-</body>
+      })(jQuery);
+    </script>
+  </body>
 </html>

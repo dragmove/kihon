@@ -1,0 +1,11 @@
+body {
+  background-color: #fff;
+}
+.kihon-desc {
+  margin: 0;
+  padding: 0;
+  font-family: Menlo, 'Bitstream Vera Sans Mono', 'DejaVu Sans Mono', Monaco, Consolas, monospace;
+  font-size: 0.75em;
+  line-height: 1.5;
+  color: #002451;
+}

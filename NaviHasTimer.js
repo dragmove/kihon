@@ -1,5 +1,5 @@
 import Navi from './Navi';
-import {isDefined, isNotDef, isNumber} from './_util';
+import { isDefined, isNotDef, isNumber } from './_util';
 
 class NaviHasTimer extends Navi {
   constructor(options) {
@@ -10,7 +10,7 @@ class NaviHasTimer extends Navi {
     const _ = this;
 
     // set default timer interval 0.5 sec.
-    _._timerInterval = (isNumber(options.timerInterval) && options.timerInterval >= 0) ? options.timerInterval : 500;
+    _._timerInterval = isNumber(options.timerInterval) && options.timerInterval >= 0 ? options.timerInterval : 500;
 
     _._timer = null;
   }

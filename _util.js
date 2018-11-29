@@ -1,3 +1,5 @@
+export const hasOwnProp = Object.hasOwnProperty;
+
 export const truthy = any => !!any;
 
 export const falsy = any => !!!any;

@@ -335,18 +335,12 @@ class FullSizeCanvasVideo {
         .pop()
         .toLowerCase();
 
-    videoSourceTpl += `<source src="${
-      opt.videoUrl
-    }" type="video/${ext}"></source>`;
+    videoSourceTpl += `<source src="${opt.videoUrl}" type="video/${ext}"></source>`;
 
-    let tpl = `<video class="${opt.videoClass}" poster="${
-      opt.posterUrl
-    }">${videoSourceTpl}</video>`;
+    let tpl = `<video class="${opt.videoClass}" poster="${opt.posterUrl}">${videoSourceTpl}</video>`;
 
     if (_.isIOS()) {
-      tpl = `<video class="${opt.videoClass}" poster="${
-        opt.posterUrl
-      }" autoplay>${videoSourceTpl}</video>`;
+      tpl = `<video class="${opt.videoClass}" poster="${opt.posterUrl}" autoplay>${videoSourceTpl}</video>`;
     }
     //let tpl = `<video class="${opt.videoClass}" muted="true" loop="true" autoplay="true" poster="">${videoSourceTpl}</video>`;
 

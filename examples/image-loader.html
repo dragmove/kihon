@@ -1,69 +1,77 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
-    <meta name="viewport"
-          content="user-scalable=no, maximum-scale=1.0, minimum-scale=1.0, width=device-width, initial-scale=1.0">
-    <meta name="description" content="Kihon.ImageLoader"/>
-    <meta name="keywords" content="kihon"/>
-    <meta name="author" content="dragmove"/>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta
+      name="viewport"
+      content="user-scalable=no, maximum-scale=1.0, minimum-scale=1.0, width=device-width, initial-scale=1.0"
+    />
+    <meta name="description" content="Kihon.ImageLoader" />
+    <meta name="keywords" content="kihon" />
+    <meta name="author" content="dragmove" />
     <title>Kihon.ImageLoader</title>
-</head>
+    <link rel="stylesheet" href="./styles/example.css" />
+  </head>
 
-<body>
-<p>kihon.ImageLoader : See Javascript Console of Browser DevTools please.</p>
-<p>Thanks to whoever use kihon.</p>
+  <body>
+    <p class="kihon-desc">kihon.ImageLoader : See Javascript Console of Browser DevTools please.</p>
+    <p class="kihon-desc">Thanks to whoever use kihon.</p>
 
-<script src="https://code.jquery.com/jquery-3.0.0.min.js"
-        integrity="sha256-JmvOoLtYsmqlsWxa7mDSLMwa6dZ9rrIdtrrVYRnDRH0="
-        crossorigin="anonymous"></script>
-<script src="kihon.min.js"></script>
-<script>
-    (function ($) {
+    <script
+      src="https://code.jquery.com/jquery-3.0.0.min.js"
+      integrity="sha256-JmvOoLtYsmqlsWxa7mDSLMwa6dZ9rrIdtrrVYRnDRH0="
+      crossorigin="anonymous"
+    ></script>
+    <script src="kihon.min.js"></script>
+    <script>
+      (function($) {
         $(document).ready(init);
 
         function init() {
-            var imgLoader = new Kihon.ImageLoader({
-                loadCompleteCallback: function (obj) { // data about all images. {imgs, percentage}
-                    console.log('Kihon.ImageLoader loadComplete :', obj);
-                    console.log('Kihon.ImageLoader loadComplete - imgLoader.isFinished() :', imgLoader.isFinished());
-                    console.log('Kihon.ImageLoader loadComplete - imgLoader.getLoadedImgs() :', imgLoader.getLoadedImgs());
-                },
-                loadPerCompleteCallback: function (obj) { // data about per image. {event, img, percentage}
-                    console.log('Kihon.ImageLoader loadPerComplete :', obj);
-                    console.log('Kihon.ImageLoader loadPerComplete - imgLoader.isFinished() :', imgLoader.isFinished());
-                    console.log('Kihon.ImageLoader loadPerComplete - imgLoader.getLoadedImgs() :', imgLoader.getLoadedImgs());
-                },
-                loadErrorCallback: function (obj) { // data about per error. {event, img, percentage}
-                    console.log('Kihon.ImageLoader loadError :', obj);
-                    console.log('Kihon.ImageLoader loadError - imgLoader.isFinished() :', imgLoader.isFinished());
-                    console.log('Kihon.ImageLoader loadError - imgLoader.getLoadedImgs() :', imgLoader.getLoadedImgs());
-                }
-            });
+          var imgLoader = new Kihon.ImageLoader({
+            loadCompleteCallback: function(obj) {
+              // data about all images. {imgs, percentage}
+              console.log('Kihon.ImageLoader loadComplete :', obj);
+              console.log('Kihon.ImageLoader loadComplete - imgLoader.isFinished() :', imgLoader.isFinished());
+              console.log('Kihon.ImageLoader loadComplete - imgLoader.getLoadedImgs() :', imgLoader.getLoadedImgs());
+            },
+            loadPerCompleteCallback: function(obj) {
+              // data about per image. {event, img, percentage}
+              console.log('Kihon.ImageLoader loadPerComplete :', obj);
+              console.log('Kihon.ImageLoader loadPerComplete - imgLoader.isFinished() :', imgLoader.isFinished());
+              console.log('Kihon.ImageLoader loadPerComplete - imgLoader.getLoadedImgs() :', imgLoader.getLoadedImgs());
+            },
+            loadErrorCallback: function(obj) {
+              // data about per error. {event, img, percentage}
+              console.log('Kihon.ImageLoader loadError :', obj);
+              console.log('Kihon.ImageLoader loadError - imgLoader.isFinished() :', imgLoader.isFinished());
+              console.log('Kihon.ImageLoader loadError - imgLoader.getLoadedImgs() :', imgLoader.getLoadedImgs());
+            }
+          });
 
-            imgLoader.start([
-                'https://images.unsplash.com/photo-1431794062232-2a99a5431c6c?dpr=2&auto=compress,format&crop=entropy&fit=crop&w=767&h=511&q=80&cs=tinysrgb',
-                'https://images.unsplash.com/error-dummy-url.png',
-                'https://images.unsplash.com/photo-1459666644539-a9755287d6b0?dpr=2&auto=compress,format&crop=entropy&fit=crop&w=767&h=463&q=80&cs=tinysrgb'
-            ]);
+          imgLoader.start([
+            'https://images.unsplash.com/photo-1431794062232-2a99a5431c6c?dpr=2&auto=compress,format&crop=entropy&fit=crop&w=767&h=511&q=80&cs=tinysrgb',
+            'https://images.unsplash.com/error-dummy-url.png',
+            'https://images.unsplash.com/photo-1459666644539-a9755287d6b0?dpr=2&auto=compress,format&crop=entropy&fit=crop&w=767&h=463&q=80&cs=tinysrgb'
+          ]);
 
-            /*
-             * ImageLoader public methods
-             */
-            // get flag finish load all images
-            // console.log( imgLoader.isFinished() );
+          /*
+           * ImageLoader public methods
+           */
+          // get flag finish load all images
+          // console.log( imgLoader.isFinished() );
 
-            // get array has loaded images
-            // console.log( imgLoader.getLoadedImgs() );
+          // get array has loaded images
+          // console.log( imgLoader.getLoadedImgs() );
 
-            // get percentage number(0 ~ 1)
-            // console.log( imgLoader.getPercentageLoaded() );
+          // get percentage number(0 ~ 1)
+          // console.log( imgLoader.getPercentageLoaded() );
 
-            // destroy
-            // imgLoader.destroy();
+          // destroy
+          // imgLoader.destroy();
         }
-    }(jQuery));
-</script>
-</body>
+      })(jQuery);
+    </script>
+  </body>
 </html>

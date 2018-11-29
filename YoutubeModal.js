@@ -1,5 +1,5 @@
 import $ from 'jquery';
-import {not, isDefined, isNotDef, isString, isObject, getUriCombinedParams} from './_util';
+import { not, isDefined, isNotDef, isString, isObject, getUriCombinedParams } from './_util';
 import Modal from './Modal';
 
 class YoutubeModal extends Modal {
@@ -84,7 +84,7 @@ class YoutubeModal extends Modal {
     return _;
   }
 
-  changeYoutubeIFrame(youtube = {id: '', width: 0, height: 0, playerVars: {}}) {
+  changeYoutubeIFrame(youtube = { id: '', width: 0, height: 0, playerVars: {} }) {
     const _ = this;
 
     if (isNotDef(youtube)) return _;
@@ -94,7 +94,6 @@ class YoutubeModal extends Modal {
     if (isString(youtube)) {
       // input only youtubeId
       opt.youtube.id = youtube;
-
     } else if (isObject(youtube)) {
       // input youtube options
       opt.youtube = $.extend(true, opt.youtube, youtube);
@@ -125,8 +124,8 @@ class YoutubeModal extends Modal {
   _setContents() {
     const _ = this,
       opt = _._option,
-      w = (opt.youtube.width) ? opt.youtube.width : '100%',
-      h = (opt.youtube.height) ? opt.youtube.height : '100%';
+      w = opt.youtube.width ? opt.youtube.width : '100%',
+      h = opt.youtube.height ? opt.youtube.height : '100%';
 
     let url = `https://www.youtube.com/embed/${opt.youtube.id}`;
 
