@@ -1,4 +1,5 @@
 import Emitter from './Emitter';
+import Dropdown from './Dropdown';
 import FullSizeBg from './FullSizeBg';
 import FullSizeVideo from './FullSizeVideo';
 import HorizontalScrollingNavi from './HorizontalScrollingNavi';
@@ -21,5 +22,6 @@ export default {
   NaviHasTimer,
   Overlay,
   Video,
-  YoutubeModal
+  YoutubeModal,
+  Dropdown
 };

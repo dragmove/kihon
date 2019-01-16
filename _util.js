@@ -1,3 +1,5 @@
+const global = window;
+
 export const hasOwnProp = Object.hasOwnProperty;
 
 export const truthy = any => !!any;
@@ -82,7 +84,9 @@ export const notSingleEle = not(singleEle);
 
 export const each = (dataCanLoop, func, context) => {
   if (falsy(Array.isArray(dataCanLoop) || isString(dataCanLoop))) {
-    throw new TypeError('dataCanLoop parameter type of each() should be Array or String.');
+    throw new TypeError(
+      'dataCanLoop parameter type of each() should be Array or String.'
+    );
   }
 
   const _context = existy(context) ? context : null;
@@ -93,31 +97,36 @@ export const each = (dataCanLoop, func, context) => {
 };
 
 export const curry2 = func => {
-  if (!isFunction(func)) throw new TypeError('func parameter type of curry2() should be Function.');
+  if (!isFunction(func))
+    throw new TypeError('func parameter type of curry2() should be Function.');
 
   return secondArg => firstArg => func(firstArg, secondArg);
 };
 
 export const gt = curry2(function(lhs, rhs) {
-  if (!allOf(isNumber(lhs), isNumber(rhs))) throw new TypeError('gt requires Number parameters.');
+  if (!allOf(isNumber(lhs), isNumber(rhs)))
+    throw new TypeError('gt requires Number parameters.');
 
   return lhs > rhs;
 });
 
 export const gte = curry2(function(lhs, rhs) {
-  if (!allOf(isNumber(lhs), isNumber(rhs))) throw new TypeError('gte requires Number parameters.');
+  if (!allOf(isNumber(lhs), isNumber(rhs)))
+    throw new TypeError('gte requires Number parameters.');
 
   return lhs >= rhs;
 });
 
 export const lt = curry2(function(lhs, rhs) {
-  if (!allOf(isNumber(lhs), isNumber(rhs))) throw new TypeError('lt requires Number parameters.');
+  if (!allOf(isNumber(lhs), isNumber(rhs)))
+    throw new TypeError('lt requires Number parameters.');
 
   return lhs < rhs;
 });
 
 export const lte = curry2(function(lhs, rhs) {
-  if (!allOf(isNumber(lhs), isNumber(rhs))) throw new TypeError('lte requires Number parameters.');
+  if (!allOf(isNumber(lhs), isNumber(rhs)))
+    throw new TypeError('lte requires Number parameters.');
 
   return lhs <= rhs;
 });
@@ -126,8 +135,20 @@ export const eq = curry2(function(lhs, rhs) {
   return lhs === rhs;
 });
 
-export const getSizeAspectFill = (srcWidth, srcHeight, fillWidth, fillHeight) => {
-  if (!allOf(isNumber(srcWidth), isNumber(srcHeight), isNumber(fillWidth), isNumber(fillHeight))) {
+export const getSizeAspectFill = (
+  srcWidth,
+  srcHeight,
+  fillWidth,
+  fillHeight
+) => {
+  if (
+    !allOf(
+      isNumber(srcWidth),
+      isNumber(srcHeight),
+      isNumber(fillWidth),
+      isNumber(fillHeight)
+    )
+  ) {
     throw new TypeError('getSizeAspectFill() requires Number parameters.');
   }
 
@@ -143,7 +164,10 @@ export const getSizeAspectFill = (srcWidth, srcHeight, fillWidth, fillHeight) =>
 };
 
 export const getUriCombinedParams = (uri = '', params = {}) => {
-  if (!isString(uri)) throw new TypeError('uri parameter type of getUriCombinedParams() should be string.');
+  if (!isString(uri))
+    throw new TypeError(
+      'uri parameter type of getUriCombinedParams() should be string.'
+    );
 
   if (!uri) return '';
   if (!params) return uri;
@@ -157,7 +181,13 @@ export const getUriCombinedParams = (uri = '', params = {}) => {
   uri = uris[0];
 
   const hashStr = isDefined(uris[1]) ? '#' + uris[1] : '';
-  uri = (uri.indexOf('?') >= 0 ? uri + str : uri + '?' + str.substr(1)) + hashStr;
+  uri =
+    (uri.indexOf('?') >= 0 ? uri + str : uri + '?' + str.substr(1)) + hashStr;
 
   return uri;
 };
+
+export const isIOS = userAgent =>
+  /iPad|iPhone|iPod/.test(userAgent) && !global.MSStream;
+
+export const isAndroid = userAgent => /Android/.test(userAgent);

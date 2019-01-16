@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta
+      name="viewport"
+      content="user-scalable=no, maximum-scale=1.0, minimum-scale=1.0, width=device-width, initial-scale=1.0"
+    />
+    <meta name="description" content="Kihon.Dropdown" />
+    <meta name="keywords" content="kihon" />
+    <meta name="author" content="dragmove" />
+    <title>Kihon.Dropdown</title>
+    <link rel="stylesheet" href="./styles/example.css" />
+    <style>
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="wrap">
+      <div class="dropdown">
+        <div class="select"><span>title</span></div>
+
+        <ul class="option">
+          <li data-value="00">option-1</li>
+          <li data-value="01">option-2</li>
+          <li data-value="02">option-3</li>
+          <li data-value="03">option-4</li>
+        </ul>
+
+        <select class="" name="select-name-what-you-want">
+          <option value="00">option-1</option>
+          <option value="01">option-2</option>
+          <option value="02">option-3</option>
+          <option value="03">option-4</option>
+        </select>
+      </div>
+    </div>
+
+    <script
+      src="https://code.jquery.com/jquery-3.0.0.min.js"
+      integrity="sha256-JmvOoLtYsmqlsWxa7mDSLMwa6dZ9rrIdtrrVYRnDRH0="
+      crossorigin="anonymous"
+    ></script>
+    <script src="kihon.min.js"></script>
+    <script>
+      function isIOS(userAgent) {
+        return /iPad|iPhone|iPod/.test(userAgent) && !global.MSStream;
+      }
+
+      function isAndroid(userAgent) {
+        return /Android/.test(userAgent);
+      }
+
+      (function($) {
+        'use strict';
+
+        $(document).ready(init);
+
+        function init() {
+          var dropdown = new Kihon.Dropdown({
+            wrap: $('.dropdown')
+
+            // options
+            /*
+            activateIndex: 0, // activated option <li> index. default is 0.
+
+            titleBtnClass: 'select', // default is 'select'
+            optionWrapClass: 'option', // default is 'option'
+            openWrapClass: 'is-active', // default is 'is-active'
+            activateOptionClass: 'selected', // default is 'selected'
+            activateCallback: function (obj) {
+                console.log('activateCallback - obj :', obj); // { btns, btn, title, index, prevIndex }
+            },
+            openCallback: function (obj) {
+                console.log('openCallback - obj :', obj); // { title, index }
+            },
+            closeCallback: function (obj) {
+                console.log('closeCallback - obj :', obj); // { title, index }
+            },
+
+            isCloseByClickOutside: true, // default is true
+            isDisableClass: 'disabled' // default is 'disabled'
+
+            // If "useDefaultSelectInMobileDevice", "isMobileDevice" variables are all true, use <select> element instead of <ul class="option">...</ul> custom UI.
+            // useDefaultSelectInMobileDevice: false, // default is false
+            // isMobileDevice: isIOS(navigator.userAgent) || isAndroid(navigator.userAgent) // default is false
+              */
+          }).init();
+
+          /*
+           * Dropdown public methods
+           */
+          // get title.
+          // console.log('dropdown.getTitle() :', dropdown.getTitle());
+
+          // set title.
+          // dropdown.setTitle('temp title');
+
+          // get titleBtn node
+          // console.log('dropdown.getTitleBtn() :', dropdown.getTitleBtn());
+
+          // get option wrap node
+          // console.log('dropdown.getOptionWrap() :', dropdown.getOptionWrap());
+
+          // get activated option index.
+          // console.log( 'dropdown.getActivatedOptionIndex() :', dropdown.getActivatedOptionIndex() );
+
+          // get activated option's data-value.
+          // console.log( 'dropdown.getActivatedOptionValue() :', dropdown.getActivatedOptionValue() );
+
+          // get option info by data-value.
+          // console.log("dropdown.getOptionInfoByValue('02') :", dropdown.getOptionInfoByValue('02')); // { btn, btns, index, title, value }
+
+          // activate dropdown option.
+          // dropdown.activate(3);
+
+          // open dropdown. and, call openCallback
+          // dropdown.open();
+
+          // close dropdown. and, call closeCallback
+          // dropdown.close();
+
+          // disable dropdown
+          // dropdown.disable(true);
+
+          // enable dropdown
+          // dropdown.disable(false);
+
+          // get dropdown disabled status
+          // console.log( 'dropdown.isDisabled() :', dropdown.isDisabled() );
+
+          // change dropdown options. and, change title.
+          // dropdown.changeOptions([{text: 'new-option-1', value: '91'}, {text: 'new-option-2', value: '92'}, {text: 'new-option-3', value: '93'}, {text: 'new-option-4', value: '94'}, {text: 'new-option-5', value: '95'}]).setTitle('new-title');
+
+          // destroy
+          // dropdown.destroy();
+        }
+      })(jQuery);
+    </script>
+  </body>
+</html>
